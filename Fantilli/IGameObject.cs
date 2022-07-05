@@ -1,7 +1,5 @@
 ﻿namespace Fantilli
 {
-    using System;
-
     /// <summary>
     ///  Class that represent an element of the game.
     /// </summary>
@@ -65,13 +63,6 @@
         GameObjectType Type { get; }
 
         /// <summary>
-        /// Update physic state of the object.
-        /// </summary>
-        /// <param name="dt">elapsed time from the previous state</param>
-        /// <param name="env">environment of the game</param>
-        void UpdatePhysics(long dt, Environment env);
-
-        /// <summary>
         /// Gets the <see cref="PhysicsComponent"/> of the game object.
         /// </summary>
         PhysicsComponent PhysicsComponent { get; }
@@ -80,6 +71,13 @@
         /// Gets the <see cref="GraphicComponent"/> of the game object.
         /// </summary>
         GraphicComponent GraphicComponent { get; }
+
+        /// <summary>
+        /// Update physic state of the object.
+        /// </summary>
+        /// <param name="dt">elapsed time from the previous state</param>
+        /// <param name="env">environment of the game</param>
+        void UpdatePhysics(long dt, Environment env);
 
         /// <summary>
         /// Draw the game object skin in the actual scene.
