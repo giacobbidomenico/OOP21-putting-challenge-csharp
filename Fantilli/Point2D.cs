@@ -60,9 +60,9 @@
         }
         
         /// <summary>
-        /// Compares this point to <paramref name="point"/> passed.
-        ///  The result is true if and only if the argument is not null and is 
-        ///  an instance of <see cref="Point2D"/> and contains the same coordinates.
+        /// Compares this instance with given <paramref name="point"/>.
+        /// The result is true if and only if the argument is not null and is 
+        /// an instance of <see cref="Point2D"/> and contains the same coordinates.
         /// </summary>
         /// <param name="point">the point to compare</param>
         /// <returns>true if the given object is equal to this point, false otherwise</returns>
@@ -85,6 +85,7 @@
         /// <param name="pointA">the first point</param>
         /// <param name="pointB">the second point</param>
         /// <returns>the distance between point A and B</returns>
-        public static double GetDistance(Point2D pointA, Point2D pointB) => new Vector2D(pointA.X - pointB.X, pointA.Y - pointB.Y).getModule();
+        public static double GetDistance(Point2D pointA, Point2D pointB) => 
+            Vector2D.GetVectorFrom(pointA, pointB).GetModule();
     }
 }
