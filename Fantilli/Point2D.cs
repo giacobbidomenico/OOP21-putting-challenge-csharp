@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Class that represent a 2-dimensional point.
+    /// </summary>
     public class Point2D
     {
         /// <summary>
