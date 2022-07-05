@@ -1,9 +1,17 @@
 ﻿namespace Fantilli
 {
+    using System;
+
     public class Point2D
     {
+        /// <summary>
+        /// Gets the abscissa of the 2D point.
+        /// </summary>
         public double X { get; private set; }
 
+        /// <summary>
+        /// Gets the ordinate of the 2D point.
+        /// </summary>
         public double Y { get; private set; }
 
         /// <summary>
@@ -25,72 +33,58 @@
         {
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="object.ToString()"/>
         public override string ToString() => "Point2D (" + X + ", " + Y + ")";
 
-        /**
-         * Adds the supplied value to the abscissa of the point.
-         * 
-         * @param value
-         *          the value to sum
-         */
+        /// <summary>
+        /// Adds the supplied value to the abscissa of the point.
+        /// </summary>
+        /// <param name="value">the value to sum</param>
         public void SumX(double value) => this.X += value;
 
-        /**
-         * Adds the supplied value to the ordinate of the point.
-         * 
-         * @param value
-         *          the value to sum
-         */
-        public void sumY(final double value)
-        {
-            this.y += value;
-        }
+        /// <summary>
+        /// Adds the supplied value to the ordinate of the point.
+        /// </summary>
+        /// <param name="value">the value to sum</param>
+        public void SumY(double value) => this.Y += value;
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-    public int hashCode()
-        {
-            return Double.hashCode(x) ^ Double.hashCode(y);
-        }
+        /// <inheritdoc cref="object.GetHashCode()"/>
+        public override int GetHashCode() => HashCode.Combine(this.X, this.Y);
 
-        /**
-         * Compares this point to the specified object. The result is true if and
-         * only if the argument is not null and is an instance of {@link Point2D} and 
-         * contains the same coordinates.
-         * 
-         * @param obj
-         *          the object to compare
-         * 
-         * @return true if the given object is equal to this point, false otherwise
-         */
-        @Override
-    public boolean equals(final Object obj)
+        /// <inheritdoc cref="object.Equals(object?)"/>
+        public override bool Equals(object obj)
         {
-            if (this == obj)
+            if (obj == null) return false;
+            if (obj.GetType() != this.GetType()) return false;
+            return this.Equals(obj as Point2D);
+        }
+        
+        /// <summary>
+        /// Compares this point to <paramref name="point"/> passed.
+        ///  The result is true if and only if the argument is not null and is 
+        ///  an instance of <see cref="Point2D"/> and contains the same coordinates.
+        /// </summary>
+        /// <param name="point">the point to compare</param>
+        /// <returns>true if the given object is equal to this point, false otherwise</returns>
+        public bool Equals(Point2D point)
+        {
+            if (this == point)
             {
                 return true;
             }
-            if (obj instanceof Point2D) {
-                final Point2D p = (Point2D)obj;
-                return Double.compare(this.x, p.getX()) == 0
-                       && Double.compare(this.y, p.getY()) == 0;
+            else
+            {
+                return this.X.CompareTo(point.X) == 0
+                       && this.Y.CompareTo(point.Y) == 0;
             }
-            return false;
         }
-
-        /**
-         * Get the distance between two {@link Point2D}.
-         * @param pointA
-         * @param pointB
-         * @return
-         *          the distance between point A and B
-         */
-        public static double getDistance(final Point2D pointA, final Point2D pointB)
-        {
-            return new Vector2D(pointA.getX() - pointB.getX(), pointA.getY() - pointB.getY()).getModule();
-        }
+        
+        /// <summary>
+        /// Get the distance between two <see cref="Point2D"/>.
+        /// </summary>
+        /// <param name="pointA">the first point</param>
+        /// <param name="pointB">the second point</param>
+        /// <returns>the distance between point A and B</returns>
+        public static double GetDistance(Point2D pointA, Point2D pointB) => new Vector2D(pointA.X - pointB.X, pointA.Y - pointB.Y).getModule();
     }
 }
