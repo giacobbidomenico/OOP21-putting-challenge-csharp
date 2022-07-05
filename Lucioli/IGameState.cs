@@ -6,22 +6,13 @@ namespace OOP21-putting-challenge-csharp.Lucioli
 	{
 		/// <summary>Initialize the state.</summary>
 		/// <returns>returns a <see cref="Tuple"/> that contains the <see cref="SceneType"/> and a <see cref="List{GameObject}"/>.</returns>
-		public Tuple<SceneType, List<GameObject>> InitState();
-
-		/// <returns>The associated <see cref="GameStatus"/>.</returns>
-		public GameStatus GetStatus();
-
-		/// <returns>The <see cref="GameStateManager"/> object.</returns>
-		public GameStateManager GetGameStateManager();
-
-		/// <returns>The <see cref="Environment"/></returns>
-		public Optional<Environment> GetEnvironment();
+		public Tuple<SceneType, List<IGameObject>> InitState();
 
 		/// <summary>
 		/// Sets the <see cref="Environment"/> of the state.
 		/// </summary>
 		/// <param name="environment">Is the environment to set.</param>
-		public void SetEnvironment(Optional<Environment> environment);
+		public void SetEnvironment(Optional<IEnvironment> environment);
 
 		/// <summary>
 		/// Notify the intercepted model event.

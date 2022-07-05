@@ -12,7 +12,7 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         /// </summary>
         /// <param name="status">is the status to switch to.</param>
         public void switchState(GameStatus status);
-        
+
         /// <summary>
         /// This method updates the physics state of the <see cref="GameObject"/>s.
         /// </summary>
