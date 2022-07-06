@@ -22,7 +22,9 @@
             this._hitBox = hitBox;
         }
 
-        /// <inheritdoc cref="IGameObject.Velocity"/>
+        /// <summary>
+        /// Gets the hit-box of the ball.
+        /// </summary>
         public DynamicBoundingBox HitBox { get => this._hitBox; }
     }
 }
