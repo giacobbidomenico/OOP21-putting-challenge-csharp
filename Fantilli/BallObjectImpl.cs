@@ -16,7 +16,7 @@
         /// <param name="hitBox">the hit-box of the object</param>
         public GameObjectImpl(IGameObject.GameObjectType type,
                               Point2D position,
-                              PhysicsComponent phys,
+                              IPhysicsComponent phys,
                               PassiveCircleBoundingBox hitBox) : base(type, position, phys)
         {
             this._hitBox = hitBox;

@@ -5,10 +5,10 @@
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.
     /// </summary>
-    abstract class AbstractGameObject : IGameObject
+    public abstract class AbstractGameObject : IGameObject
     {
         private readonly IGameObject.GameObjectType _type;
-        private readonly PhysicsComponent _phys;
+        private readonly IPhysicsComponent _phys;
 
         /// <summary>
         /// Set up a new <see cref="AbstractGameObject"/>.
@@ -18,7 +18,7 @@
         /// <param name="phys">physical component of the game object</param>
         public AbstractGameObject(IGameObject.GameObjectType type,
                                   Point2D position,
-                                  PhysicsComponent phys)
+                                  IPhysicsComponent phys)
         {
             this._type = type;
             this.Position = position;
@@ -39,7 +39,7 @@
         public IGameObject.GameObjectType Type { get => this._type; }
 
         /// <inheritdoc cref="IGameObject.PhysicsComponent"/>
-        public PhysicsComponent PhysicsComponent { get => this._phys; }
+        public IPhysicsComponent PhysicsComponent { get => this._phys; }
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
         public void UpdatePhysics(long dt, Environment env) =>

@@ -65,13 +65,13 @@
         /// <summary>
         /// Gets the <see cref="PhysicsComponent"/> of the game object.
         /// </summary>
-        PhysicsComponent PhysicsComponent { get; }
+        IPhysicsComponent PhysicsComponent { get; }
 
         /// <summary>
         /// Update physic state of the object.
         /// </summary>
         /// <param name="dt">elapsed time from the previous state</param>
         /// <param name="env">environment of the game</param>
-        void UpdatePhysics(long dt, Environment env);
+        void UpdatePhysics(long dt, IEnvironment env);
     }
 }
