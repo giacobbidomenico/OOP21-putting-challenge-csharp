@@ -2,17 +2,13 @@ using System;
 
 namespace OOP21-putting-challenge-csharp.Lucioli
 {
-    abstract class GameState
+    abstract class GameState : IGameState
     {
         public Tuple Status { get; private set; }
 
         public IGameStateManager StateManager { get; private set; }
 
         public IEnvironment Environment { get; set; }
-
-        public override Tuple<SceneType, List<IGameObject>> InitState()
-        {
-        }
 
         public GameState(IGameStateManager manager, GameStatus status)
         {
@@ -21,6 +17,13 @@ namespace OOP21-putting-challenge-csharp.Lucioli
             Environment = null;
         }
 
+        /// <inheritdoc/>
+        public override Tuple<SceneType, List<IGameObject>> InitState()
+        {
+        }
+
+        
+        /// <inheritdoc/>
         public override void LeavingState(GameStatus nextStatus)
         {
             StateManager.SwitchState(nextStatus);
