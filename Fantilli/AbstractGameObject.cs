@@ -43,7 +43,7 @@
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
         public void UpdatePhysics(long dt, Environment env) =>
-            this._phys.update(dt, this, env);
+            this._phys.Update(dt, this, env);
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
         public override int GetHashCode() => HashCode.Combine(this._type, this.Position, this.Velocity);
