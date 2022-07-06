@@ -1,6 +1,6 @@
 using System;
 
-namespace OOP21-putting-challenge-csharp.Lucioli
+namespace Lucioli
 {
 	public interface IGameState
 	{

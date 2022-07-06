@@ -1,4 +1,7 @@
-namespace OOP21-putting-challenge-csharp.Lucioli
+using System;
+using System.Collections.Generic;
+
+namespace Lucioli
 {
     public class GamePlayGameState : GameState
     {
@@ -9,7 +12,7 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         private ObservableEvents<ModelEventType> _observable;
         private ObserverEvents<ModelEventType> _observer;
         private SceneType _currentScene;
-        
+
 
         private static IEnumerable<SceneType> GetNextMap()
         {
@@ -24,9 +27,21 @@ namespace OOP21-putting-challenge-csharp.Lucioli
             }
         }
 
-        public int Score { get; }
-        public int Lives { get; }
-        public Mediator GeneralMediator { set; }
+        public int Score
+        {
+            get;
+            private set;
+        }
+        public int Lives
+        {
+            get;
+            private set;
+        }
+        public Mediator GeneralMediator
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Builds a new <see cref="GamePlayGameState"/> object.
@@ -38,7 +53,7 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         }
 
         /// <inheritdoc/>
-        public override Tuple<SceneType, List<IGameObject>> initState()
+        public new Tuple<SceneType, List<IGameObject>> InitState()
         {
             Lives = MaxLives;
             Score = None;
@@ -47,10 +62,10 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         }
 
         /// <inheritdoc/>
-        public override LeavingState(GameStatus nextStatus)
+        public override void LeavingState(GameStatus nextStatus)
         {
             WriteStats();
-            base.LeavingState(nextStatus);
+            StateManager.SwitchState(nextStatus);
         }
 
         private void DecScore() => Score--;
@@ -77,10 +92,29 @@ namespace OOP21-putting-challenge-csharp.Lucioli
             {
                 LeavingState(GameStatus.GameOver);
             }
-            else 
-            { 
-           
+            else
+            {
+                // missing
             }
+        }
+
+        private void LoadNextEnvironment()
+        {
+            SceneType nextMap = GetNextMap();
+            if (nextMap != null)
+            {
+                _currentScene = nextMap;
+                // missing
+            }
+            else
+            {
+                LeavingState(GameStatus.GameWin);
+            }
+        }
+
+        private void WriteStats()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -89,38 +123,44 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         /// <param name="points"> where the mouse was pressed and released during the aiming phase.</param>
         public void Shoot(Tuple<Point2D, Point2D> points)
         {
-            readonly BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.Ball.GetPhysicsComponent();
-            readonly double batStrength = Environment.Player.Bat.Type.Strength;
+            BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.Ball.GetPhysicsComponent();
+            double batStrength = Environment.Player.Bat.Type.Strength;
             if (!ballPhysicsComponent.IsMoving)
             {
                 Vector2D shootingVector = Vector2D.GetVectorFrom(points.Item1, points.Item2);
                 shootingVector.SetX(shootingVector.X * batStrength);
                 shootingVector.SetY(shootingVector.Y * batStrength);
-                if(shootingVector.GetModule() > MaxStrength)
+                if (shootingVector.GetModule() > MaxStrength)
                 {
-                    readonly double moduleRate= MaxStrength / shootingVector.GetModule();
+                    double moduleRate = MaxStrength / shootingVector.GetModule();
                     shootingVector = new Vector2D(moduleRate * shootingVector.X, moduleRate * shootingVector.Y);
                 }
                 Environment.Ball.SetVelocity(shootingVector);
                 NotifyEvents(ModelEventType.Shoot);
             }
         }
-        
+
+
+
         /// <inheritdoc/>
-        public override void NotifyEvent(GameEvent event)
+        public override void NotifyEvent(GameEvent gameEvent)
         {
-            switch (event.Type)
-            {
-            case Shoot:
-                if(Status == GameStatus.Play)
-                {
-                    readonly Tuple<Point2D, Point2D> points = event.GetDetails();
-                    Shoot(points);
-                }
-                break;
-            default:
-                break;
-            }
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyEvents(ModelEventType eventType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ReceiveEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void SetEnvironment(Optional<IEnvironment> environment)
+        {
+            throw new NotImplementedException();
         }
     }
 }

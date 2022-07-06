@@ -1,14 +1,27 @@
 using System;
+using System.Collections.Generic;
 
-namespace OOP21-putting-challenge-csharp.Lucioli
+namespace Lucioli
 {
-    abstract class GameState : IGameState
+    public abstract class GameState : IGameState
     {
-        public Tuple Status { get; private set; }
+        public GameStatus Status
+        { 
+            get; 
+            private set; 
+        }
 
-        public IGameStateManager StateManager { get; private set; }
+        public IGameStateManager StateManager 
+        { 
+            get; 
+            private set; 
+        }
 
-        public IEnvironment Environment { get; set; }
+        public IEnvironment Environment 
+        { 
+            get; 
+            set; 
+        }
 
         public GameState(IGameStateManager manager, GameStatus status)
         {
@@ -18,16 +31,24 @@ namespace OOP21-putting-challenge-csharp.Lucioli
         }
 
         /// <inheritdoc/>
-        public override Tuple<SceneType, List<IGameObject>> InitState()
-        {
-        }
-
-        
-        /// <inheritdoc/>
-        public override void LeavingState(GameStatus nextStatus)
+        public virtual void LeavingState(GameStatus nextStatus)
         {
             StateManager.SwitchState(nextStatus);
         }
+
+        /// <inheritdoc/>
+        public Tuple<SceneType, List<IGameObject>> InitState()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public abstract void SetEnvironment(IEnvironment environment);
+
+        /// <inheritdoc/>
+        public abstract void NotifyEvents(ModelEventType eventType);
         
+        /// <inheritdoc/>
+        public abstract void ReceiveEvents();
     }
 }
