@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Lucioli
 {
@@ -7,12 +8,6 @@ namespace Lucioli
 		/// <summary>Initialize the state.</summary>
 		/// <returns>returns a <see cref="Tuple"/> that contains the <see cref="SceneType"/> and a <see cref="List{GameObject}"/>.</returns>
 		public Tuple<SceneType, List<IGameObject>> InitState();
-
-		/// <summary>
-		/// Sets the <see cref="Environment"/> of the state.
-		/// </summary>
-		/// <param name="environment">Is the environment to set.</param>
-		public void SetEnvironment(Optional<IEnvironment> environment);
 
 		/// <summary>
 		/// Notify the intercepted model event.

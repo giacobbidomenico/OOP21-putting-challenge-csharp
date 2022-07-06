@@ -37,13 +37,7 @@ namespace Lucioli
         }
 
         /// <inheritdoc/>
-        public Tuple<SceneType, List<IGameObject>> InitState()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public abstract void SetEnvironment(IEnvironment environment);
+        public abstract Tuple<SceneType, List<IGameObject>> InitState();
 
         /// <inheritdoc/>
         public abstract void NotifyEvents(ModelEventType eventType);

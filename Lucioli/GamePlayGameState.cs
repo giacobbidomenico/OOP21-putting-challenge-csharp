@@ -53,7 +53,7 @@ namespace Lucioli
         }
 
         /// <inheritdoc/>
-        public new Tuple<SceneType, List<IGameObject>> InitState()
+        public override Tuple<SceneType, List<IGameObject>> InitState()
         {
             Lives = MaxLives;
             Score = None;
