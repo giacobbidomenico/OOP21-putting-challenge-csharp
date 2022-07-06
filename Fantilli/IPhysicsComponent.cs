@@ -8,7 +8,7 @@
         /// <param name="dt">elapsed time from the previous state</param>
         /// <param name="obj">the instance of <see cref="IGameObject"/> to update</param>
         /// <param name="env">environment of the game</param>
-        void update(long dt, IGameObject obj, Environment env);
+        void Update(long dt, IGameObject obj, Environment env);
 
         /// <summary>
         /// Gets or sets the velocity of the object.
