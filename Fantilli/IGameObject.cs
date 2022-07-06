@@ -1,7 +1,7 @@
 ﻿namespace Fantilli
 {
     /// <summary>
-    ///  Class that represent an element of the game.
+    /// Class that represent an element of the game.
     /// </summary>
     public interface IGameObject
     {
@@ -68,21 +68,10 @@
         PhysicsComponent PhysicsComponent { get; }
 
         /// <summary>
-        /// Gets the <see cref="GraphicComponent"/> of the game object.
-        /// </summary>
-        GraphicComponent GraphicComponent { get; }
-
-        /// <summary>
         /// Update physic state of the object.
         /// </summary>
         /// <param name="dt">elapsed time from the previous state</param>
         /// <param name="env">environment of the game</param>
         void UpdatePhysics(long dt, Environment env);
-
-        /// <summary>
-        /// Draw the game object skin in the actual scene.
-        /// </summary>
-        /// <param name="graphicsContext"></param>
-        void Draw(GraphicsContext graphicsContext);
     }
 }
