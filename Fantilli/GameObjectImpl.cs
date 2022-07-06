@@ -23,7 +23,7 @@
         }
 
         /// <summary>
-        /// Gets the hit-box of the ball.
+        /// Gets the hit-box of the object.
         /// </summary>
         public DynamicBoundingBox HitBox { get => this._hitBox; }
     }

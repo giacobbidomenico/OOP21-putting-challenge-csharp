@@ -26,7 +26,7 @@
         }
 
         /// <inheritdoc cref="IGameObject.Position"/>
-        public Point2D Position { get; set; }
+        public virtual Point2D Position { get; set; }
 
         /// <inheritdoc cref="IGameObject.Velocity"/>
         public Vector2D Velocity 
