@@ -18,6 +18,6 @@
         /// <summary>
         /// Gets or sets the velocity of the object.
         /// </summary>
-        Vector2D Velocity { get; set; }
+        Vector2D Velocity { get; }
     }
 }
