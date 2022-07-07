@@ -1,4 +1,4 @@
-﻿namespace Fantilli
+﻿namespace putting_challenge.Fantilli
 {
     /// <summary>
     /// Class that implements an object of the game.

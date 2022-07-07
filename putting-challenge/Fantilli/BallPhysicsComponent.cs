@@ -61,8 +61,8 @@
             } 
         }
 
-        /// <inheritdoc cref="IPhysicsComponent.Update(long, IGameObject, Environment)"/>
-        public override void Update(long dt, IGameObject obj, Environment env)
+        /// <inheritdoc cref="IPhysicsComponent.Update(long, IGameObject, IEnvironment)"/>
+        public override void Update(long dt, IGameObject obj, IEnvironment env)
         {
             if (this.IsMoving)
             {

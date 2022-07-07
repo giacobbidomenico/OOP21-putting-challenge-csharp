@@ -4,7 +4,7 @@ using System.Text;
 
 namespace putting_challenge.Giacobbi
 {
-    interface IEnvironment
+    public interface IEnvironment
     {
     }
 }

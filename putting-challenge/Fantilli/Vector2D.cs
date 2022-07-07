@@ -1,4 +1,4 @@
-﻿namespace Fantilli
+﻿namespace putting_challenge.Fantilli
 {
     using System;
 
@@ -89,7 +89,7 @@
         /// Return a new <see cref="Vector2D"/> object starting from <paramref name="pointA"/>
         /// and ending at <paramref name="pointB"/>.
         /// </summary>
-        /// <param name="pointA">the startin point of the result vector</param>
+        /// <param name="pointA">the starting point of the result vector</param>
         /// <param name="pointB">the ending point of the result vector</param>
         /// <returns>the new vector</returns>
         public static Vector2D GetVectorFrom(Point2D pointA, Point2D pointB) => 
@@ -105,7 +105,7 @@
         }
 
         /// <summary>
-        /// Gets the dot product bewtween this vector and the given.
+        /// Gets the dot product between this vector and the given.
         /// </summary>
         /// <param name="vector">the vector to multiply</param>
         /// <returns>the dot product</returns>

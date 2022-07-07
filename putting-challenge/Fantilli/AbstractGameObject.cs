@@ -1,6 +1,7 @@
-﻿namespace Fantilli
+﻿namespace putting_challenge.Fantilli
 {
     using System;
+    using putting_challenge.Giacobbi;
 
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.
@@ -41,8 +42,8 @@
         /// <inheritdoc cref="IGameObject.PhysicsComponent"/>
         public IPhysicsComponent PhysicsComponent { get => this._phys; }
 
-        /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
-        public void UpdatePhysics(long dt, Environment env) =>
+        /// <inheritdoc cref="IGameObject.UpdatePhysics(long, IEnvironment)"/>
+        public void UpdatePhysics(long dt, IEnvironment env) =>
             this._phys.Update(dt, this, env);
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
