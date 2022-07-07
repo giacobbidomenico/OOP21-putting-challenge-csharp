@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giacobbi", "Giacobbi\Giacobbi.csproj", "{77B91B3E-ED52-429B-9C13-68CD776DB761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Giacobbi", "Giacobbi\Giacobbi.csproj", "{77B91B3E-ED52-429B-9C13-68CD776DB761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantilli", "Fantilli\Fantilli.csproj", "{C46C1B7A-C14A-4053-BD0F-1205E010908F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fantilli", "Fantilli\Fantilli.csproj", "{C46C1B7A-C14A-4053-BD0F-1205E010908F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucioli", "Lucioli\Lucioli.csproj", "{A38F848E-C585-495E-B3D5-9D2DAFAF1834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lucioli", "Lucioli\Lucioli.csproj", "{A38F848E-C585-495E-B3D5-9D2DAFAF1834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colletta", "Colletta\Colletta.csproj", "{378C0B5D-52C6-4F24-BE48-63A436B77B15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Colletta", "Colletta\Colletta.csproj", "{378C0B5D-52C6-4F24-BE48-63A436B77B15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
