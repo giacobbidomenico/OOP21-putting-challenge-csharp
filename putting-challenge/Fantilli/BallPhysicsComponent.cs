@@ -1,6 +1,8 @@
 ﻿namespace Fantilli
 {
     using System;
+    using Optional;
+    using Optional.Unsafe;
 
     public class BallPhysicsComponent : AbstractPhysicsComponent
     {
@@ -15,7 +17,7 @@
         private const double MIN_KINETICS_ENERGY = 100;
 
         private readonly double _radius;
-        private Point2D? _lastPos;
+        private Option<Point2D> _lastPos;
         private ActiveBoundingBox? _lastHitbox;
 
         /// <summary>
@@ -130,7 +132,7 @@
 
         private void IsStopping(Point2D pos, ActiveBoundingBox hitbox)
         {
-            if (((ActiveBoundingBox?)this._lastHitbox).HasValue && ((Point2D?)this._lastPos).)
+            if (((ActiveBoundingBox?)this._lastHitbox).HasValue && this._lastPos.ValueOrFailure)
             {
                 final Vector2D vel = this.getVelocity();
                 if (Point2D.getDistance(pos, this.lastPos.get()) < radius * MIN_BOUNCING_DIFFERENCE_FACTOR
