@@ -2,6 +2,9 @@
 {
     using putting_challenge.Giacobbi;
 
+    /// <summary>
+    /// Abstract class that describes the physics of moving <see cref="IGameObject"/>.
+    /// </summary>
     public abstract class AbstractPhysicsComponent : IPhysicsComponent
     {
         /// <inheritdoc cref="IPhysicsComponent.Velocity"/>

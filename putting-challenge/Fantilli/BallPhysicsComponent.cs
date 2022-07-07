@@ -5,6 +5,9 @@
     using Optional.Unsafe;
     using putting_challenge.Giacobbi;
 
+    /// <summary>
+    /// Class that describes the physical behavior of the ball.
+    /// </summary>
     public class BallPhysicsComponent : AbstractPhysicsComponent
     {
         private const double Y_ACCELERATION = 30 * -9.81;

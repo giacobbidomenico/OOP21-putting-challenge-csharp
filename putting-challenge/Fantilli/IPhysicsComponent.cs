@@ -2,6 +2,9 @@
 {
     using putting_challenge.Giacobbi;
 
+    /// <summary>
+    /// Describes the physical behavior of a <see cref="IGameObject"/>.
+    /// </summary>
     public interface IPhysicsComponent
     {
         /// <summary>
