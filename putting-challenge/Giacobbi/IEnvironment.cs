@@ -1,12 +1,19 @@
 ﻿using Fantilli;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Giacobbi
 {
     public interface IEnvironment
     {
+        public IGameObject Ball { get; }
+        public PlayerObject Player { get; }
+        public Rectangle Container { get; }
+        public IList<IGameObject> StaticObstacle { get; }
+        public IGameObject Hole { get; }
+
         /// <summary>
         /// Update the game <see cref="IEnvironment"/>. 
         /// </summary>

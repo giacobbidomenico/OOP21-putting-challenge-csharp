@@ -18,13 +18,9 @@ namespace Giacobbi
         private bool _notifiable;
 
         public IGameObject Ball { get; private set; }
-        
         public PlayerObject Player { get; private set; }
-        
         public Rectangle Container { get; private set; }
-        
         public IList<IGameObject> StaticObstacle { get; private set; }
-        
         public IGameObject Hole { get; private set; }
 
         /// <summary>
@@ -260,7 +256,7 @@ namespace Giacobbi
             if (obj is IEnvironment env)
             {
                 return Ball.Equals(env.Ball)
-                        && _staticObstacles.Contains(env.StaticObstacle)
+                        && _staticObstacles.Select(e => StaticObstacle.Contains(e)).Count() != 0
                         && Container.Equals(env.Container)
                         && Hole.Equals(env.Hole);
             }
