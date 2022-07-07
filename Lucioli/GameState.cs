@@ -11,7 +11,7 @@ namespace Lucioli
             private set; 
         }
 
-        public IGameStateManager StateManager 
+        public GameStateManager StateManager 
         { 
             get; 
             private set; 
@@ -23,7 +23,7 @@ namespace Lucioli
             set; 
         }
 
-        public GameState(IGameStateManager manager, GameStatus status)
+        public GameState(GameStateManager manager, GameStatus status)
         {
             StateManager = manager;
             Status = status;
