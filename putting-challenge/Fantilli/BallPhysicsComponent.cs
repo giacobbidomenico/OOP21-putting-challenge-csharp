@@ -1,8 +1,9 @@
-﻿namespace Fantilli
+﻿namespace putting_challenge.Fantilli
 {
     using System;
     using Optional;
     using Optional.Unsafe;
+    using putting_challenge.Giacobbi;
 
     public class BallPhysicsComponent : AbstractPhysicsComponent
     {
@@ -18,7 +19,7 @@
 
         private readonly double _radius;
         private Option<Point2D> _lastPos;
-        private ActiveBoundingBox? _lastHitbox;
+        private Option<ActiveBoundingBox> _lastHitbox;
 
         /// <summary>
         /// Build a new <see cref="BallObjectImpl"/>.
@@ -28,8 +29,8 @@
         {
             base.Velocity = new Vector2D(0, 0);
             this._radius = radius;
-            this._lastPos = null;
-            this._lastHitbox = null;
+            this._lastPos = Option.None<Point2D>();
+            this._lastHitbox = Option.None<ActiveBoundingBox>();
         }
 
         /// <summary>
@@ -68,17 +69,17 @@
                 BallPhysicsComponent clone = new BallPhysicsComponent(this.Radius);
                 clone.Velocity = new Vector2D(this.Velocity);
 
-                CollisionTest? infoOpt = env.CheckCollisions(((BallObjectImpl)obj).HitBox, clone, obj.Position, dt);
+                Option<CollisionTest> infoOpt = env.CheckCollisions(((BallObjectImpl)obj).HitBox, clone, obj.Position, dt);
                 Point2D nextPos;
                 if (infoOpt.HasValue)
                 {
-                    CollisionTest info = infoOpt.Value;
+                    Option<CollisionTest> info = infoOpt.ValueOrFailure();
 
                     double radius = ((BallObjectImpl)obj).HitBox.Radius();
-                    Vector2D normale = info.GetActiveBBSideNormal().Value;
+                    Vector2D normale = info.GetActiveBBSideNormal().ValueOrFailure();
                     Vector2D lastVel = this.Velocity;
 
-                    nextPos = info.GetEstimatedPointOfImpact().Value;
+                    nextPos = info.GetEstimatedPointOfImpact().ValueOrFailure();
                     bool bTangent = info.GetActiveBoundingBox().BounceAlongTanget();
                     if (bTangent)
                     {
@@ -94,8 +95,8 @@
                     nextPos.SumX(-radius);
                     nextPos.SumY(-radius);
 
-                    normale = bTangent ? info.GetActiveBBSideTanget().Value : normale;
-                    Vector2D finVel = this.VelAfterCollision(normale, lastVel, info.GetActiveBoundingBox().BounceAlongTanget());
+                    normale = bTangent ? info.GetActiveBBSideTanget().ValueOrFailure() : normale;
+                    Vector2D finVel = this.VelAfterCollision(normale, lastVel, bTangent);
                     this.Velocity = finVel;
                     this.IsStopping(nextPos, info.GetActiveBoundingBox());
                 }
@@ -132,60 +133,55 @@
 
         private void IsStopping(Point2D pos, ActiveBoundingBox hitbox)
         {
-            if (((ActiveBoundingBox?)this._lastHitbox).HasValue && this._lastPos.ValueOrFailure)
+            if (this._lastHitbox.HasValue && this._lastPos.HasValue)
             {
-                final Vector2D vel = this.getVelocity();
-                if (Point2D.getDistance(pos, this.lastPos.get()) < radius * MIN_BOUNCING_DIFFERENCE_FACTOR
-                    && hitbox.equals(this.lastHitbox.get())
-                    && (-Y_ACCELERATION * (1 / pos.getY()) * 100) < MIN_POTENTIAL_ENERGY
-                    && Math.abs(vel.getX()) + Math.abs(vel.getY()) < MIN_KINETICS_ENERGY)
+                Vector2D vel = this.Velocity;
+                if (Point2D.GetDistance(pos, this._lastPos.ValueOrFailure()) < this.Radius * MIN_BOUNCING_DIFFERENCE_FACTOR
+                    && hitbox.equals(this._lastHitbox.ValueOrFailure())
+                    && (-Y_ACCELERATION * (1 / pos.Y) * 100) < MIN_POTENTIAL_ENERGY
+                    && Math.Abs(vel.X) + Math.Abs(vel.Y) < MIN_KINETICS_ENERGY)
                 {
-                    this.setVelocity(new Vector2D(0, 0));
+                    this.Velocity = new Vector2D(0, 0);
                 }
             }
-            this.lastPos = Optional.of(pos);
-            this.lastHitbox = Optional.of(hitbox);
+            this._lastPos = Option.Some(pos);
+            this._lastHitbox = Option.Some(hitbox);
         }
 
-        /**
-         * Given a delta time, it calculates the next position of the object, starting from an initial position.
-         * Follow the formulas of the motion of the projectile in a viscous medium.
-         * 
-         * @param dt
-         *          delta time
-         * @param curPos
-         *          starting position
-         * @return the next expected position
-         */
-        public Point2D nextPos(final long dt, final Point2D curPos)
+        /// <summary>
+        /// Given a delta time, it calculates the next position of the object, starting from an initial position.
+        /// Follow the formulas of the motion of the projectile in a viscous medium.
+        /// </summary>
+        /// <param name="dt">elapsed time from the previous state</param>
+        /// <param name="curPos">starting position</param>
+        /// <returns>the next expected position</returns>
+        public Point2D NextPos(long dt, Point2D curPos)
         {
-            final double t = 0.001 * dt * 1.5;
-            final Vector2D vel = this.getVelocity();
+            double t = 0.001 * dt * 1.5;
+            Vector2D vel = this.Velocity;
 
-            this.reduceVel(dt);
-            final double x = curPos.getX() + (vel.getX() * t);
-            final double y = curPos.getY()
-                             + (vel.getY() * t)
-                             - (0.5 * Y_ACCELERATION * t * t);
+            this.ReduceVel(dt);
+            double x = curPos.X + (vel.X * t);
+            double y = curPos.Y + (vel.Y * t) - (0.5 * Y_ACCELERATION * t * t);
             return new Point2D(x, y);
         }
 
-        private void reduceVel(final long dt)
+        private void ReduceVel(long dt)
         {
-            double velX = Math.abs(this.getVelocity().getX());
-            double velY = this.getVelocity().getY();
-            final double t = 0.001 * dt;
+            double velX = Math.Abs(this.Velocity.X);
+            double velY = this.Velocity.Y;
+            double t = 0.001 * dt;
 
             velY -= Y_ACCELERATION * t;
             if (velX != 0)
             {
-                velX -= 3 * Math.PI * FRICTION * velX * this.radius * t;
-                if (this.getVelocity().getX() < 0)
+                velX -= 3 * Math.PI * FRICTION * velX * this.Radius * t;
+                if (this.Velocity.X < 0)
                 {
                     velX *= -1;
                 }
             }
-            this.setVelocity(new Vector2D(velX, velY));
+            this.Velocity = new Vector2D(velX, velY);
         }
     }
 }
