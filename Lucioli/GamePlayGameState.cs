@@ -1,3 +1,4 @@
+using Fantilli;
 using System;
 using System.Collections.Generic;
 
@@ -128,8 +129,8 @@ namespace Lucioli
             if (!ballPhysicsComponent.IsMoving)
             {
                 Vector2D shootingVector = Vector2D.GetVectorFrom(points.Item1, points.Item2);
-                shootingVector.SetX(shootingVector.X * batStrength);
-                shootingVector.SetY(shootingVector.Y * batStrength);
+                shootingVector.X = shootingVector.X * batStrength;
+                shootingVector.Y = shootingVector.Y * batStrength;
                 if (shootingVector.GetModule() > MaxStrength)
                 {
                     double moduleRate = MaxStrength / shootingVector.GetModule();
@@ -158,7 +159,7 @@ namespace Lucioli
             throw new NotImplementedException();
         }
 
-        public override void SetEnvironment(Optional<IEnvironment> environment)
+        public override void SetEnvironment(IEnvironment environment)
         {
             throw new NotImplementedException();
         }
