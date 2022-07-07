@@ -1,6 +1,8 @@
 ﻿namespace Fantilli
 {
     using System;
+    using Optional;
+    using Optional.Unsafe;
 
     public class BallPhysicsComponent : AbstractPhysicsComponent
     {
@@ -15,7 +17,7 @@
         private const double MIN_KINETICS_ENERGY = 100;
 
         private readonly double _radius;
-        private Point2D? _lastPos;
+        private Option<Point2D> _lastPos;
         private ActiveBoundingBox? _lastHitbox;
 
         /// <summary>
@@ -106,31 +108,31 @@
             }
         }
 
-        private Vector2D velAfterCollision(final Vector2D normale, final Vector2D lastVel, final boolean usesTangent)
+        private Vector2D VelAfterCollision(Vector2D normale, Vector2D lastVel, bool usesTangent)
         {
             double x;
             double y;
             if (usesTangent)
             {
-                final double tangentX = normale.getX();
-                final double tangentY = normale.getY();
-                final double dot = tangentX * lastVel.getX() + tangentY * lastVel.getY();
+                double tangentX = normale.X;
+                double tangentY = normale.Y;
+                double dot = tangentX * lastVel.X + tangentY * lastVel.Y;
                 x = dot * tangentX;
                 y = dot * tangentY;
             }
             else
             {
-                double sign = Math.signum(normale.getY()) == -1 ? 1 : -1;
-                y = lastVel.getY() * (normale.getY() == 0 ? 1 : normale.getY() * sign) * REDUCE_Y;
-                sign = Math.signum(normale.getX()) == -1 ? 1 : -1;
-                x = lastVel.getX() * (normale.getX() == 0 ? 1 : normale.getX() * sign) * REDUCE_X;
+                double sign = Math.Sign(normale.Y) == -1 ? 1 : -1;
+                y = lastVel.Y * (normale.Y == 0 ? 1 : normale.Y * sign) * REDUCE_Y;
+                sign = Math.Sign(normale.X) == -1 ? 1 : -1;
+                x = lastVel.X * (normale.X == 0 ? 1 : normale.X * sign) * REDUCE_X;
             }
             return new Vector2D(x, y);
         }
 
-        private void isStopping(final Point2D pos, final ActiveBoundingBox hitbox)
+        private void IsStopping(Point2D pos, ActiveBoundingBox hitbox)
         {
-            if (this.lastHitbox.isPresent() && this.lastPos.isPresent())
+            if (((ActiveBoundingBox?)this._lastHitbox).HasValue && this._lastPos.ValueOrFailure)
             {
                 final Vector2D vel = this.getVelocity();
                 if (Point2D.getDistance(pos, this.lastPos.get()) < radius * MIN_BOUNCING_DIFFERENCE_FACTOR
