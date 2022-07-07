@@ -7,7 +7,7 @@
     /// When a colleague wants to interact with other colleagues, it calls the Mediator passing the event occured.
     /// The Mediator proceeds to notify the other colleagues passing them the event.
     /// </summary>
-    public interface GameEvent
+    public interface IGameEvent
     {
         /// <summary>
         /// Gets the type of the event.
