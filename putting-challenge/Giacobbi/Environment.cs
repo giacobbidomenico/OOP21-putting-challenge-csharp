@@ -175,7 +175,31 @@ namespace puttingchallenge.Giacobbi
         /// <inheritdoc/>
         public Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
-            _collisionWithHole = true;
+            IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
+            IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
+                    new Point2D(ballPosition.X + ballHitbox.Radius,
+                            ballPosition.Y + ballHitbox.Radius),
+                    ballHitbox.getRadius());
+
+            builder.SetHitbox(box);
+            builder.SetPhysic(ballPhysics);
+            builder.SetPosition(box.getPosition());
+
+            CollisionTest result = ((GameObjectImpl)_hole).getHitBox().collidesWith(builder, dt);
+            if (result.isCollisionOccurred())
+            {
+                _collisionWithHole = true;
+            }
+
+            result = null;
+            for (final GameObject gameObject : staticObstacles)
+            {
+                final CollisionTest currentResult = ((GameObjectImpl)gameObject).getHitBox().collidesWith(builder, dt);
+                if (currentResult.isCollisionOccurred())
+                {
+                    result = currentResult;
+                }
+            }
             return Option.None<CollisionTest>();
         }
 
@@ -215,7 +239,7 @@ namespace puttingchallenge.Giacobbi
                 throw new InvalidOperationException();
             }
             IEnumerable<ModelEventType> eventsReceived = _observable.EventsReceived();
-            eventsReceived.ToList().All(e =>
+            eventsReceived.All(e =>
             {
                 switch (e)
                 {
@@ -244,10 +268,6 @@ namespace puttingchallenge.Giacobbi
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(Ball, Container, Hole,
-            Player, _observable, _observableGameState,_observer, _staticObstacles);
-
-        /// <inheritdoc/>
         public override bool Equals(object? obj)
         {
             if (this == obj)
@@ -269,15 +289,13 @@ namespace puttingchallenge.Giacobbi
         }
 
         /// <inheritdoc/>
-        public void AddStaticObstacle(IGameObject obstacle)
-        {
-            StaticObstacle.Add(obstacle);
-        }
+        public override int GetHashCode() =>
+            HashCode.Combine(Ball, Container, Hole, Player, _staticObstacles);
 
         /// <inheritdoc/>
-        public IObservableEvents<ModelEventType> GetObservable()
-        {
-            return _observable;
-        }
+        public void AddStaticObstacle(IGameObject obstacle) => StaticObstacle.Add(obstacle);
+
+        /// <inheritdoc/>
+        public IObservableEvents<ModelEventType> GetObservable() => _observable;
     }
 }
