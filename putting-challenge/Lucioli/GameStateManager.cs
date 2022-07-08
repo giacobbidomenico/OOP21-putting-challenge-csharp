@@ -1,6 +1,9 @@
 ﻿using Giacobbi;
 using Optional;
 using Optional.Unsafe;
+using putting_challenge.Fantilli;
+using System;
+using System.Collections.Generic;
 
 namespace putting_challenge.Lucioli
 {
@@ -21,17 +24,39 @@ namespace putting_challenge.Lucioli
         ///<inheritdoc/>
         public void SwitchState(GameStatus newStatus)
         {
+            IGameEvent otherEvent;
             switch (newStatus)
             {
                 case GameStatus.Play:
                     CurrentGameState = new GamePlayGameState(this, newStatus);
-                    // missing
+                    CurrentGameState.Mediator = _generalMediator;
+                    _generalMediator.AddColleague(CurrentGameState);
+                    Tuple<IEnumerable<SceneType>, IList<IGameObject>> tuple = CurrentGameState.InitState();
+                    _generalMediator.NotifyColleagues(new GameEventWithDetailsImpl<Tuple<IEnumerable<SceneType>, IList<IGameObject>>>(GameEventType.SET_SCENE, tuple), this);
                     break;
                 case GameStatus.GameOver:
-                case GameStatus.GameWin:
-                case GameStatus.Leaderboard:
-                case GameStatus.MainMenu:
+                    otherEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE,
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.GameOver, new List<IGameObject>()));
                     CurrentGameState = new ScreenGameState(this, newStatus);
+                    _generalMediator.NotifyColleagues(otherEvent, this);
+                    break;
+                case GameStatus.GameWin:
+                    otherEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE,
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.GameWin, new List<IGameObject>()));
+                    CurrentGameState = new ScreenGameState(this, newStatus);
+                    _generalMediator.NotifyColleagues(otherEvent, this);
+                    break;
+                case GameStatus.Leaderboard:
+                    otherEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE,
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.Leaderboard, new List<IGameObject>()));
+                    CurrentGameState = new ScreenGameState(this, newStatus);
+                    _generalMediator.NotifyColleagues(otherEvent, this);
+                    break;
+                case GameStatus.MainMenu:
+                    otherEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE,
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.MainMenu, new List<IGameObject>()));
+                    CurrentGameState = new ScreenGameState(this, newStatus);
+                    _generalMediator.NotifyColleagues(otherEvent, this);
                     // missing
                     break;
                 default:
