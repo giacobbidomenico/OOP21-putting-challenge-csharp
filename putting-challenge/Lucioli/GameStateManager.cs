@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Giacobbi;
+using Optional;
+using Optional.Unsafe;
 
-namespace Lucioli
+namespace putting_challenge.Lucioli
 {
     public class GameStateManager
     {
@@ -41,7 +43,7 @@ namespace Lucioli
         {
             if(CurrentGameState.Environment != null)
             {
-                CurrentGameState.Environment.Update(dt);
+                CurrentGameState.Environment.ValueOrFailure<IEnvironment>().Update(dt);
                 CurrentGameState.ReceiveEvents();
             }
         }

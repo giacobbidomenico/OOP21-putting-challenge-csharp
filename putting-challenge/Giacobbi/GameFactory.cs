@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     public class GameFactory
     {
