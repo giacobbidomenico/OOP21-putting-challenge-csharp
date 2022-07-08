@@ -1,13 +1,15 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.gameobjects
 {
-    using putting_challenge.Giacobbi;
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.physics;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Class that represent an element of the game.
     /// </summary>
     public interface IGameObject
     {
-        
+
         /// <summary>
         /// Types of the game objects.
         /// </summary>

@@ -1,7 +1,9 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.gameobjects
 {
     using System;
-    using putting_challenge.Giacobbi;
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.physics;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.
@@ -21,40 +23,40 @@
                                   Point2D position,
                                   IPhysicsComponent phys)
         {
-            this._type = type;
-            this.Position = position;
-            this._phys = phys;
+            _type = type;
+            Position = position;
+            _phys = phys;
         }
 
         /// <inheritdoc cref="IGameObject.Position"/>
         public virtual Point2D Position { get; set; }
 
         /// <inheritdoc cref="IGameObject.Velocity"/>
-        public Vector2D Velocity 
-        { 
-            get => this._phys.Velocity; 
-            set => this._phys.Velocity = value; 
+        public Vector2D Velocity
+        {
+            get => _phys.Velocity;
+            set => _phys.Velocity = value;
         }
 
         /// <inheritdoc cref="IGameObject.Type"/>
-        public IGameObject.GameObjectType Type { get => this._type; }
+        public IGameObject.GameObjectType Type { get => _type; }
 
         /// <inheritdoc cref="IGameObject.PhysicsComponent"/>
-        public IPhysicsComponent PhysicsComponent { get => this._phys; }
+        public IPhysicsComponent PhysicsComponent { get => _phys; }
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, IEnvironment)"/>
         public void UpdatePhysics(long dt, IEnvironment env) =>
-            this._phys.Update(dt, this, env);
+            _phys.Update(dt, this, env);
 
         /// <inheritdoc cref="IGameObject.UpdatePhysics(long, Environment)"/>
-        public override int GetHashCode() => HashCode.Combine(this._type, this.Position, this.Velocity);
+        public override int GetHashCode() => HashCode.Combine(_type, Position, Velocity);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (obj.GetType() != this.GetType()) return false;
-            return this.Equals(obj as AbstractGameObject);
+            if (obj.GetType() != GetType()) return false;
+            return Equals(obj as AbstractGameObject);
         }
 
         /// <summary>
@@ -72,9 +74,9 @@
             }
             else
             {
-                return this.Position.Equals(obj.Position)
-                       && this._phys.Equals(obj.PhysicsComponent)
-                       && this._type.Equals(obj.Type);
+                return Position.Equals(obj.Position)
+                       && _phys.Equals(obj.PhysicsComponent)
+                       && _type.Equals(obj.Type);
             }
         }
     }

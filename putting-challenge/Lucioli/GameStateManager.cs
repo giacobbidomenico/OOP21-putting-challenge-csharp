@@ -5,7 +5,7 @@ using putting_challenge.Fantilli;
 using System;
 using System.Collections.Generic;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class GameStateManager
     {

@@ -1,10 +1,9 @@
 ﻿using Fantilli;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using Optional;
 
-namespace Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     public interface IEnvironment
     {
@@ -31,7 +30,7 @@ namespace Giacobbi
         /// return a info about the collision occurred, empty 
         /// if no collision has occurred.
         /// </returns>
-        Optional<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox,
+        Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox,
                 BallPhysicsComponent ballPhysics,
                 Point2D ballPosition, long dt);
 
@@ -52,12 +51,12 @@ namespace Giacobbi
         void ReceiveEvents();
 
         /// <summary>
-        /// Configure the <see cref="ObservableEvents{ModelEventType}"/>, 
+        /// Configure the <see cref="IObservableEvents{ModelEventType}"/>, 
         /// that allows the communication from the <see cref="IEnvironment"/> 
         /// to the <see cref="IGameObject"/>.
         /// </summary>
         /// <param name="observable"></param>
-        void ConfigureObservable(ObservableEvents<ModelEventType> observable);
+        void ConfigureObservable(IObservableEvents<ModelEventType> observable);
 
         /// <returns>
         /// return the <see cref="IObservableEvents{T}"/>>, that allows the

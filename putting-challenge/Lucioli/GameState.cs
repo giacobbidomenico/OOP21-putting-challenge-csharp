@@ -1,10 +1,10 @@
-using putting_challenge.Fantilli;
 using System;
 using System.Collections.Generic;
 using Giacobbi;
 using Optional;
+using Fantilli.gameobjects;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public abstract class GameState : IGameState
     {

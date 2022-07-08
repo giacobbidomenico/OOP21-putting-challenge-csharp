@@ -1,8 +1,7 @@
-﻿using putting_challenge.Giacobbi;
-using Fantilli;
+﻿using Fantilli;
 using System;
 
-namespace Giacobbi
+namespace puttingchallenge.Giacobbi
 {
 
     /// <summary>
@@ -17,13 +16,14 @@ namespace Giacobbi
         /// <inheritdoc/>
         public void Update(long dt, IGameObject obj, IEnvironment env)
         {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(new Vector2D(0,0));
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
             {
