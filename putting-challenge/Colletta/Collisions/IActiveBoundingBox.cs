@@ -1,6 +1,6 @@
 ﻿using putting_challenge.Fantilli;
 
-namespace putting_challenge.Colletta.Collisions
+namespace PuttingChallenge.Colletta.Collisions
 {
     /// <summary>
     /// Defines a bounding box capable of performing intersection tests, hence Active.
