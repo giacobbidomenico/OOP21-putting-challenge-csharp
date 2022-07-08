@@ -19,10 +19,10 @@ namespace PuttingChallenge.Colletta.Mediator
             _colleagues = ts;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IMediator.AddColleague(IColleague)"/> 
         public void AddColleague(IColleague newColleague) => _colleagues.Add(newColleague);
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IMediator.NotifyColleagues(IGameEvent, IColleague)"/>
         public void NotifyColleagues(IGameEvent eventOccurred, IColleague sender)
         {
             foreach (IColleague colleague in _colleagues)
@@ -34,7 +34,7 @@ namespace PuttingChallenge.Colletta.Mediator
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IMediator.RemoveColleague(IColleague)"/>
         public void RemoveColleague(IColleague toRemove) => _colleagues.Remove(toRemove);
     }
 }
