@@ -39,7 +39,7 @@ namespace PuttingChallenge.Colletta.Collisions
         /// <inheritdoc cref="IActiveBoundingBox.BounceAlongTangent"/>
         public bool BounceAlongTangent() => false;
 
-        /// <inheritdoc cref="IActiveBoundingBox.ClosestPointOnBBToPoint(Point2D)"/>
+        /// <inheritdoc cref="IActiveBoundingBox.ClosestPointOnBBToPoint"/>
         public Point2D ClosestPointOnBBToPoint(Point2D point)
         {
             Point2D closestPoint = new Point2D(point.X, point.Y);
@@ -62,7 +62,7 @@ namespace PuttingChallenge.Colletta.Collisions
             return closestPoint;
         }
 
-        /// <inheritdoc cref="IActiveBoundingBox.GetNormal(Point2D)"/>
+        /// <inheritdoc cref="IActiveBoundingBox.GetNormal"/>
         public Vector2D GetNormal(Point2D pointOnActiveBoundingBox)
         {
             if (pointOnActiveBoundingBox.X == _minimumVertex.X)
@@ -84,7 +84,7 @@ namespace PuttingChallenge.Colletta.Collisions
             throw new ArgumentException();
         }
 
-        /// <inheritdoc cref="IActiveBoundingBox.IntersectionToSegment(Point2D, Point2D)"/>
+        /// <inheritdoc cref="IActiveBoundingBox.IntersectionToSegment"/>
         public Point2D IntersectionToSegment(Point2D pointA, Point2D pointB)
         {
             if (ClosestPointOnBBToPoint(pointA) == pointA || ClosestPointOnBBToPoint(pointB) != pointB)
@@ -118,7 +118,7 @@ namespace PuttingChallenge.Colletta.Collisions
             return result.ValueOrFailure();
         }
 
-        /// <inheritdoc cref="IActiveBoundingBox.IsColliding(IPassiveCircleBoundingBox)"/>
+        /// <inheritdoc cref="IActiveBoundingBox.IsColliding"/>
         public bool IsColliding(IPassiveCircleBoundingBox circle)
         {
             Point2D closestPointOnAABB = ClosestPointOnBBToPoint(circle.Position);
