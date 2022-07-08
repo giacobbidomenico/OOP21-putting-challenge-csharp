@@ -1,12 +1,11 @@
-﻿using Fantilli;
-using puttingchallenge_Giacobbi;
+﻿using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Fantilli.common;
+using puttingchallenge.Lucioli;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using Optional;
 using Optional.Unsafe;
-using Environment = puttingchallenge_Giacobbi.Environment;
 
 namespace puttingchallenge.Giacobbi
 {
@@ -28,7 +27,7 @@ namespace puttingchallenge.Giacobbi
             _gameObjects = new List<IGameObject>();
             _container = Option.None<Rectangle>();
             _ball = Option.None<IGameObject>();
-            _player = Option.None<IGameObject>();
+            _player = Option.None<PlayerObject>();
             _hole = Option.None<IGameObject>();
         }
 
@@ -53,7 +52,7 @@ namespace puttingchallenge.Giacobbi
                                             double h,
                                             bool flip)
         {
-            _player = AddElement<PlayerObject>(_player, _factory.CreatePlayer(pos, skinPath, w, h));
+            _player = AddElement<PlayerObject>(_player, _factory.CreatePlayer(pos, skinPath, w, h, true));
             return this;
         }
 
@@ -129,5 +128,6 @@ namespace puttingchallenge.Giacobbi
             }
             return Option.None<T>();
         }
+
     }
 }
