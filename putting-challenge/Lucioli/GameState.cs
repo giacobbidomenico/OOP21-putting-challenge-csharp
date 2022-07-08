@@ -40,7 +40,7 @@ namespace putting_challenge.Lucioli
         }
 
         /// <inheritdoc/>
-        public abstract Tuple<SceneType, List<IGameObject>> InitState();
+        public abstract Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState();
 
         /// <inheritdoc/>
         public abstract void NotifyEvents(ModelEventType eventType);

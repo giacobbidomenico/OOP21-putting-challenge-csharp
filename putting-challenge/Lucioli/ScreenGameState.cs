@@ -11,7 +11,7 @@ namespace putting_challenge.Lucioli
         {
         }
 
-        public override Tuple<SceneType, List<IGameObject>> InitState()
+        public override Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState()
         {
             throw new NotImplementedException();
         }

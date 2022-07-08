@@ -8,7 +8,7 @@ namespace putting_challenge.Lucioli
 	{
 		/// <summary>Initialize the state.</summary>
 		/// <returns>returns a <see cref="Tuple"/> that contains the <see cref="SceneType"/> and a <see cref="List{GameObject}"/>.</returns>
-		public Tuple<SceneType, List<IGameObject>> InitState();
+		public Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState();
 
 		/// <summary>
 		/// Notify the intercepted model event.

@@ -15,7 +15,7 @@ namespace putting_challenge.Lucioli
 
         private ObservableEvents<ModelEventType> _observable;
         private ObserverEvents<ModelEventType> _observer;
-        private SceneType _currentScene;
+        private IEnumerable<SceneType> _currentScene;
 
 
         private static IEnumerable<SceneType> GetNextMap()
@@ -57,12 +57,12 @@ namespace putting_challenge.Lucioli
         }
 
         /// <inheritdoc/>
-        public override Tuple<SceneType, IList<IGameObject>> InitState()
+        public override Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState()
         {
             Lives = MaxLives;
             Score = None;
             LoadNextEnvironment();
-            return new Tuple<SceneType, IList<IGameObject>>(_currentScene, (IList<IGameObject>)Environment.ValueOrFailure().GetObjects());
+            return new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, Environment.ValueOrFailure().GetObjects());
         }
 
         /// <inheritdoc/>
@@ -104,7 +104,7 @@ namespace putting_challenge.Lucioli
 
         private void LoadNextEnvironment()
         {
-            SceneType nextMap = GetNextMap();
+            var nextMap = GetNextMap();
             if (nextMap != null)
             {
                 _currentScene = nextMap;
