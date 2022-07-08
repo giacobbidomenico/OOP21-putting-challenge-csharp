@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using E
 using Optional;
 using Optional.Unsafe;
 using putting_challenge.Giacobbi;
 
-namespace puttingchallenge_Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     public class Environment : IEnvironment
     {
@@ -237,7 +236,7 @@ namespace puttingchallenge_Giacobbi
                 Player,
                 Ball
             };
-            ((List<IGameObject>) allGameObjects).AddRange(_staticObstacles);
+            allGameObjects.ToList().AddRange(_staticObstacles);
             allGameObjects.Add(Hole);
             return allGameObjects;
         }

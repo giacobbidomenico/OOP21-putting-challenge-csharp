@@ -1,7 +1,7 @@
 ﻿using Fantilli;
 using System;
 
-namespace puttingchallenge_Giacobbi
+namespace puttingchallenge.Giacobbi
 {
 
     /// <summary>

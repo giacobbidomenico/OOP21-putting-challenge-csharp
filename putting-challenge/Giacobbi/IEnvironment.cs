@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Optional;
 
-namespace puttingchallenge_Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     public interface IEnvironment
     {

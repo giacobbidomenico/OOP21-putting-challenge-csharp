@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace puttingchallenge_Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     /// <summary>
     /// Class that implements an event observable.
