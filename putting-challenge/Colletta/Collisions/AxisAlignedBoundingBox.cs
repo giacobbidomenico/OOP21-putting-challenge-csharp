@@ -5,17 +5,31 @@ using Optional.Unsafe;
 
 namespace PuttingChallenge.Colletta.Collisions
 {
+    /// <summary>
+    /// Represents a rectangle bounding box whose sides are parallel to the axis of the plane.
+    /// </summary>
     public class AxisAlignedBoundingBox : IActiveBoundingBox
     {
         private readonly Point2D _minimumVertex;
         private readonly Point2D _maximumVertex;
 
+        /// <summary>
+        /// Builds a <see cref="AxisAlignedBoundingBox"/> given two vertices.
+        /// </summary>
+        /// <param name="minimum">The down-left vertex of the rectangle.</param>
+        /// <param name="maximum">The up-right vertex of the rectangle.</param>
         public AxisAlignedBoundingBox(Point2D minimum, Point2D maximum)
         {
             _minimumVertex = minimum;
             _maximumVertex = maximum;
         }
 
+        /// <summary>
+        /// Builds a <see cref="AxisAlignedBoundingBox"/> given the up-left vertex and its dimensions-
+        /// </summary>
+        /// <param name="upLeft">The up-left vertex.</param>
+        /// <param name="height">The height of the rectangole.</param>
+        /// <param name="width">The width of the rectangle.</param>
         public AxisAlignedBoundingBox(Point2D upLeft, double height, double width)
         {
             _minimumVertex = new Point2D(upLeft.X, upLeft.Y + height);
