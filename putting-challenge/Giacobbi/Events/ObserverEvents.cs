@@ -1,4 +1,4 @@
-﻿using puttingchallenge_Giacobbi;
+﻿using puttingchallenge.Giacobbi;
 using System.Collections.Generic;
 using System.Linq;
 

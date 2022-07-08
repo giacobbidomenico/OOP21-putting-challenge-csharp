@@ -1,7 +1,7 @@
-﻿using System;
+﻿using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
+using System;
 using System.Drawing;
-using Fantilli;
-using puttingchallenge_Giacobbi;
 
 namespace puttingchallenge.Giacobbi
 {

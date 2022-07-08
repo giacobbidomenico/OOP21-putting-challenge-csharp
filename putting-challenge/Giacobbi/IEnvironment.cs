@@ -1,4 +1,7 @@
-﻿using Fantilli;
+﻿using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Fantilli.physics;
+using puttingchallenge.Lucioli;
 using System.Collections.Generic;
 using System.Drawing;
 using Optional;
