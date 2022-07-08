@@ -2,6 +2,11 @@
 
 namespace PuttingChallenge.Colletta.Mediator
 {
+    /// <summary>
+    /// Defines an object that needs to interact with other objects (other colleagues), 
+    /// notifying them the occurred <see cref="IGameEvent"/>.
+    /// A Colleague delegates its interaction with other Colleagues to a <see cref="IMediator"/>.
+    /// </summary>
     public interface IColleague
     {
         /// <summary>
@@ -9,6 +14,10 @@ namespace PuttingChallenge.Colletta.Mediator
         /// </summary>
         IMediator Mediator { set; };
 
+        /// <summary>
+        /// Notifies the other colleagues an event occurred.
+        /// </summary>
+        /// <param name="eventOccurred">The occurred event.</param>
         void NotifyEvent(IGameEvent eventOccurred);
 
     }
