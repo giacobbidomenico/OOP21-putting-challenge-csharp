@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace puttingchallenge_Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     /// <summary>
     /// Interface that defines an event observable of type <A>.
