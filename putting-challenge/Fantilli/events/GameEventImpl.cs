@@ -1,7 +1,7 @@
-﻿using Optional;
-
-namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.events
 {
+    using Optional;
+
     /// <summary>
     /// Implementation of <see cref="IGameEvent"/> interface.
     /// </summary>
@@ -13,7 +13,7 @@ namespace putting_challenge.Fantilli
         /// <param name="eventType">the type of the event</param>
         public GameEventImpl(GameEventType eventType)
         {
-            this.EventType = eventType;
+            EventType = eventType;
         }
 
         /// <inheritdoc cref="IGameEvent.EventType"/>

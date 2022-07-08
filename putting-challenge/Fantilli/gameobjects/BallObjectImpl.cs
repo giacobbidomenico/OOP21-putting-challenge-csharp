@@ -1,5 +1,8 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.gameobjects
 {
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.physics;
+
     /// <summary>
     /// Class that represent the ball game object.
     /// </summary>
@@ -14,28 +17,28 @@
         /// <param name="position">position of the game object</param>
         /// <param name="phys">physical component of the game object</param>
         /// <param name="hitBox">the hit-box of the object</param>
-        public GameObjectImpl(IGameObject.GameObjectType type,
+        public BallObjectImpl(IGameObject.GameObjectType type,
                               Point2D position,
                               IPhysicsComponent phys,
                               PassiveCircleBoundingBox hitBox) : base(type, position, phys)
         {
-            this._hitBox = hitBox;
+            _hitBox = hitBox;
         }
 
         /// <inheritdoc cref="IGameObject.Position"/>
-        public override Point2D Position 
+        public override Point2D Position
         {
             get => base.Position;
             set
             {
                 base.Position = value;
-                this._hitBox.Position = value;
+                _hitBox.Position = value;
             }
         }
 
         /// <summary>
         /// Gets the hit-box of the ball.
         /// </summary>
-        public PassiveCircleBoundingBox HitBox { get => this._hitBox; }
+        public PassiveCircleBoundingBox HitBox { get => _hitBox; }
     }
 }

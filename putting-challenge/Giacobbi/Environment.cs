@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using Optional;
 using Optional.Unsafe;
-using putting_challenge.Giacobbi;
+using puttingchallenge.Giacobbi;
 
 namespace puttingchallenge.Giacobbi
 {

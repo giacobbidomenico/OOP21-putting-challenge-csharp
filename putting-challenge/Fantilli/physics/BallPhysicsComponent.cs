@@ -1,9 +1,11 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.physics
 {
     using System;
     using Optional;
     using Optional.Unsafe;
     using puttingchallenge.Giacobbi;
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.gameobjects;
 
     /// <summary>
     /// Class that describes the physical behavior of the ball.
@@ -31,15 +33,15 @@
         public BallPhysicsComponent(double radius)
         {
             base.Velocity = new Vector2D(0, 0);
-            this._radius = radius;
-            this._lastPos = Option.None<Point2D>();
-            this._lastHitbox = Option.None<ActiveBoundingBox>();
+            _radius = radius;
+            _lastPos = Option.None<Point2D>();
+            _lastHitbox = Option.None<ActiveBoundingBox>();
         }
 
         /// <summary>
         /// Gets the radius of the ball.
         /// </summary>
-        public double Radius { get => this._radius; }
+        public double Radius { get => _radius; }
 
         /// <summary>
         /// Return true if the ball is stopped, false otherwise
@@ -47,30 +49,30 @@
         public bool IsMoving { get; private set; }
 
         /// <inheritdoc cref="IPhysicsComponent.Velocity"/>
-        public override Vector2D Velocity 
-        { 
-            get => base.Velocity; 
+        public override Vector2D Velocity
+        {
+            get => base.Velocity;
             set
             {
                 base.Velocity = value;
-                if (this.Velocity.Equals(new Vector2D(0, 0)))
+                if (Velocity.Equals(new Vector2D(0, 0)))
                 {
-                    this.IsMoving = false;
+                    IsMoving = false;
                 }
                 else
                 {
-                    this.IsMoving = true;
+                    IsMoving = true;
                 }
-            } 
+            }
         }
 
         /// <inheritdoc cref="IPhysicsComponent.Update(long, IGameObject, IEnvironment)"/>
         public override void Update(long dt, IGameObject obj, IEnvironment env)
         {
-            if (this.IsMoving)
+            if (IsMoving)
             {
-                BallPhysicsComponent clone = new BallPhysicsComponent(this.Radius);
-                clone.Velocity = new Vector2D(this.Velocity);
+                BallPhysicsComponent clone = new BallPhysicsComponent(Radius);
+                clone.Velocity = new Vector2D(Velocity);
 
                 Option<CollisionTest> infoOpt = env.CheckCollisions(((BallObjectImpl)obj).HitBox, clone, obj.Position, dt);
                 Point2D nextPos;
@@ -80,7 +82,7 @@
 
                     double radius = ((BallObjectImpl)obj).HitBox.Radius();
                     Vector2D normale = info.GetActiveBBSideNormal().ValueOrFailure();
-                    Vector2D lastVel = this.Velocity;
+                    Vector2D lastVel = Velocity;
 
                     nextPos = info.GetEstimatedPointOfImpact().ValueOrFailure();
                     bool bTangent = info.GetActiveBoundingBox().BounceAlongTanget();
@@ -99,8 +101,8 @@
                     nextPos.SumY(-radius);
 
                     normale = bTangent ? info.GetActiveBBSideTanget().ValueOrFailure() : normale;
-                    Vector2D finVel = this.VelAfterCollision(normale, lastVel, bTangent);
-                    this.Velocity = finVel;
+                    Vector2D finVel = VelAfterCollision(normale, lastVel, bTangent);
+                    Velocity = finVel;
                     this.IsStopping(nextPos, info.GetActiveBoundingBox());
                 }
                 else
@@ -136,19 +138,19 @@
 
         private void IsStopping(Point2D pos, ActiveBoundingBox hitbox)
         {
-            if (this._lastHitbox.HasValue && this._lastPos.HasValue)
+            if (_lastHitbox.HasValue && _lastPos.HasValue)
             {
-                Vector2D vel = this.Velocity;
-                if (Point2D.GetDistance(pos, this._lastPos.ValueOrFailure()) < this.Radius * MIN_BOUNCING_DIFFERENCE_FACTOR
-                    && hitbox.equals(this._lastHitbox.ValueOrFailure())
-                    && (-Y_ACCELERATION * (1 / pos.Y) * 100) < MIN_POTENTIAL_ENERGY
+                Vector2D vel = Velocity;
+                if (Point2D.GetDistance(pos, _lastPos.ValueOrFailure()) < Radius * MIN_BOUNCING_DIFFERENCE_FACTOR
+                    && hitbox.equals(_lastHitbox.ValueOrFailure())
+                    && -Y_ACCELERATION * (1 / pos.Y) * 100 < MIN_POTENTIAL_ENERGY
                     && Math.Abs(vel.X) + Math.Abs(vel.Y) < MIN_KINETICS_ENERGY)
                 {
-                    this.Velocity = new Vector2D(0, 0);
+                    Velocity = new Vector2D(0, 0);
                 }
             }
-            this._lastPos = Option.Some(pos);
-            this._lastHitbox = Option.Some(hitbox);
+            _lastPos = Option.Some(pos);
+            _lastHitbox = Option.Some(hitbox);
         }
 
         /// <summary>
@@ -161,30 +163,30 @@
         public Point2D NextPos(long dt, Point2D curPos)
         {
             double t = 0.001 * dt * 1.5;
-            Vector2D vel = this.Velocity;
+            Vector2D vel = Velocity;
 
-            this.ReduceVel(dt);
-            double x = curPos.X + (vel.X * t);
-            double y = curPos.Y + (vel.Y * t) - (0.5 * Y_ACCELERATION * t * t);
+            ReduceVel(dt);
+            double x = curPos.X + vel.X * t;
+            double y = curPos.Y + vel.Y * t - 0.5 * Y_ACCELERATION * t * t;
             return new Point2D(x, y);
         }
 
         private void ReduceVel(long dt)
         {
-            double velX = Math.Abs(this.Velocity.X);
-            double velY = this.Velocity.Y;
+            double velX = Math.Abs(Velocity.X);
+            double velY = Velocity.Y;
             double t = 0.001 * dt;
 
             velY -= Y_ACCELERATION * t;
             if (velX != 0)
             {
-                velX -= 3 * Math.PI * FRICTION * velX * this.Radius * t;
-                if (this.Velocity.X < 0)
+                velX -= 3 * Math.PI * FRICTION * velX * Radius * t;
+                if (Velocity.X < 0)
                 {
                     velX *= -1;
                 }
             }
-            this.Velocity = new Vector2D(velX, velY);
+            Velocity = new Vector2D(velX, velY);
         }
     }
 }

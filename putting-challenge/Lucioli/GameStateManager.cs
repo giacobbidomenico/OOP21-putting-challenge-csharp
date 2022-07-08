@@ -2,7 +2,7 @@
 using Optional;
 using Optional.Unsafe;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class GameStateManager
     {

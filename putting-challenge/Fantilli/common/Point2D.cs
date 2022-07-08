@@ -1,4 +1,4 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.common
 {
     using System;
 
@@ -24,8 +24,8 @@
         /// <param name="y">ordinate of the 2D point</param>
         public Point2D(double x, double y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         /// <summary>
@@ -43,25 +43,25 @@
         /// Adds the supplied value to the abscissa of the point.
         /// </summary>
         /// <param name="value">the value to sum</param>
-        public void SumX(double value) => this.X += value;
+        public void SumX(double value) => X += value;
 
         /// <summary>
         /// Adds the supplied value to the ordinate of the point.
         /// </summary>
         /// <param name="value">the value to sum</param>
-        public void SumY(double value) => this.Y += value;
+        public void SumY(double value) => Y += value;
 
         /// <inheritdoc cref="object.GetHashCode()"/>
-        public override int GetHashCode() => HashCode.Combine(this.X, this.Y);
+        public override int GetHashCode() => HashCode.Combine(X, Y);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (obj.GetType() != this.GetType()) return false;
-            return this.Equals(obj as Point2D);
+            if (obj.GetType() != GetType()) return false;
+            return Equals(obj as Point2D);
         }
-        
+
         /// <summary>
         /// Compares this instance with given <paramref name="point"/>.
         /// The result is true if and only if the argument is not null and is 
@@ -77,18 +77,18 @@
             }
             else
             {
-                return this.X.CompareTo(point.X) == 0
-                       && this.Y.CompareTo(point.Y) == 0;
+                return X.CompareTo(point.X) == 0
+                       && Y.CompareTo(point.Y) == 0;
             }
         }
-        
+
         /// <summary>
         /// Get the distance between two <see cref="Point2D"/>.
         /// </summary>
         /// <param name="pointA">the first point</param>
         /// <param name="pointB">the second point</param>
         /// <returns>the distance between point A and B</returns>
-        public static double GetDistance(Point2D pointA, Point2D pointB) => 
+        public static double GetDistance(Point2D pointA, Point2D pointB) =>
             Vector2D.GetVectorFrom(pointA, pointB).GetModule();
     }
 }

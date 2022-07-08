@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace putting_challenge.Giacobbi
+namespace puttingchallenge.Giacobbi
 {
     /// <summary>
     /// Class that implements an event observer.
