@@ -129,8 +129,8 @@ namespace Lucioli
             if (!ballPhysicsComponent.IsMoving)
             {
                 Vector2D shootingVector = Vector2D.GetVectorFrom(points.Item1, points.Item2);
-                shootingVector.X = shootingVector.X * batStrength;
-                shootingVector.Y = shootingVector.Y * batStrength;
+                shootingVector.X *= batStrength;
+                shootingVector.Y *= batStrength;
                 if (shootingVector.GetModule() > MaxStrength)
                 {
                     double moduleRate = MaxStrength / shootingVector.GetModule();
