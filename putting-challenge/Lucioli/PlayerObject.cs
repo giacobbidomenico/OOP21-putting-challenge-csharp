@@ -1,6 +1,8 @@
-﻿using Fantilli.common;
-using Fantilli.physics;
-using static Fantilli.gameobjects.IGameObject;
+﻿using putting_challenge.Lucioli;
+using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Fantilli.physics;
+using static puttingchallenge.Fantilli.gameobjects.IGameObject;
 
 namespace puttingchallenge.Lucioli
 {

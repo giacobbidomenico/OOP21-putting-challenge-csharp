@@ -1,11 +1,11 @@
 using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
-using Giacobbi;
-using Optional;
-using Fantilli.gameobjects;
-using Fantilli.common;
-using Fantilli.physics;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Giacobbi;
+using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.physics;
+using puttingchallenge.Fantilli.events;
 
 namespace puttingchallenge.Lucioli
 {
@@ -47,6 +47,16 @@ namespace puttingchallenge.Lucioli
         {
             get;
             set;
+        }
+
+        public void InitModelComunication()
+        {
+            IObservableEvents<ModelEventType> environmentObservable;
+            environmentObservable = Environment.ValueOrFailure().GetObservable();
+            _observer = new ObserverEvents<ModelEventType>();
+            environmentObservable.AddObserver(_observer);
+            _observable = new ObservableEvents<ModelEventType>();
+            Environment.ValueOrFailure().ConfigureObservable(_observable);
         }
 
         /// <summary>
@@ -110,7 +120,8 @@ namespace puttingchallenge.Lucioli
             if (nextMap != null)
             {
                 _currentScene = nextMap;
-                // missing
+                InitModelComunication();
+                GeneralMediator.NotifyColleagues(new GameEventWithDetailsImpl<Tuple<IEnumerable<SceneType>, IList<IGameObject>>>(GameEventType.SET_SCENE, new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, Environment.ValueOrFailure().GetObjects())), this);
             }
             else
             {
@@ -142,7 +153,7 @@ namespace puttingchallenge.Lucioli
                     shootingVector = new Vector2D(moduleRate * shootingVector.X, moduleRate * shootingVector.Y);
                 }
                 Environment.ValueOrFailure<IEnvironment>().Ball.SetVelocity(shootingVector);
-                NotifyEvents(ModelEventType.Shoot);
+                NotifyEvents(ModelEventType.SHOOT);
             }
         }
         public override void NotifyEvents(ModelEventType eventType)

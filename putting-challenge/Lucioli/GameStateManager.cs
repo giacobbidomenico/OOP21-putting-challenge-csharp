@@ -1,7 +1,7 @@
-﻿using Giacobbi;
-using Optional;
-using Optional.Unsafe;
-using putting_challenge.Fantilli;
+﻿using Optional.Unsafe;
+using puttingchallenge.Fantilli.events;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
 
@@ -57,7 +57,6 @@ namespace puttingchallenge.Lucioli
                         new Tuple<SceneType, IList<IGameObject>>(SceneType.MainMenu, new List<IGameObject>()));
                     CurrentGameState = new ScreenGameState(this, newStatus);
                     _generalMediator.NotifyColleagues(otherEvent, this);
-                    // missing
                     break;
                 default:
                     break;
