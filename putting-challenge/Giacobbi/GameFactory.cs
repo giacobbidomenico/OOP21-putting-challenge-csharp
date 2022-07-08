@@ -1,7 +1,8 @@
-﻿using Fantilli;
+﻿using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Fantilli.physics;
+using puttingchallenge.Lucioli;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace puttingchallenge.Giacobbi
 {
@@ -34,18 +35,24 @@ namespace puttingchallenge.Giacobbi
         /// <param name="skinPath">path of the player's skin</param>
         /// <param name="w">the width of the player</param>
         /// <param name="h">the height of the player</param>
+        /// <param name="flip"></param>  
         /// <returns>an instance of <see cref="PlayerObject"/> representing the player</returns>
         public PlayerObject CreatePlayer(Point2D pos,
                                          String skinPath,
                                          double w,
-                                         double h)
+                                         double h,
+                                         bool flip)
         {
-            return new PlayerObject(IGameObject.GameObjectType.PLAYER,
-                                    pos,
-                                    new StaticPhysicsComponent(),
-                                    new ConcreteDynamicBoundingBox(new AxisAlignedBoundingBox(pos, h, w)),
-                                    w,
-                                    h);
+            var playerObject = new PlayerObject(IGameObject.GameObjectType.PLAYER,
+                                                pos,
+                                                new StaticPhysicsComponent(),
+                                                new ConcreteDynamicBoundingBox(new AxisAlignedBoundingBox(pos, h, w)),
+                                                w,
+                                                h)
+            {
+                Flip = flip
+            };
+            return playerObject;
         }
 
         /// <summary>
