@@ -175,7 +175,32 @@ namespace puttingchallenge.Giacobbi
         /// <inheritdoc/>
         public Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
-            return Optional.None<>();
+            IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
+            IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
+                    new Point2D(ballPosition.X + ballHitbox.Radius,
+                            ballPosition.Y + ballHitbox.Radius),
+                    ballHitbox.getRadius());
+
+            builder.SetHitbox(box);
+            builder.SetPhysic(ballPhysics);
+            builder.SetPosition(box.getPosition());
+
+            CollisionTest result = ((GameObjectImpl)_hole).getHitBox().collidesWith(builder, dt);
+            if (result.isCollisionOccurred())
+            {
+                _collisionWithHole = true;
+            }
+
+            result = null;
+            for (final GameObject gameObject : staticObstacles)
+            {
+                final CollisionTest currentResult = ((GameObjectImpl)gameObject).getHitBox().collidesWith(builder, dt);
+                if (currentResult.isCollisionOccurred())
+                {
+                    result = currentResult;
+                }
+            }
+            return Option.None<CollisionTest>();
         }
 
         /// <inheritdoc/>
