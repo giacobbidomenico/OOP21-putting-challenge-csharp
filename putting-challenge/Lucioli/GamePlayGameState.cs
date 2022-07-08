@@ -1,8 +1,11 @@
-using Fantilli;
+using putting_challenge.Fantilli;
+using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
+using Giacobbi;
+using Optional;
 
-namespace Lucioli
+namespace putting_challenge.Lucioli
 {
     public class GamePlayGameState : GameState
     {
@@ -54,12 +57,12 @@ namespace Lucioli
         }
 
         /// <inheritdoc/>
-        public override Tuple<SceneType, List<IGameObject>> InitState()
+        public override Tuple<SceneType, IList<IGameObject>> InitState()
         {
             Lives = MaxLives;
             Score = None;
             LoadNextEnvironment();
-            return new Tuple<SceneType, List<IGameObject>>(_currentScene, Environment.GetObjects());
+            return new Tuple<SceneType, IList<IGameObject>>(_currentScene, (IList<IGameObject>)Environment.ValueOrFailure().GetObjects());
         }
 
         /// <inheritdoc/>
@@ -124,8 +127,8 @@ namespace Lucioli
         /// <param name="points"> where the mouse was pressed and released during the aiming phase.</param>
         public void Shoot(Tuple<Point2D, Point2D> points)
         {
-            BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.Ball.GetPhysicsComponent();
-            double batStrength = Environment.Player.Bat.Type.Strength;
+            BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.ValueOrFailure<IEnvironment>().Ball.GetPhysicsComponent();
+            double batStrength = Environment.ValueOrFailure<IEnvironment>().Player.Bat.Type.Strength;
             if (!ballPhysicsComponent.IsMoving)
             {
                 Vector2D shootingVector = Vector2D.GetVectorFrom(points.Item1, points.Item2);
@@ -136,30 +139,16 @@ namespace Lucioli
                     double moduleRate = MaxStrength / shootingVector.GetModule();
                     shootingVector = new Vector2D(moduleRate * shootingVector.X, moduleRate * shootingVector.Y);
                 }
-                Environment.Ball.SetVelocity(shootingVector);
+                Environment.ValueOrFailure<IEnvironment>().Ball.SetVelocity(shootingVector);
                 NotifyEvents(ModelEventType.Shoot);
             }
         }
-
-
-
-        /// <inheritdoc/>
-        public override void NotifyEvent(GameEvent gameEvent)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void NotifyEvents(ModelEventType eventType)
         {
             throw new NotImplementedException();
         }
 
         public override void ReceiveEvents()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetEnvironment(IEnvironment environment)
         {
             throw new NotImplementedException();
         }

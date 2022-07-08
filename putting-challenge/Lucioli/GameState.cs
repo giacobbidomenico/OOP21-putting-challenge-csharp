@@ -1,8 +1,10 @@
-using Fantilli;
+using putting_challenge.Fantilli;
 using System;
 using System.Collections.Generic;
+using Giacobbi;
+using Optional;
 
-namespace Lucioli
+namespace putting_challenge.Lucioli
 {
     public abstract class GameState : IGameState
     {
@@ -18,17 +20,17 @@ namespace Lucioli
             private set; 
         }
 
-        public IEnvironment Environment 
+        public Option<IEnvironment> Environment 
         { 
-            get; 
-            set; 
+            get;
+            set;
         }
 
         public GameState(GameStateManager manager, GameStatus status)
         {
             StateManager = manager;
             Status = status;
-            Environment = null;
+            Environment = Option.None<IEnvironment>();
         }
 
         /// <inheritdoc/>
