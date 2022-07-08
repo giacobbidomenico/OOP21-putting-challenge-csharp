@@ -1,5 +1,8 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.gameobjects
 {
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.physics;
+
     /// <summary>
     /// Class that implements an object of the game.
     /// </summary>
@@ -19,12 +22,12 @@
                               IPhysicsComponent phys,
                               DynamicBoundingBox hitBox) : base(type, position, phys)
         {
-            this._hitBox = hitBox;
+            _hitBox = hitBox;
         }
 
         /// <summary>
         /// Gets the hit-box of the object.
         /// </summary>
-        public DynamicBoundingBox HitBox { get => this._hitBox; }
+        public DynamicBoundingBox HitBox { get => _hitBox; }
     }
 }

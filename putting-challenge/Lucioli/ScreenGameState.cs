@@ -1,4 +1,4 @@
-﻿using puttingchallenge.Fantilli;
+﻿using Fantilli.gameobjects;
 using System;
 using System.Collections.Generic;
 using System.Text;

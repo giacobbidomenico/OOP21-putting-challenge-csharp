@@ -1,10 +1,10 @@
-using puttingchallenge.Fantilli;
+using Fantilli.gameobjects;
 using System;
 using System.Collections.Generic;
 
 namespace puttingchallenge.Lucioli
 {
-	public interface IGameState
+    public interface IGameState
 	{
 		/// <summary>Initialize the state.</summary>
 		/// <returns>returns a <see cref="Tuple"/> that contains the <see cref="SceneType"/> and a <see cref="List{GameObject}"/>.</returns>

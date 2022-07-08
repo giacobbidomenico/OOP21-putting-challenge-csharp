@@ -1,5 +1,7 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.physics
 {
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.gameobjects;
     using puttingchallenge.Giacobbi;
 
     /// <summary>

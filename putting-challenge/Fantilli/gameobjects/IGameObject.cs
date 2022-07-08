@@ -1,5 +1,7 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.gameobjects
 {
+    using puttingchallenge.Fantilli.common;
+    using puttingchallenge.Fantilli.physics;
     using puttingchallenge.Giacobbi;
 
     /// <summary>
@@ -7,7 +9,7 @@
     /// </summary>
     public interface IGameObject
     {
-        
+
         /// <summary>
         /// Types of the game objects.
         /// </summary>

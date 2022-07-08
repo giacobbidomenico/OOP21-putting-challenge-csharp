@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.common
 {
     using System;
 
@@ -24,8 +24,8 @@
         /// <param name="y">y-component of the 2D vector</param>
         public Vector2D(double x, double y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
 
         /// <summary>
@@ -37,32 +37,32 @@
         }
 
         /// <inheritdoc cref="object.ToString()"/>
-        public override String ToString() => "Vector2D (" + this.X + ", " + this.Y + ")";
+        public override string ToString() => "Vector2D (" + X + ", " + Y + ")";
 
         /// <returns>the module of the vector</returns>
-        public double GetModule() => Math.Sqrt(this.X * this.X + this.Y * this.Y);
+        public double GetModule() => Math.Sqrt(X * X + Y * Y);
 
         /// <summary>
         /// Adds the supplied value to the x-component of the vector.
         /// </summary>
         /// <param name="value">the value to sum</param>
-        public void SumX(double value) => this.X += value;
+        public void SumX(double value) => X += value;
 
         /// <summary>
         /// Adds the supplied value to the y-component of the vector.
         /// </summary>
         /// <param name="value">the value to sum</param>
-        public void SumY(double value) => this.Y += value;
+        public void SumY(double value) => Y += value;
 
         /// <inheritdoc cref="object.GetHashCode()"/>
-        public override int GetHashCode() => HashCode.Combine(this.X, this.Y);
+        public override int GetHashCode() => HashCode.Combine(X, Y);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (obj.GetType() != this.GetType()) return false;
-            return this.Equals(obj as Vector2D);
+            if (obj.GetType() != GetType()) return false;
+            return Equals(obj as Vector2D);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@
             }
             else
             {
-                return this.X.CompareTo(vector.X) == 0
-                       && this.Y.CompareTo(vector.Y) == 0;
+                return X.CompareTo(vector.X) == 0
+                       && Y.CompareTo(vector.Y) == 0;
             }
         }
 
@@ -92,7 +92,7 @@
         /// <param name="pointA">the starting point of the result vector</param>
         /// <param name="pointB">the ending point of the result vector</param>
         /// <returns>the new vector</returns>
-        public static Vector2D GetVectorFrom(Point2D pointA, Point2D pointB) => 
+        public static Vector2D GetVectorFrom(Point2D pointA, Point2D pointB) =>
             new Vector2D(pointA.X - pointB.X, pointA.Y - pointB.Y);
 
         /// <summary>
@@ -100,8 +100,8 @@
         /// </summary>
         public void FlipVector()
         {
-            this.X = -X;
-            this.Y = -Y;
+            X = -X;
+            Y = -Y;
         }
 
         /// <summary>
@@ -109,6 +109,6 @@
         /// </summary>
         /// <param name="vector">the vector to multiply</param>
         /// <returns>the dot product</returns>
-        public double DotProduct(Vector2D vector) => this.X * vector.X + this.Y * vector.Y;
+        public double DotProduct(Vector2D vector) => X * vector.X + Y * vector.Y;
     }
 }

@@ -1,9 +1,11 @@
-using puttingchallenge.Fantilli;
 using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
 using Giacobbi;
 using Optional;
+using Fantilli.gameobjects;
+using Fantilli.common;
+using Fantilli.physics;
 
 namespace puttingchallenge.Lucioli
 {

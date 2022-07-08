@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.events
 {
     using Optional;
 

@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.events
 {
     using Optional;
     using System;
@@ -18,8 +18,8 @@
         /// <param name="details">the details of the event</param>
         public GameEventWithDetailsImpl(GameEventType eventType, B details)
         {
-            this.EventType = eventType;
-            this._details = details;
+            EventType = eventType;
+            _details = details;
         }
 
         /// <inheritdoc cref="IGameEvent.EventType"/>
@@ -30,7 +30,7 @@
         {
             try
             {
-                return Option.Some<T>((T)Convert.ChangeType(this._details, typeof(T)));
+                return Option.Some<T>((T)Convert.ChangeType(_details, typeof(T)));
             }
             catch (Exception)
             {

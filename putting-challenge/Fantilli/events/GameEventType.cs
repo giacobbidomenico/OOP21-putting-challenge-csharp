@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace puttingchallenge.Fantilli.events
 {
     /// <summary>
     /// Enumeration that establishes the various types of events occurred in the Application, 

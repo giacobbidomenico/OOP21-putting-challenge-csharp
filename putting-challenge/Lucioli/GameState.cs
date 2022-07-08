@@ -1,8 +1,8 @@
-using puttingchallenge.Fantilli;
 using System;
 using System.Collections.Generic;
 using Giacobbi;
 using Optional;
+using Fantilli.gameobjects;
 
 namespace puttingchallenge.Lucioli
 {
