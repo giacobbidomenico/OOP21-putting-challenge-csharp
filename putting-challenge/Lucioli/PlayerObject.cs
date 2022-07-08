@@ -1,6 +1,8 @@
-﻿namespace Lucioli
+﻿using Fantilli;
+
+namespace Lucioli
 {
-    public class PlayerObject : GameObject
+    public class PlayerObject : AbstractGameObject
     {
         private ConcreteDynamicBoundingBox _hitBox;
         public bool Flip
@@ -26,11 +28,10 @@
 
         public PlayerObject(GameObjectType objectType,
             Point2D position,
-            GraphicComponent graph,
-            PhysicsComponent phys,
+            IPhysicsComponent phys,
             ConcreteDynamicBoundingBox concreteDynamicBoundingBox,
             double width, 
-            double heigth) : base(objectType, position, graph, phys)
+            double heigth) : base(objectType, position, phys)
         {
             BatInUse = new Bat(BatType.Hybrid);
             _hitBox = concreteDynamicBoundingBox;
