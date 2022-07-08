@@ -1,4 +1,5 @@
 ﻿using putting_challenge.Fantilli;
+using static putting_challenge.Fantilli.IGameObject;
 
 namespace putting_challenge.Lucioli
 {

@@ -62,7 +62,7 @@ namespace putting_challenge.Lucioli
             Lives = MaxLives;
             Score = None;
             LoadNextEnvironment();
-            return new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, Environment.ValueOrFailure().GetObjects());
+            return new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, (IList<IGameObject>)Environment.ValueOrFailure().GetObjects());
         }
 
         /// <inheritdoc/>
