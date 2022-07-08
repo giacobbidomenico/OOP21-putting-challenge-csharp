@@ -3,12 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using E
+using Optional;
+using Optional.Unsafe;
+using putting_challenge.Giacobbi;
 
-namespace Giacobbi
+namespace puttingchallenge_Giacobbi
 {
     public class Environment : IEnvironment
     {
-        private Optional<IObservableEvents<ModelEventType>> _observableGameState;
+        private Option<IObservableEvents<ModelEventType>> _observableGameState;
         private readonly IObservableEvents<ModelEventType> _observable;
         private readonly IObserverEvents<ModelEventType> _observer;
         private readonly IList<IGameObject> _staticObstacles;
@@ -48,7 +52,7 @@ namespace Giacobbi
                            IList<IGameObject> staticObstacles,
                            IGameObject hole)
         {
-            _observableGameState = null;
+            _observableGameState = Option.None<IObservableEvents<ModelEventType>>();
             _observable = new ObservableEvents<ModelEventType>();
             _observer = new ObserverEvents<ModelEventType>();
             _precPosBall = ball.Position;
@@ -177,8 +181,8 @@ namespace Giacobbi
         /// <inheritdoc/>
         public void ConfigureObservable(ObservableEvents<ModelEventType> observableGameState)
         {
-            _observableGameState = observableGameState;
-            _observableGameState.Add(_observer);
+            _observableGameState = Option.Some<IObservableEvents<ModelEventType>>(observableGameState);
+            _observableGameState.ValueOrDefault().AddObserver(_observer);
         }
 
         /// <inheritdoc/>
@@ -199,17 +203,17 @@ namespace Giacobbi
             {
                 events.Add(ModelEventType.BALL_IN_HOLE);
             }
-            _observer.sendModelEvents(events);
+            _observer.SendModelEvents(events);
         }
 
         /// <inheritdoc/>
         public void ReceiveEvents()
         {
-            if (_observableGameState.isEmpty())
+            if (!_observableGameState.HasValue)
             {
                 throw new InvalidOperationException();
             }
-            IEnumerable<ModelEventType> eventsReceived = _observable.eventsReceived();
+            IEnumerable<ModelEventType> eventsReceived = _observable.EventsReceived();
             eventsReceived.ToList().All(e =>
             {
                 switch (e)
@@ -243,7 +247,7 @@ namespace Giacobbi
             Player, _observable, _observableGameState,_observer, _staticObstacles);
 
         /// <inheritdoc/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (this == obj)
             {
@@ -263,19 +267,19 @@ namespace Giacobbi
             return false;
         }
 
-        public Optional<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddStaticObstacle(IGameObject obstacle)
+        public Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
             throw new NotImplementedException();
         }
 
         public IObservableEvents<ModelEventType> GetObservable()
         {
-            throw new NotImplementedException();
+            return _observable;
+        }
+
+        public void AddStaticObstacle(IGameObject obstacle)
+        {
+            StaticObstacle.Add(obstacle);
         }
     }
 }

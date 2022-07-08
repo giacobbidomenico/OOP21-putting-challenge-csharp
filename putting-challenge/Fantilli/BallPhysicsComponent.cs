@@ -3,6 +3,7 @@
     using System;
     using Optional;
     using Optional.Unsafe;
+    using puttingchallenge_Giacobbi;
 
     public class BallPhysicsComponent : AbstractPhysicsComponent
     {
@@ -61,7 +62,7 @@
         }
 
         /// <inheritdoc cref="IPhysicsComponent.Update(long, IGameObject, Environment)"/>
-        public override void Update(long dt, IGameObject obj, Environment env)
+        public override void Update(long dt, IGameObject obj, IEnvironment env)
         {
             if (this.IsMoving)
             {
