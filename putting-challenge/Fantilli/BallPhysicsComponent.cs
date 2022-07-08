@@ -3,7 +3,7 @@
     using System;
     using Optional;
     using Optional.Unsafe;
-    using puttingchallenge_Giacobbi;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Class that describes the physical behavior of the ball.
