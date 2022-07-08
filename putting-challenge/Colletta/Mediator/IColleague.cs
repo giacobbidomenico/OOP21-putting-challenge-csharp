@@ -1,4 +1,4 @@
-﻿using putting_challenge.Fantilli;
+﻿using puttingchallenge.Fantilli.events;
 
 namespace PuttingChallenge.Colletta.Mediator
 {
@@ -12,7 +12,7 @@ namespace PuttingChallenge.Colletta.Mediator
         /// <summary>
         /// Sets the mediator to delegate event notification.
         /// </summary>
-        IMediator Mediator { set; };
+        IMediator Mediator { set; }
 
         /// <summary>
         /// Notifies the other colleagues an event occurred.
