@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class DescriptorAttributeSceneType : Attribute
     {

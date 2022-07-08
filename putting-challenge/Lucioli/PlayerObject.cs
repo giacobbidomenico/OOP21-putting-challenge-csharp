@@ -1,7 +1,7 @@
-﻿using putting_challenge.Fantilli;
-using static putting_challenge.Fantilli.IGameObject;
+﻿using puttingchallenge.Fantilli;
+using static puttingchallenge.Fantilli.IGameObject;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class PlayerObject : AbstractGameObject
     {

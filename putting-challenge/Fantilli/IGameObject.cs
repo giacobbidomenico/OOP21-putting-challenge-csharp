@@ -1,6 +1,6 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
-    using putting_challenge.Giacobbi;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Class that represent an element of the game.

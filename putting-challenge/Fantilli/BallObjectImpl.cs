@@ -1,4 +1,4 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
     /// <summary>
     /// Class that represent the ball game object.

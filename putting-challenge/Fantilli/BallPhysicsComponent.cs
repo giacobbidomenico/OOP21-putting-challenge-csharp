@@ -1,9 +1,9 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
     using System;
     using Optional;
     using Optional.Unsafe;
-    using putting_challenge.Giacobbi;
+    using puttingchallenge_Giacobbi;
 
     /// <summary>
     /// Class that describes the physical behavior of the ball.

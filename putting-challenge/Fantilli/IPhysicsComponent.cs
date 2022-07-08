@@ -1,6 +1,6 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
-    using putting_challenge.Giacobbi;
+    using puttingchallenge_Giacobbi;
 
     /// <summary>
     /// Describes the physical behavior of a <see cref="IGameObject"/>.

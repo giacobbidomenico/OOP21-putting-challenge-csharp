@@ -1,4 +1,4 @@
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public interface IGameStateManager : Colleague
     {

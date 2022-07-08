@@ -1,8 +1,8 @@
-using putting_challenge.Fantilli;
+using puttingchallenge.Fantilli;
 using System;
 using System.Collections.Generic;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
 	public interface IGameState
 	{

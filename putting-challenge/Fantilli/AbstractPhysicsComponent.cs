@@ -1,6 +1,6 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
-    using putting_challenge.Giacobbi;
+    using puttingchallenge_Giacobbi;
 
     /// <summary>
     /// Abstract class that describes the physics of moving <see cref="IGameObject"/>.

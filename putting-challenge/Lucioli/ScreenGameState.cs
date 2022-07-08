@@ -1,9 +1,9 @@
-﻿using putting_challenge.Fantilli;
+﻿using puttingchallenge.Fantilli;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class ScreenGameState : GameState
     {

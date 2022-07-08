@@ -1,7 +1,7 @@
-﻿namespace putting_challenge.Fantilli
+﻿namespace puttingchallenge.Fantilli
 {
     using System;
-    using putting_challenge.Giacobbi;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.

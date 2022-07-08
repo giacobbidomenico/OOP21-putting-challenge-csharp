@@ -1,11 +1,11 @@
-using putting_challenge.Fantilli;
+using puttingchallenge.Fantilli;
 using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
 using Giacobbi;
 using Optional;
 
-namespace putting_challenge.Lucioli
+namespace puttingchallenge.Lucioli
 {
     public class GamePlayGameState : GameState
     {

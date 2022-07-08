@@ -1,6 +1,6 @@
 ﻿using Optional;
 
-namespace putting_challenge.Fantilli
+namespace puttingchallenge.Fantilli
 {
     /// <summary>
     /// Implementation of <see cref="IGameEvent"/> interface.
