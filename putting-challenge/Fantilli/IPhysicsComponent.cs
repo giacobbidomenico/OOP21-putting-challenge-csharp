@@ -1,6 +1,6 @@
 ﻿namespace puttingchallenge.Fantilli
 {
-    using puttingchallenge_Giacobbi;
+    using puttingchallenge.Giacobbi;
 
     /// <summary>
     /// Describes the physical behavior of a <see cref="IGameObject"/>.
@@ -18,6 +18,6 @@
         /// <summary>
         /// Gets or sets the velocity of the object.
         /// </summary>
-        Vector2D Velocity { get; }
+        Vector2D Velocity { get; set; }
     }
 }
