@@ -11,9 +11,16 @@ namespace PuttingChallenge.Giacobbi
     /// </summary>
     public class StaticPhysicsComponent : IPhysicsComponent
     {
-
         /// <inheritdoc/>
-        public Vector2D Velocity { get => new Vector2D(0, 0); }
+        public Vector2D Velocity { get; set; }
+
+        /// <summary>
+        /// Physics of static <see cref="IGameObject"/>s
+        /// </summary>
+        public StaticPhysicsComponent()
+        {
+            Velocity = new Vector2D(0, 0);
+        }
 
         /// <inheritdoc/>
         public void Update(long dt, IGameObject obj, IEnvironment env)
