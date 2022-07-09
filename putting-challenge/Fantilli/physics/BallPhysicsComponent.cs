@@ -6,6 +6,7 @@
     using puttingchallenge.Giacobbi;
     using puttingchallenge.Fantilli.common;
     using puttingchallenge.Fantilli.gameobjects;
+    using PuttingChallenge.Colletta.Collisions;
 
     /// <summary>
     /// Class that describes the physical behavior of the ball.
@@ -24,7 +25,7 @@
 
         private readonly double _radius;
         private Option<Point2D> _lastPos;
-        private Option<ActiveBoundingBox> _lastHitbox;
+        private Option<IActiveBoundingBox> _lastHitbox;
 
         /// <summary>
         /// Build a new <see cref="BallObjectImpl"/>.
@@ -35,7 +36,7 @@
             base.Velocity = new Vector2D(0, 0);
             _radius = radius;
             _lastPos = Option.None<Point2D>();
-            _lastHitbox = Option.None<ActiveBoundingBox>();
+            _lastHitbox = Option.None<IActiveBoundingBox>();
         }
 
         /// <summary>
@@ -74,18 +75,18 @@
                 BallPhysicsComponent clone = new BallPhysicsComponent(Radius);
                 clone.Velocity = new Vector2D(Velocity);
 
-                Option<CollisionTest> infoOpt = env.CheckCollisions(((BallObjectImpl)obj).HitBox, clone, obj.Position, dt);
+                Option<IDynamicBoundingBox.ICollisionTest> infoOpt = env.CheckCollisions(((BallObjectImpl)obj).HitBox, clone, obj.Position, dt);
                 Point2D nextPos;
                 if (infoOpt.HasValue)
                 {
-                    Option<CollisionTest> info = infoOpt.ValueOrFailure();
+                    IDynamicBoundingBox.ICollisionTest info = infoOpt.ValueOrFailure();
 
-                    double radius = ((BallObjectImpl)obj).HitBox.Radius();
+                    double radius = ((BallObjectImpl)obj).HitBox.Radius;
                     Vector2D normale = info.GetActiveBBSideNormal().ValueOrFailure();
                     Vector2D lastVel = Velocity;
 
                     nextPos = info.GetEstimatedPointOfImpact().ValueOrFailure();
-                    bool bTangent = info.GetActiveBoundingBox().BounceAlongTanget();
+                    bool bTangent = info.GetActiveBoundingBox().BounceAlongTangent();
                     if (bTangent)
                     {
                         double cat = Math.Sqrt(Math.Pow(radius, 2) / 2);
@@ -136,13 +137,13 @@
             return new Vector2D(x, y);
         }
 
-        private void IsStopping(Point2D pos, ActiveBoundingBox hitbox)
+        private void IsStopping(Point2D pos, IActiveBoundingBox hitbox)
         {
             if (_lastHitbox.HasValue && _lastPos.HasValue)
             {
                 Vector2D vel = Velocity;
                 if (Point2D.GetDistance(pos, _lastPos.ValueOrFailure()) < Radius * MIN_BOUNCING_DIFFERENCE_FACTOR
-                    && hitbox.equals(_lastHitbox.ValueOrFailure())
+                    && hitbox.Equals(_lastHitbox.ValueOrFailure())
                     && -Y_ACCELERATION * (1 / pos.Y) * 100 < MIN_POTENTIAL_ENERGY
                     && Math.Abs(vel.X) + Math.Abs(vel.Y) < MIN_KINETICS_ENERGY)
                 {
