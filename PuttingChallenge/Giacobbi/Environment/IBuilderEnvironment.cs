@@ -1,5 +1,5 @@
-﻿using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
+﻿using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
 using System;
 using System.Drawing;
 
