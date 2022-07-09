@@ -11,8 +11,8 @@ namespace PuttingChallenge.Lucioli
         private ConcreteDynamicBoundingBox _hitBox;
         public bool Flip
         {
-            get => Flip;
-            set => Flip = !Flip;
+            get;
+            set;
         }
         public Bat BatInUse
         {
@@ -30,6 +30,11 @@ namespace PuttingChallenge.Lucioli
             private set;
         }
 
+        public void InvertFlip()
+        {
+            Flip = !Flip;
+        }
+
         public PlayerObject(GameObjectType objectType,
             Point2D position,
             IPhysicsComponent phys,
@@ -40,6 +45,7 @@ namespace PuttingChallenge.Lucioli
             BatInUse = new Bat(BatType.Hybrid);
             _hitBox = concreteDynamicBoundingBox;
             Width = width;
+            Flip = false;
             Height = heigth;
         }
 
