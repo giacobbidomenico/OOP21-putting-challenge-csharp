@@ -49,10 +49,7 @@ namespace PuttingChallenge.Lucioli
         /// <inheritdoc/>
         public abstract void ReceiveEvents();
 
-        public void NotifyEvent(IGameEvent eventOccurred)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void NotifyEvent(IGameEvent eventOccurred);
 
         public abstract void NotifyEvents(ModelEventType eventType);
 
