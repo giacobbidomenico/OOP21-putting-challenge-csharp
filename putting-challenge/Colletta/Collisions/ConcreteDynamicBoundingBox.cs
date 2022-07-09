@@ -50,20 +50,27 @@ namespace PuttingChallenge.Colletta.Collisions
         public class ConcreteCollisionTest : IDynamicBoundingBox.ICollisionTest
         {
             private readonly bool _hasCollided;
+            private readonly IActiveBoundingBox _box;
             private readonly Point2D? _estimatedPointOfImpact;
             private readonly Vector2D? _normal;
             private readonly Point2D? _positionBeforeCollision;
 
-            private ConcreteCollisionTest(bool hasCollided, Point2D estimatedPoint, Vector2D normal, Point2D position)
+            private ConcreteCollisionTest(IActiveBoundingBox box,
+                bool hasCollided, 
+                Point2D estimatedPoint, 
+                Vector2D normal, 
+                Point2D position)
             {
+                _box = box;
                 _hasCollided = hasCollided;
                 _estimatedPointOfImpact = estimatedPoint;
                 _normal = normal;
                 _positionBeforeCollision = position;
             }
             
-            private ConcreteCollisionTest()
+            private ConcreteCollisionTest(IActiveBoundingBox box)
             {
+                _box = box;
                 _hasCollided = false;
                 _estimatedPointOfImpact = null;
                 _normal = null;
@@ -73,37 +80,37 @@ namespace PuttingChallenge.Colletta.Collisions
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.GetActiveBBSideNormal"/>
             public Option<Vector2D> GetActiveBBSideNormal()
             {
-                throw new NotImplementedException();
+                return _normal == null ? Option.None<Vector2D>() : Option.Some(_normal);
             }
 
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.GetActiveBBSideTanget"/>
             public Option<Vector2D> GetActiveBBSideTanget()
             {
-                throw new NotImplementedException();
+                return _normal == null ? Option.None<Vector2D>() : Option.Some(new Vector2D(-_normal.Y, _normal.X));
             }
 
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.GetActiveBoundingBox"/>
             public IActiveBoundingBox GetActiveBoundingBox()
             {
-                throw new NotImplementedException();
+                return _box;
             }
 
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.GetEstimatedPointOfImpact"/>
             public Option<Point2D> GetEstimatedPointOfImpact()
             {
-                throw new NotImplementedException();
+                return _estimatedPointOfImpact == null ? Option.None<Point2D>() : Option.Some(_estimatedPointOfImpact);
             }
 
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.GetPassiveBoxPositionBeforeCollisions"/>
             public Option<Point2D> GetPassiveBoxPositionBeforeCollisions()
             {
-                throw new NotImplementedException();
+                return _positionBeforeCollision == null ? Option.None<Point2D>() : Option.Some(_positionBeforeCollision);
             }
 
             /// <inheritdoc cref="IDynamicBoundingBox.ICollisionTest.IsColliding"/>
             public bool IsColliding()
             {
-                throw new NotImplementedException();
+                return _hasCollided;
             }
         }
     }
