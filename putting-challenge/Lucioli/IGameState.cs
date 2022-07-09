@@ -4,7 +4,7 @@ using PuttingChallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
 	public interface IGameState : IColleague
 	{

@@ -6,7 +6,7 @@ using puttingchallenge.Fantilli.gameobjects;
 using PuttingChallenge.Colletta.Mediator;
 using PuttingChallenge.Giacobbi;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public abstract class GameState : IGameState
     {

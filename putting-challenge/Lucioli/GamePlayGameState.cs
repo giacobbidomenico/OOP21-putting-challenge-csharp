@@ -8,7 +8,7 @@ using puttingchallenge.Fantilli.events;
 using PuttingChallenge.Colletta.Mediator;
 using PuttingChallenge.Giacobbi;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class GamePlayGameState : GameState
     {

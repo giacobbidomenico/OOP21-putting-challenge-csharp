@@ -5,7 +5,7 @@ using puttingchallenge.Fantilli.physics;
 using PuttingChallenge.Colletta.Collisions;
 using static puttingchallenge.Fantilli.gameobjects.IGameObject;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class PlayerObject : AbstractGameObject
     {

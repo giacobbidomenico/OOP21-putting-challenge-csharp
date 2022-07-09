@@ -1,6 +1,6 @@
 using PuttingChallenge.Colletta.Mediator;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public interface IGameStateManager : IColleague
     {
