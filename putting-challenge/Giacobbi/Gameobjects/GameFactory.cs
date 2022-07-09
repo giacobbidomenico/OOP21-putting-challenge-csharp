@@ -1,15 +1,13 @@
-﻿using Fantilli;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Fantilli.physics;
+using PuttingChallenge.Colletta.Collisions;
+using puttingchallenge.Lucioli;
 
-namespace puttingchallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi
 {
     public class GameFactory
     {
-        private const double BALL_GRAPHIC_FACTOR = 1.27;
-        private const double RECT_GRAPHIC_FACTOR = 1.05;
-        
         /// <summary>
         /// Build the ball of the game. 
         /// </summary>
@@ -34,18 +32,23 @@ namespace puttingchallenge.Giacobbi
         /// <param name="skinPath">path of the player's skin</param>
         /// <param name="w">the width of the player</param>
         /// <param name="h">the height of the player</param>
+        /// <param name="flip"></param>  
         /// <returns>an instance of <see cref="PlayerObject"/> representing the player</returns>
         public PlayerObject CreatePlayer(Point2D pos,
-                                         String skinPath,
                                          double w,
-                                         double h)
+                                         double h,
+                                         bool flip)
         {
-            return new PlayerObject(IGameObject.GameObjectType.PLAYER,
-                                    pos,
-                                    new StaticPhysicsComponent(),
-                                    new ConcreteDynamicBoundingBox(new AxisAlignedBoundingBox(pos, h, w)),
-                                    w,
-                                    h);
+            var playerObject = new PlayerObject(IGameObject.GameObjectType.PLAYER,
+                                                pos,
+                                                new StaticPhysicsComponent(),
+                                                new ConcreteDynamicBoundingBox(new AxisAlignedBoundingBox(pos, h, w)),
+                                                w,
+                                                h)
+            {
+                Flip = flip
+            };
+            return playerObject;
         }
 
         /// <summary>
@@ -96,7 +99,7 @@ namespace puttingchallenge.Giacobbi
             return new GameObjectImpl(IGameObject.GameObjectType.TREE,
                                       pos,
                                       new StaticPhysicsComponent(),
-                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + w / 2), w / 2)));
+                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + h / 2), w / 2)));
         }
 
         /// <summary>
@@ -113,7 +116,7 @@ namespace puttingchallenge.Giacobbi
             return new GameObjectImpl(IGameObject.GameObjectType.FOOTBALL,
                                       pos,
                                       new StaticPhysicsComponent(),
-                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + w / 2), w / 2)));
+                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + h / 2), w / 2)));
         }
 
         /// <summary>

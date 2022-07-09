@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Giacobbi
+﻿namespace PuttingChallenge.Giacobbi
 {
     public enum ModelEventType
     {

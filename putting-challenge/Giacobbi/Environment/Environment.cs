@@ -1,30 +1,45 @@
-﻿using Fantilli;
+﻿using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.physics;
+using puttingchallenge.Fantilli.gameobjects;
+using puttingchallenge.Lucioli;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Optional;
 using Optional.Unsafe;
-using puttingchallenge.Giacobbi;
+using PuttingChallenge.Colletta.Collisions;
+using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
-namespace puttingchallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi
 {
     public class Environment : IEnvironment
     {
         private Option<IObservableEvents<ModelEventType>> _observableGameState;
         private readonly IObservableEvents<ModelEventType> _observable;
         private readonly IObserverEvents<ModelEventType> _observer;
-        private readonly IList<IGameObject> _staticObstacles;
         private bool _collisionWithHole;
         private Point2D _precPosBall;
         private Point2D _precPosPlayer;
         private bool _notifiable;
-
+        
+        /// <inheritdoc/>
         public IGameObject Ball { get; private set; }
+        
+        /// <inheritdoc/>
         public PlayerObject Player { get; private set; }
+        
+        /// <inheritdoc/>
         public Rectangle Container { get; private set; }
+        
+        /// <inheritdoc/>
         public IList<IGameObject> StaticObstacle { get; private set; }
+        
+        /// <inheritdoc/>
         public IGameObject Hole { get; private set; }
+
+        /// <inheritdoc/>
+        public IObservableEvents<ModelEventType> Observable { get => _observable; }
 
         /// <summary>
         /// Build a new <see cref="Environment"/>.
@@ -56,11 +71,11 @@ namespace puttingchallenge.Giacobbi
             _observer = new ObserverEvents<ModelEventType>();
             _precPosBall = ball.Position;
             _precPosPlayer = player.Position;
-            
+
             Container = container;
             Ball = ball;
             Player = player;
-            StaticObstacle = staticObstacles;
+            StaticObstacle = new List<IGameObject>(staticObstacles);
             Hole = hole;
         }
 
@@ -88,12 +103,12 @@ namespace puttingchallenge.Giacobbi
 
             var posBall = Ball.Position;
             var newPos = this.LeftBallPos();
-            if (!Player.isFlip())
+            if (!Player.Flip)
             {
                 if (posBall.X >= 0
                         && posBall.X <= Hole.Position.X)
                 {
-                    Player.setFlip(false);
+                    Player.Flip = false;
                     Player.Position = newPos;
                 }
 
@@ -101,7 +116,7 @@ namespace puttingchallenge.Giacobbi
                         && posBall.X < Container.Width)
                 {
                     newPos = this.RightBallPos();
-                    Player.setFlip(true);
+                    Player.Flip = true;
                     Player.Position = newPos;
                 }
             }
@@ -110,19 +125,19 @@ namespace puttingchallenge.Giacobbi
                 if (posBall.X > Hole.Position.X)
                 {
                     newPos = this.RightBallPos();
-                    Player.setFlip(true);
+                    Player.Flip = true;
                     Player.Position = newPos;
                 }
 
                 if (posBall.X >= 0
                         && posBall.X <= Hole.Position.X)
                 {
-                    Player.setFlip(false);
+                    Player.Flip = false;
                     Player.Position = newPos;
                 }
             }
             _precPosBall = Ball.Position;
-            _precPosPlayer = Player.Position;
+            _precPosPlayer = ((IGameObject) Player).Position;
         }
 
         /// <returns>
@@ -135,9 +150,9 @@ namespace puttingchallenge.Giacobbi
                                Ball.Position.Y - Player.Height + (bf.Radius * 2));
         }
 
-        ///<returns>
-        ///return the player's position calculated to the right of the ball
-        ///</returns>
+        /// <returns>
+        /// return the player's position calculated to the right of the ball
+        /// </returns>
         private Point2D RightBallPos()
         {
             var bf = (BallPhysicsComponent) Ball.PhysicsComponent;
@@ -171,17 +186,39 @@ namespace puttingchallenge.Giacobbi
         }
 
         /// <inheritdoc/>
-        public bool CheckCollisions()
+        public Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
-            _collisionWithHole = true;
-            return false;
+            IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
+            IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
+                    new Point2D(ballPosition.X + ballHitbox.Radius,ballPosition.Y + ballHitbox.Radius),ballHitbox.Radius);
+
+            builder.Hitbox = box;
+            builder.Physic = ballPhysics;
+            builder.Position = box.Position;
+
+            ConcreteCollisionTest? result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, dt);
+            if (result.IsColliding())
+            {
+                _collisionWithHole = true;
+            }
+
+            foreach (IGameObject gameObject in StaticObstacle.ToList())
+            {
+                ConcreteCollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, dt);
+                if (currentResult.IsColliding())
+                {
+                    result = currentResult;
+                }
+            }
+
+            return Option.None<ConcreteCollisionTest>();
         }
 
         /// <inheritdoc/>
-        public void ConfigureObservable(ObservableEvents<ModelEventType> observableGameState)
+        public void ConfigureObservable(IObservableEvents<ModelEventType> observableGameState)
         {
             _observableGameState = Option.Some<IObservableEvents<ModelEventType>>(observableGameState);
-            _observableGameState.ValueOrDefault().AddObserver(_observer);
+            _observableGameState.ValueOrFailure().AddObserver(_observer);
         }
 
         /// <inheritdoc/>
@@ -213,7 +250,7 @@ namespace puttingchallenge.Giacobbi
                 throw new InvalidOperationException();
             }
             IEnumerable<ModelEventType> eventsReceived = _observable.EventsReceived();
-            eventsReceived.ToList().All(e =>
+            eventsReceived.All(e =>
             {
                 switch (e)
                 {
@@ -236,14 +273,10 @@ namespace puttingchallenge.Giacobbi
                 Player,
                 Ball
             };
-            allGameObjects.ToList().AddRange(_staticObstacles);
+            allGameObjects.ToList().AddRange(StaticObstacle);
             allGameObjects.Add(Hole);
             return allGameObjects;
         }
-
-        /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(Ball, Container, Hole,
-            Player, _observable, _observableGameState,_observer, _staticObstacles);
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)
@@ -259,26 +292,19 @@ namespace puttingchallenge.Giacobbi
             if (obj is IEnvironment env)
             {
                 return Ball.Equals(env.Ball)
-                        && _staticObstacles.Select(e => StaticObstacle.Contains(e)).Count() != 0
+                        && StaticObstacle.Select(e => StaticObstacle.Contains(e)).Count() != 0
                         && Container.Equals(env.Container)
                         && Hole.Equals(env.Hole);
             }
             return false;
         }
 
-        public Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
-        {
-            throw new NotImplementedException();
-        }
+        /// <inheritdoc/>
+        public override int GetHashCode() =>
+            HashCode.Combine(Ball, Container, Hole, Player, StaticObstacle);
 
-        public IObservableEvents<ModelEventType> GetObservable()
-        {
-            return _observable;
-        }
+        /// <inheritdoc/>
+        public void AddStaticObstacle(IGameObject obstacle) => StaticObstacle.Add(obstacle);
 
-        public void AddStaticObstacle(IGameObject obstacle)
-        {
-            StaticObstacle.Add(obstacle);
-        }
     }
 }

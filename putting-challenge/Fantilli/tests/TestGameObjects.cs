@@ -4,6 +4,7 @@
     using puttingchallenge.Fantilli.gameobjects;
     using puttingchallenge.Fantilli.common;
     using puttingchallenge.Giacobbi;
+    using PuttingChallenge.Colletta.Collisions;
 
     [TestFixture]
     public class TestGameObjects
@@ -15,7 +16,7 @@
         private IGameObject.GameObjectType _type;
         private Point2D _pos;
         private StaticPhysicsComponent _phys;
-        private DynamicBoundingBox _hitBox;
+        private IDynamicBoundingBox _hitBox;
 
         [SetUp]
         public void SetUp()
@@ -23,7 +24,7 @@
             this._type = IGameObject.GameObjectType.WALL;
             this._pos = new Point2D(X, Y);
             this._phys = new StaticPhysicsComponent();
-            this._hitbox = new DynamicBoundingBox;
+            this._hitBox = new ConcreteDynamicBoundingBox(new AxisAlignedBoundingBox(this._pos, X, Y));
             this._gameObject = new GameObjectImpl(this._type,
                                                   this._pos,
                                                   this._phys,

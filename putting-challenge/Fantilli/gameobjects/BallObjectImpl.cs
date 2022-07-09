@@ -2,13 +2,14 @@
 {
     using puttingchallenge.Fantilli.common;
     using puttingchallenge.Fantilli.physics;
+    using PuttingChallenge.Colletta.Collisions;
 
     /// <summary>
     /// Class that represent the ball game object.
     /// </summary>
     public class BallObjectImpl : AbstractGameObject
     {
-        private readonly PassiveCircleBoundingBox _hitBox;
+        private readonly IPassiveCircleBoundingBox _hitBox;
 
         /// <summary>
         /// Build a new <see cref="BallObjectImpl"/>.
@@ -20,7 +21,7 @@
         public BallObjectImpl(IGameObject.GameObjectType type,
                               Point2D position,
                               IPhysicsComponent phys,
-                              PassiveCircleBoundingBox hitBox) : base(type, position, phys)
+                              IPassiveCircleBoundingBox hitBox) : base(type, position, phys)
         {
             _hitBox = hitBox;
         }
@@ -39,6 +40,6 @@
         /// <summary>
         /// Gets the hit-box of the ball.
         /// </summary>
-        public PassiveCircleBoundingBox HitBox { get => _hitBox; }
+        public IPassiveCircleBoundingBox HitBox { get => _hitBox; }
     }
 }
