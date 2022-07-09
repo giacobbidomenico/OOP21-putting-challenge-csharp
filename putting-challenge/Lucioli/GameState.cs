@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Optional;
+using puttingchallenge.Fantilli.events;
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Giacobbi;
+using PuttingChallenge.Colletta.Mediator;
 
 namespace puttingchallenge.Lucioli
 {
@@ -25,6 +27,7 @@ namespace puttingchallenge.Lucioli
             get;
             set;
         }
+        public IMediator Mediator { set => throw new NotImplementedException(); }
 
         public GameState(GameStateManager manager, GameStatus status)
         {
@@ -41,11 +44,14 @@ namespace puttingchallenge.Lucioli
 
         /// <inheritdoc/>
         public abstract Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState();
-
-        /// <inheritdoc/>
-        public abstract void NotifyEvents(ModelEventType eventType);
         
         /// <inheritdoc/>
         public abstract void ReceiveEvents();
+
+        public void NotifyEvent(IGameEvent eventOccurred)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

@@ -1,11 +1,12 @@
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Giacobbi;
+using PuttingChallenge.Colletta.Mediator;
 using System;
 using System.Collections.Generic;
 
 namespace puttingchallenge.Lucioli
 {
-	public interface IGameState : Colleague
+	public interface IGameState : IColleague
 	{
 		/// <summary>Initialize the state.</summary>
 		/// <returns>returns a <see cref="Tuple"/> that contains the <see cref="SceneType"/> and a <see cref="List{GameObject}"/>.</returns>

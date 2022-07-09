@@ -6,6 +6,7 @@ using puttingchallenge.Giacobbi;
 using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.physics;
 using puttingchallenge.Fantilli.events;
+using PuttingChallenge.Colletta.Mediator;
 
 namespace puttingchallenge.Lucioli
 {
@@ -43,7 +44,7 @@ namespace puttingchallenge.Lucioli
             get;
             private set;
         }
-        public Mediator GeneralMediator
+        public IMediator GeneralMediator
         {
             get;
             set;

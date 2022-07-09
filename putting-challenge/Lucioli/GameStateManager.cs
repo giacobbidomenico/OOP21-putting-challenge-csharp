@@ -2,20 +2,23 @@
 using puttingchallenge.Fantilli.events;
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Giacobbi;
+using PuttingChallenge.Colletta.Mediator;
 using System;
 using System.Collections.Generic;
 
 namespace puttingchallenge.Lucioli
 {
-    public class GameStateManager
+    public class GameStateManager : IColleague
     {
-        private Mediator _generalMediator;
+        private IMediator _generalMediator;
         private const GameStatus _initialState = GameStatus.MainMenu;
         public GameState CurrentGameState
         {
             get;
             private set;
         }
+        public IMediator Mediator { set => throw new NotImplementedException(); }
+
         ///<inheritdoc/>
         public void InitState()
         {
@@ -72,6 +75,9 @@ namespace puttingchallenge.Lucioli
             }
         }
 
-
+        public void NotifyEvent(IGameEvent eventOccurred)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
