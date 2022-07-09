@@ -1,4 +1,6 @@
-﻿using PuttingChallenge.Fantilli.GameObjects;
+﻿using PuttingChallenge.Fantilli.Events;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Giacobbi.Events;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +13,11 @@ namespace PuttingChallenge.Lucioli
         }
 
         public override Tuple<IEnumerable<SceneType>, IList<IGameObject>> InitState()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyEvent(IGameEvent eventOccurred)
         {
             throw new NotImplementedException();
         }
