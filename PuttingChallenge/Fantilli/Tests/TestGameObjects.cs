@@ -48,7 +48,7 @@
             Assert.AreEqual(this._gameObject.Velocity, new Vector2D(0, 0));
             Vector2D newVel = new Vector2D(X, Y);
             this._gameObject.Velocity = newVel;
-            Assert.AreEqual(this._gameObject.Position, new Vector2D(0, 0));
+            Assert.AreEqual(this._gameObject.Velocity, new Vector2D(0, 0));
         }
 
         [Test]
