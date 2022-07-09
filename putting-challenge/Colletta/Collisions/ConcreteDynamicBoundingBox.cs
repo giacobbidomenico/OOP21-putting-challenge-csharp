@@ -18,9 +18,26 @@ namespace PuttingChallenge.Colletta.Collisions
         public ConcreteDynamicBoundingBox(IActiveBoundingBox box) => _box = box;
 
         /// <inheritdoc cref="IDynamicBoundingBox.CollidesWith"/>
-        public IDynamicBoundingBox.ICollisionTest CollidesWith(IPassiveCircleBoundingBox circle, long dt)
+        public IDynamicBoundingBox.ICollisionTest CollidesWith(
+            PassiveCircleBBTrajectoryBuilder circleBuilder, 
+            IPassiveCircleBoundingBox circle, 
+            long dt)
         {
-            throw new NotImplementedException();
+            Option<long> timeOfCollision = TestMovingCircle(circleBuilder, 0, dt);
+            if (!timeOfCollision.HasValue)
+            {
+                return new ConcreteCollisionTest(_box);
+            }
+            Point2D lastPosition = circleBuilder.Build(timeOfCollision.ValueOrFailure()).getPosition();
+            Point2D closestPoint = _box.ClosestPointOnBBToPoint(lastPosition);
+            if (lastPosition == closestPoint)
+            {
+                closestPoint = _box.IntersectionToSegment(
+                        circleBuilder.Build(0).GetPosition(),
+                        lastPosition);
+            }
+            Vector2D normal = _box.GetNormal(closestPoint);
+            return new ConcreteCollisionTest(_box, true, closestPoint, normal, lastPosition);
         }
 
         private Option<long> TestMovingCircle(PassiveCircleBBTrajectoryBuilder circleBuilder, long t1, long t2)
@@ -36,11 +53,7 @@ namespace PuttingChallenge.Colletta.Collisions
                 return Option.Some(t1);
             }
             Option<long> leftResult = TestMovingCircle(circleBuilder, t1, mid);
-            if (leftResult.HasValue)
-            {
-                return leftResult;
-            }
-            return TestMovingCircle(circleBuilder, mid, t2);
+            return leftResult.HasValue ? leftResult : TestMovingCircle(circleBuilder, mid, t2);
         }
 
         /// <summary>
@@ -55,7 +68,7 @@ namespace PuttingChallenge.Colletta.Collisions
             private readonly Vector2D? _normal;
             private readonly Point2D? _positionBeforeCollision;
 
-            private ConcreteCollisionTest(IActiveBoundingBox box,
+            protected internal ConcreteCollisionTest(IActiveBoundingBox box,
                 bool hasCollided, 
                 Point2D estimatedPoint, 
                 Vector2D normal, 
@@ -68,7 +81,7 @@ namespace PuttingChallenge.Colletta.Collisions
                 _positionBeforeCollision = position;
             }
             
-            private ConcreteCollisionTest(IActiveBoundingBox box)
+            protected internal ConcreteCollisionTest(IActiveBoundingBox box)
             {
                 _box = box;
                 _hasCollided = false;
