@@ -3,7 +3,7 @@ using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.gameobjects;
 using System;
 
-namespace PuttingChallenge.Giacobbi.PhysicsComponent
+namespace PuttingChallenge.Giacobbi.Physics
 {
 
     /// <summary>
