@@ -1,6 +1,7 @@
-﻿using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
+﻿using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Giacobbi.Environment;
 using System;
 
 namespace PuttingChallenge.Giacobbi.Physics

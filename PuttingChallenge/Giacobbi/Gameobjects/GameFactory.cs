@@ -1,8 +1,9 @@
-﻿using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Fantilli.physics;
+﻿using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Physics;
 using PuttingChallenge.Colletta.Collisions;
-using puttingchallenge.Lucioli;
+using PuttingChallenge.Lucioli;
+using PuttingChallenge.Giacobbi.Physics;
 
 namespace PuttingChallenge.Giacobbi.Gameobjects
 {

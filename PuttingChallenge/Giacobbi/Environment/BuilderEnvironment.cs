@@ -1,6 +1,7 @@
-﻿using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Fantilli.common;
-using puttingchallenge.Lucioli;
+﻿using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Giacobbi.Gameobjects;
+using PuttingChallenge.Lucioli;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
