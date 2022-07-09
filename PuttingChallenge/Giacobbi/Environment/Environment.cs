@@ -11,7 +11,6 @@ using System.Linq;
 using Optional;
 using Optional.Unsafe;
 using PuttingChallenge.Colletta.Collisions;
-using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
@@ -188,7 +187,10 @@ namespace PuttingChallenge.Giacobbi.Environment
         }
 
         /// <inheritdoc/>
-        public Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
+        public Option<IDynamicBoundingBox.ICollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, 
+                                                                          BallPhysicsComponent ballPhysics, 
+                                                                          Point2D ballPosition, 
+                                                                          long dt)
         {
             PassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
             IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
@@ -198,7 +200,7 @@ namespace PuttingChallenge.Giacobbi.Environment
             builder.Physic = ballPhysics;
             builder.Position = box.Position;
 
-            ConcreteCollisionTest? result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, dt);
+            IDynamicBoundingBox.ICollisionTest result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, box, dt);
             if (result.IsColliding())
             {
                 _collisionWithHole = true;
@@ -206,14 +208,14 @@ namespace PuttingChallenge.Giacobbi.Environment
 
             foreach (IGameObject gameObject in StaticObstacle.ToList())
             {
-                ConcreteCollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, dt);
+                IDynamicBoundingBox.ICollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, box, dt);
                 if (currentResult.IsColliding())
                 {
                     result = currentResult;
                 }
             }
 
-            return Option.None<ConcreteCollisionTest>();
+            return Option.None<IDynamicBoundingBox.ICollisionTest>();
         }
 
         /// <inheritdoc/>
