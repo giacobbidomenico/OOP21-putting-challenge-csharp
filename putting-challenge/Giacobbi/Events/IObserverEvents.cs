@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PuttingChallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi.Events
 {
     /// <summary>
     /// Interface that defines an event observer.
