@@ -1,16 +1,13 @@
 ﻿using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Fantilli.physics;
+using PuttingChallenge.Colletta.Collisions;
 using puttingchallenge.Lucioli;
-using System;
 
 namespace puttingchallenge.Giacobbi
 {
     public class GameFactory
     {
-        private const double BALL_GRAPHIC_FACTOR = 1.27;
-        private const double RECT_GRAPHIC_FACTOR = 1.05;
-        
         /// <summary>
         /// Build the ball of the game. 
         /// </summary>
@@ -38,7 +35,6 @@ namespace puttingchallenge.Giacobbi
         /// <param name="flip"></param>  
         /// <returns>an instance of <see cref="PlayerObject"/> representing the player</returns>
         public PlayerObject CreatePlayer(Point2D pos,
-                                         String skinPath,
                                          double w,
                                          double h,
                                          bool flip)
@@ -103,7 +99,7 @@ namespace puttingchallenge.Giacobbi
             return new GameObjectImpl(IGameObject.GameObjectType.TREE,
                                       pos,
                                       new StaticPhysicsComponent(),
-                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + w / 2), w / 2)));
+                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + h / 2), w / 2)));
         }
 
         /// <summary>
@@ -120,7 +116,7 @@ namespace puttingchallenge.Giacobbi
             return new GameObjectImpl(IGameObject.GameObjectType.FOOTBALL,
                                       pos,
                                       new StaticPhysicsComponent(),
-                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + w / 2), w / 2)));
+                                      new ConcreteDynamicBoundingBox(new CircleBoundingBox(new Point2D(pos.X + w / 2, pos.Y + h / 2), w / 2)));
         }
 
         /// <summary>
