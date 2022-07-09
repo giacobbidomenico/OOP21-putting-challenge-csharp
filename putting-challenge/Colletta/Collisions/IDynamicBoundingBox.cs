@@ -19,7 +19,7 @@ namespace PuttingChallenge.Colletta.Collisions
         /// <param name="circle">Bounding box to perform the test with.</param>
         /// <param name="dt">Time from last frame.</param>
         /// <returns>A CollisionTest with the details about the test.</returns>
-        ICollisionTest CollidesWith(IPassiveCircleBoundingBox circle, long dt);
+        ICollisionTest CollidesWith(PassiveCircleBBTrajectoryBuilder circleBuilder, IPassiveCircleBoundingBox circle, long dt);
 
         /// <summary>
         /// Represents a collision test between an active bounding box and a passive bounding box.
