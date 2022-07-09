@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using PuttingChallenge.Colletta.Collisions;
-using puttingchallenge.Fantilli.common;
+using PuttingChallenge.Fantilli.Common;
+using System;
 
 namespace PuttingChallenge.Colletta.Test
 {
@@ -10,36 +11,41 @@ namespace PuttingChallenge.Colletta.Test
         private const double Radius = 10.0;
         private Point2D _pointA;
         private Point2D _pointB;
-        private IPassiveCircleBoundingBox _passiveCircle;
+        private IPassiveCircleBoundingBox _collidingCircle;
+        private IPassiveCircleBoundingBox _nonCollidingCircle;
 
         [SetUp]
         public void SetUp()
         {
             _pointA = new Point2D(0, 0);
             _pointB = new Point2D(15, 0);
-            _passiveCircle = new ConcretePassiveCircleBoundingBox(_pointA, Radius);
+            _collidingCircle = new ConcretePassiveCircleBoundingBox(_pointA, Radius);
+            _nonCollidingCircle= new ConcretePassiveCircleBoundingBox(_pointB, Radius / Radius);
         }
 
         [Test]
         public void CircleBoundingBoxIntersectionsTest()
         {
             IActiveBoundingBox circle = new CircleBoundingBox(_pointA, Radius);
-            Assert.Equals(circle.ClosestPointOnBBToPoint(_pointB), new Point2D(10, 0));
-            Assert.Equals(circle.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
-            Assert.Equals(circle.GetNormal(circle.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
-            Assert.Equals(circle.IsColliding(_passiveCircle), true);
+            Assert.AreEqual(circle.ClosestPointOnBBToPoint(_pointB), new Point2D(10, 0));
+            Assert.AreEqual(circle.ClosestPointOnBBToPoint(_pointA), _pointA);
+            Assert.AreEqual(circle.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
+            Assert.AreEqual(circle.GetNormal(circle.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
+            Assert.AreEqual(circle.IsColliding(_collidingCircle), true);
+            Assert.AreEqual(circle.IsColliding(_nonCollidingCircle), false);
         }
 
         [Test]
         public void AABoundingBoxIntersectionsTest()
         {
             double height = 20;
-            double width = 20;
+            double width = 10;
             IActiveBoundingBox aABB = new AxisAlignedBoundingBox(_pointA, height, width);
-            Assert.Equals(aABB.ClosestPointOnBBToPoint(_pointB), new Point2D(10, 0));
-            Assert.Equals(aABB.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
-            Assert.Equals(aABB.GetNormal(aABB.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
-            Assert.Equals(aABB.IsColliding(_passiveCircle), true);
+            Assert.AreEqual(aABB.ClosestPointOnBBToPoint(_pointB), new Point2D(10, 0));
+            Assert.AreEqual(aABB.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
+            Assert.AreEqual(aABB.GetNormal(aABB.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
+            Assert.AreEqual(aABB.IsColliding(_collidingCircle), true);
+            Assert.AreEqual(aABB.IsColliding(_nonCollidingCircle), false);
         }
 
     }
