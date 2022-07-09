@@ -3,7 +3,7 @@
     using System;
     using Optional;
     using Optional.Unsafe;
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Environment;
     using PuttingChallenge.Fantilli.Common;
     using PuttingChallenge.Fantilli.GameObjects;
     using PuttingChallenge.Colletta.Collisions;
@@ -164,11 +164,9 @@
         public Point2D NextPos(long dt, Point2D curPos)
         {
             double t = 0.001 * dt * 1.5;
-            Vector2D vel = Velocity;
-
             ReduceVel(dt);
-            double x = curPos.X + vel.X * t;
-            double y = curPos.Y + vel.Y * t - 0.5 * Y_ACCELERATION * t * t;
+            double x = curPos.X + this.Velocity.X * t;
+            double y = curPos.Y + this.Velocity.Y * t - 0.5 * Y_ACCELERATION * t * t;
             return new Point2D(x, y);
         }
 
@@ -187,7 +185,7 @@
                     velX *= -1;
                 }
             }
-            Velocity = new Vector2D(velX, velY);
+            this.Velocity = new Vector2D(velX, velY);
         }
     }
 }

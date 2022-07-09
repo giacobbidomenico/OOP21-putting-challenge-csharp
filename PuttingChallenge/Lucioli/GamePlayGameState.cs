@@ -1,12 +1,14 @@
 using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Fantilli.events;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Fantilli.Events;
 using PuttingChallenge.Colletta.Mediator;
-using PuttingChallenge.Giacobbi;
+using PuttingChallenge.Giacobbi.Events;
+using PuttingChallenge.Giacobbi.Environment;
+using Optional;
 
 namespace PuttingChallenge.Lucioli
 {
@@ -159,12 +161,65 @@ namespace PuttingChallenge.Lucioli
         }
         public override void NotifyEvents(ModelEventType eventType)
         {
-            throw new NotImplementedException();
+            IList<ModelEventType> events = new List<ModelEventType>();
+            events.Add(eventType);
+            _observer.SendModelEvents(events);
         }
 
         public override void ReceiveEvents()
         {
-            throw new NotImplementedException();
+            IList<ModelEventType> eventsReceived = _observable.EventsReceived();
+            if(eventsReceived.Count > 0)
+            {
+                foreach (var item in eventsReceived)
+                {
+                    switch (item)
+                    {
+                        case ModelEventType.BALL_IN_HOLE:
+                            HandleWin();
+                            break;
+                        case ModelEventType.BALL_OUT_OF_BOUND:
+                        case ModelEventType.BALL_STOPPED:
+                            HandleMiss();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        public override void NotifyEvent(IGameEvent gameEvent)
+        {
+            switch (gameEvent.EventType)
+            {
+                case GameEventType.START:
+                    break;
+                case GameEventType.GAMEOVER:
+                    break;
+                case GameEventType.SHOOT:
+                    if(Status == GameStatus.Play)
+                    {
+                        GameEventWithDetailsImpl<Tuple<Point2D, Point2D>> eventWithDetails = (GameEventWithDetailsImpl<Tuple<Point2D, Point2D>>)gameEvent;    
+                        Tuple<Point2D, Point2D> points = eventWithDetails.GetDetails<Tuple<Point2D, Point2D>>().ValueOrFailure<Tuple<Point2D, Point2D>>();
+                        Shoot(points);
+                    }
+                    break;
+                case GameEventType.WIN:
+                    break;
+                case GameEventType.SHOW_LEADERBOARD:
+                    break;
+                case GameEventType.SHOW_MAIN_MENU:
+                    break;
+                case GameEventType.SET_SCENE:
+                    break;
+                case GameEventType.UPDATE_STATS:
+                    break;
+                case GameEventType.QUIT:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

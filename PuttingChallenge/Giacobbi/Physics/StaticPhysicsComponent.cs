@@ -1,6 +1,7 @@
-﻿using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
+﻿using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Giacobbi.Environment;
 using System;
 
 namespace PuttingChallenge.Giacobbi.Physics
@@ -12,7 +13,7 @@ namespace PuttingChallenge.Giacobbi.Physics
     public class StaticPhysicsComponent : IPhysicsComponent
     {
         /// <inheritdoc/>
-        public Vector2D Velocity { get; set; }
+        public Vector2D Velocity { get => new Vector2D(0, 0); set { } }
 
         /// <summary>
         /// Physics of static <see cref="IGameObject"/>s
@@ -23,10 +24,7 @@ namespace PuttingChallenge.Giacobbi.Physics
         }
 
         /// <inheritdoc/>
-        public void Update(long dt, IGameObject obj, IEnvironment env)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(long dt, IGameObject obj, IEnvironment env) { }
 
         /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(new Vector2D(0,0));

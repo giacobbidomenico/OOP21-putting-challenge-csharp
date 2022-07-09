@@ -35,9 +35,10 @@
         {
             this._phys.Velocity = new Vector2D(COMPONENT, COMPONENT);
             Assert.True(this._phys.IsMoving);
-            Point2D newPos = this.NextPos(MILLISEC, new Point2D(COMPONENT, COMPONENT));
+            Point2D newPos = this.NextPos(MILLISEC, new Point2D(COMPONENT, COMPONENT), new Vector2D(COMPONENT, COMPONENT));
             Vector2D newVel = this.NextVel(MILLISEC, new Vector2D(COMPONENT, COMPONENT));
-            Assert.Equals(this._phys.NextPos(2000, new Point2D(COMPONENT, COMPONENT)), newPos);
+            Assert.AreEqual(this._phys.NextPos(MILLISEC, new Point2D(COMPONENT, COMPONENT)), newPos);
+            Assert.AreEqual(this._phys.Velocity, newVel);
             Assert.True(this._phys.IsMoving);
         }
 
@@ -59,10 +60,10 @@
             return new Vector2D(velX, velY);
         }
 
-        private Point2D NextPos(long dt, Point2D curPos)
+        private Point2D NextPos(long dt, Point2D curPos, Vector2D vel)
         {
             double t = 0.001 * dt * 1.5;
-            Vector2D vel = this.NextVel(dt, this._phys.Velocity);
+            vel = this.NextVel(dt, vel);
             double x = curPos.X + vel.X * t;
             double y = curPos.Y + vel.Y * t - 0.5 * Y_ACCELERATION * t * t;
             return new Point2D(x, y);

@@ -1,7 +1,9 @@
-﻿using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Lucioli;
+﻿using PuttingChallenge.Fantilli;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Lucioli;
+using PuttingChallenge.Giacobbi.Events;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +11,6 @@ using System.Linq;
 using Optional;
 using Optional.Unsafe;
 using PuttingChallenge.Colletta.Collisions;
-using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
@@ -186,17 +187,20 @@ namespace PuttingChallenge.Giacobbi.Environment
         }
 
         /// <inheritdoc/>
-        public Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
+        public Option<IDynamicBoundingBox.ICollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, 
+                                                                          BallPhysicsComponent ballPhysics, 
+                                                                          Point2D ballPosition, 
+                                                                          long dt)
         {
-            IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
+            PassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
             IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
                     new Point2D(ballPosition.X + ballHitbox.Radius,ballPosition.Y + ballHitbox.Radius),ballHitbox.Radius);
 
-            builder.Hitbox = box;
+            builder.HitBox = box;
             builder.Physic = ballPhysics;
             builder.Position = box.Position;
 
-            ConcreteCollisionTest? result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, dt);
+            IDynamicBoundingBox.ICollisionTest result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, box, dt);
             if (result.IsColliding())
             {
                 _collisionWithHole = true;
@@ -204,14 +208,14 @@ namespace PuttingChallenge.Giacobbi.Environment
 
             foreach (IGameObject gameObject in StaticObstacle.ToList())
             {
-                ConcreteCollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, dt);
+                IDynamicBoundingBox.ICollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, box, dt);
                 if (currentResult.IsColliding())
                 {
                     result = currentResult;
                 }
             }
 
-            return Option.None<ConcreteCollisionTest>();
+            return Option.None<IDynamicBoundingBox.ICollisionTest>();
         }
 
         /// <inheritdoc/>

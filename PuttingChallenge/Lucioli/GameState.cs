@@ -28,7 +28,7 @@ namespace PuttingChallenge.Lucioli
             get;
             set;
         }
-        public IMediator Mediator { set => throw new NotImplementedException(); }
+        public IMediator Mediator { set; private get; }
 
         public GameState(GameStateManager manager, GameStatus status)
         {
@@ -49,10 +49,7 @@ namespace PuttingChallenge.Lucioli
         /// <inheritdoc/>
         public abstract void ReceiveEvents();
 
-        public void NotifyEvent(IGameEvent eventOccurred)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void NotifyEvent(IGameEvent eventOccurred);
 
         public abstract void NotifyEvents(ModelEventType eventType);
 

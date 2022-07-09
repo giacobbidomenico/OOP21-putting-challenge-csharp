@@ -1,7 +1,8 @@
-﻿using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Lucioli;
+﻿using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Lucioli;
+using PuttingChallenge.Giacobbi.Events;
 using System.Drawing;
 using Optional;
 using System.Collections.Generic;
@@ -60,9 +61,10 @@ namespace PuttingChallenge.Giacobbi.Environment
         /// return a info about the collision occurred, empty 
         /// if no collision has occurred.
         /// </returns>
-        Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox,
-                BallPhysicsComponent ballPhysics,
-                Point2D ballPosition, long dt);
+        public Option<IDynamicBoundingBox.ICollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox,
+                                                                          BallPhysicsComponent ballPhysics,
+                                                                          Point2D ballPosition,
+                                                                          long dt);
 
         /// <summary>
         /// Adds a static obstacle to the game <see cref="IEnvironment"/>. 
