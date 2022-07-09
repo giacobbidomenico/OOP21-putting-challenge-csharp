@@ -27,7 +27,7 @@
         }
 
         /// <inheritdoc cref="IGameObject.Position"/>
-        public override Point2D Position
+        public Point2D Position
         {
             get => base.Position;
             set

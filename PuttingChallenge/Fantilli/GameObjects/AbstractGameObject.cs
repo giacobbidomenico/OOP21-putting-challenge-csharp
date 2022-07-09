@@ -12,6 +12,7 @@
     {
         private readonly IGameObject.GameObjectType _type;
         private readonly IPhysicsComponent _phys;
+        private Point2D _position;
 
         /// <summary>
         /// Set up a new <see cref="AbstractGameObject"/>.
@@ -24,12 +25,12 @@
                                   IPhysicsComponent phys)
         {
             _type = type;
-            Position = position;
+            _position = position;
             _phys = phys;
         }
 
         /// <inheritdoc cref="IGameObject.Position"/>
-        public virtual Point2D Position { get; set; }
+        public Point2D Position { get => _position; set => _position = value; }
 
         /// <inheritdoc cref="IGameObject.Velocity"/>
         public Vector2D Velocity
