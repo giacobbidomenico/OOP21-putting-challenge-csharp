@@ -9,10 +9,9 @@ using System.Linq;
 using Optional;
 using Optional.Unsafe;
 using PuttingChallenge.Colletta.Collisions;
-using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox.ConcreteCollisionTest;
 using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
-namespace puttingchallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi
 {
     public class Environment : IEnvironment
     {

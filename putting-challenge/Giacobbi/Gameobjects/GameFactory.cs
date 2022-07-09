@@ -4,7 +4,7 @@ using puttingchallenge.Fantilli.physics;
 using PuttingChallenge.Colletta.Collisions;
 using puttingchallenge.Lucioli;
 
-namespace puttingchallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi
 {
     public class GameFactory
     {
