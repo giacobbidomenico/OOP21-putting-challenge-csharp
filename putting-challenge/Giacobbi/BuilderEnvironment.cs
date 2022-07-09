@@ -31,6 +31,16 @@ namespace puttingchallenge.Giacobbi
             _hole = Option.None<IGameObject>();
         }
 
+        /// <summary>
+        /// Add a generic element
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="element1">element to check</param>
+        /// <param name="element2">element to add if element1 is empty</param>
+        /// <returns></returns>
+        private Option<T> AddElement<T>(Option<T> element1, T element2) =>
+            !element1.HasValue ? Option.Some<T>(element2) : element1;
+
         /// <inheritdoc/>
         public IBuilderEnvironment AddContainer(Rectangle container)
         {
@@ -47,10 +57,10 @@ namespace puttingchallenge.Giacobbi
 
         /// <inheritdoc/>
         public IBuilderEnvironment AddPlayer(Point2D pos,
-                                            String skinPath,
-                                            double w,
-                                            double h,
-                                            bool flip)
+                                             String skinPath,
+                                             double w,
+                                             double h,
+                                             bool flip)
         {
             _player = AddElement<PlayerObject>(_player, _factory.CreatePlayer(pos, skinPath, w, h, true));
             return this;
@@ -111,22 +121,6 @@ namespace puttingchallenge.Giacobbi
                                    _player.ValueOrFailure(),
                                    _gameObjects,
                                    _hole.ValueOrFailure());
-        }
-
-        /// <summary>
-        /// Add a generic element
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="element1">element to check</param>
-        /// <param name="element2">element to add if element1 is empty</param>
-        /// <returns></returns>
-        private Option<T> AddElement<T>(Option<T> element1, T element2)
-        {
-            if (!element1.HasValue)
-            {
-                return Option.Some<T>(element2);
-            }
-            return Option.None<T>();
         }
 
     }
