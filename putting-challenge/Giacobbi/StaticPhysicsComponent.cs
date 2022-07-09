@@ -1,4 +1,6 @@
-﻿using Fantilli;
+﻿using puttingchallenge.Fantilli.physics;
+using puttingchallenge.Fantilli.common;
+using puttingchallenge.Fantilli.gameobjects;
 using System;
 
 namespace puttingchallenge.Giacobbi
