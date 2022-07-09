@@ -3,7 +3,7 @@ using puttingchallenge.Fantilli.gameobjects;
 using System;
 using System.Drawing;
 
-namespace PuttingChallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi.Environment
 {
     public interface IBuilderEnvironment
     {

@@ -11,7 +11,7 @@ using Optional.Unsafe;
 using PuttingChallenge.Colletta.Collisions;
 using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
-namespace PuttingChallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi.Environment
 {
     public class Environment : IEnvironment
     {

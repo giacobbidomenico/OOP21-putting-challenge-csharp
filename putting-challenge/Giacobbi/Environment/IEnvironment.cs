@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 using PuttingChallenge.Colletta.Collisions;
 
-namespace PuttingChallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi.Environment
 {
     public interface IEnvironment
     {

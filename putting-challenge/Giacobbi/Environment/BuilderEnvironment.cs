@@ -7,7 +7,7 @@ using System.Drawing;
 using Optional;
 using Optional.Unsafe;
 
-namespace PuttingChallenge.Giacobbi
+namespace PuttingChallenge.Giacobbi.Environment
 {
     public class BuilderEnvironment : IBuilderEnvironment
     {
