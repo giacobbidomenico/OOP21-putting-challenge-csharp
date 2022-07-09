@@ -200,7 +200,7 @@ namespace PuttingChallenge.Giacobbi.Environment
             builder.Physic = ballPhysics;
             builder.Position = box.Position;
 
-            IDynamicBoundingBox.ICollisionTest result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, dt);
+            IDynamicBoundingBox.ICollisionTest result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, box, dt);
             if (result.IsColliding())
             {
                 _collisionWithHole = true;
@@ -208,7 +208,7 @@ namespace PuttingChallenge.Giacobbi.Environment
 
             foreach (IGameObject gameObject in StaticObstacle.ToList())
             {
-                IDynamicBoundingBox.ICollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, dt);
+                IDynamicBoundingBox.ICollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, box, dt);
                 if (currentResult.IsColliding())
                 {
                     result = currentResult;
