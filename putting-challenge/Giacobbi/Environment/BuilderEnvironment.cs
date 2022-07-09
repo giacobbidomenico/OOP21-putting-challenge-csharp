@@ -62,7 +62,7 @@ namespace puttingchallenge.Giacobbi
                                              double h,
                                              bool flip)
         {
-            _player = AddElement<PlayerObject>(_player, _factory.CreatePlayer(pos, skinPath, w, h, true));
+            _player = AddElement<PlayerObject>(_player, _factory.CreatePlayer(pos, w, h, true));
             return this;
         }
 
