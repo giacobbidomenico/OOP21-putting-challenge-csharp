@@ -58,7 +58,6 @@ namespace PuttingChallenge.Giacobbi.Environment
 
         /// <inheritdoc/>
         public IBuilderEnvironment AddPlayer(Point2D pos,
-                                             String skinPath,
                                              double w,
                                              double h,
                                              bool flip)
