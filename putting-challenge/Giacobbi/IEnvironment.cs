@@ -4,6 +4,9 @@ using puttingchallenge.Fantilli.physics;
 using puttingchallenge.Lucioli;
 using System.Drawing;
 using Optional;
+using System.Collections.Generic;
+using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
+using PuttingChallenge.Colletta.Collisions;
 
 namespace puttingchallenge.Giacobbi
 {
@@ -57,7 +60,7 @@ namespace puttingchallenge.Giacobbi
         /// return a info about the collision occurred, empty 
         /// if no collision has occurred.
         /// </returns>
-        Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox,
+        Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox,
                 BallPhysicsComponent ballPhysics,
                 Point2D ballPosition, long dt);
 
@@ -84,12 +87,6 @@ namespace puttingchallenge.Giacobbi
         /// </summary>
         /// <param name="observable"></param>
         void ConfigureObservable(IObservableEvents<ModelEventType> observable);
-
-        /// <returns>
-        /// return the <see cref="IObservableEvents{T}"/>>, that allows the
-        /// communication from the <see cref="GameState{T}"/> to the <see cref="IEnvironment"/>.
-        /// </returns>
-        IObservableEvents<ModelEventType> GetObservable();
 
         /// <returns>
         /// returns a <see cref="IList{T}"/> of <see cref="IGameObject"/>s, where:
