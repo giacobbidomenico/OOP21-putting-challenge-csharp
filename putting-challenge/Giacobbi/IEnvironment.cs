@@ -1,8 +1,7 @@
 ﻿using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Lucioli
-using System.Collections.Generic;
+using puttingchallenge.Lucioli;
 using System.Drawing;
 using Optional;
 
@@ -10,11 +9,36 @@ namespace puttingchallenge.Giacobbi
 {
     public interface IEnvironment
     {
+        /// <summary>
+        /// The ball of the game
+        /// </summary>
         public IGameObject Ball { get; }
+        
+        /// <summary>
+        /// The player of the game
+        /// </summary>
         public PlayerObject Player { get; }
+        
+        /// <summary>
+        /// The rectangle where the scene of the game is contained
+        /// </summary>
         public Rectangle Container { get; }
+        
+        /// <summary>
+        /// The obstacles of the game
+        /// </summary>
         public IList<IGameObject> StaticObstacle { get; }
+        
+        /// <summary>
+        /// The hole of the game
+        /// </summary>
         public IGameObject Hole { get; }
+
+        /// <summary>
+        /// The Observable that allows the communication between GameState
+        /// to Environment
+        /// </summary>
+        public IObservableEvents<ModelEventType> Observable { get; }
 
         /// <summary>
         /// Update the game <see cref="IEnvironment"/>. 

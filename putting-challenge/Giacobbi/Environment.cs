@@ -21,12 +21,24 @@ namespace puttingchallenge.Giacobbi
         private Point2D _precPosBall;
         private Point2D _precPosPlayer;
         private bool _notifiable;
-
+        
+        /// <inheritdoc/>
         public IGameObject Ball { get; private set; }
+        
+        /// <inheritdoc/>
         public PlayerObject Player { get; private set; }
+        
+        /// <inheritdoc/>
         public Rectangle Container { get; private set; }
+        
+        /// <inheritdoc/>
         public IList<IGameObject> StaticObstacle { get; private set; }
+        
+        /// <inheritdoc/>
         public IGameObject Hole { get; private set; }
+
+        /// <inheritdoc/>
+        public IObservableEvents<ModelEventType> Observable { get => _observable; }
 
         /// <summary>
         /// Build a new <see cref="Environment"/>.
@@ -295,7 +307,5 @@ namespace puttingchallenge.Giacobbi
         /// <inheritdoc/>
         public void AddStaticObstacle(IGameObject obstacle) => StaticObstacle.Add(obstacle);
 
-        /// <inheritdoc/>
-        public IObservableEvents<ModelEventType> GetObservable() => _observable;
     }
 }
