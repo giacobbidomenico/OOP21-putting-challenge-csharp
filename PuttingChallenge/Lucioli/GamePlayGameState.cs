@@ -46,11 +46,6 @@ namespace PuttingChallenge.Lucioli
             get;
             private set;
         }
-        public IMediator GeneralMediator
-        {
-            get;
-            set;
-        }
 
         public void InitModelComunication()
         {
@@ -123,8 +118,14 @@ namespace PuttingChallenge.Lucioli
             if (nextMap != null)
             {
                 _currentScene = nextMap;
+                BuilderEnvironment builder = new BuilderEnvironment();
+                builder.AddBall(new Point2D(0, 0), 1);
+                builder.AddContainer(new System.Drawing.Rectangle());
+                builder.AddHole(new Point2D(100, 100), 10, 10);
+                builder.AddPlayer(new Point2D(0, 0), 10, 10, false);
+                Environment = builder.Build().Some();
                 InitModelComunication();
-                GeneralMediator.NotifyColleagues(new GameEventWithDetailsImpl<Tuple<IEnumerable<SceneType>, IList<IGameObject>>>(GameEventType.SET_SCENE, new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, Environment.ValueOrFailure().GetObjects())), this);
+                Mediator.NotifyColleagues(new GameEventWithDetailsImpl<Tuple<IEnumerable<SceneType>, IList<IGameObject>>>(GameEventType.SET_SCENE, new Tuple<IEnumerable<SceneType>, IList<IGameObject>>(_currentScene, Environment.ValueOrFailure().GetObjects())), this);
             }
             else
             {
@@ -134,7 +135,7 @@ namespace PuttingChallenge.Lucioli
 
         private void WriteStats()
         {
-            throw new NotImplementedException();
+            
         }
 
         /// <summary>
