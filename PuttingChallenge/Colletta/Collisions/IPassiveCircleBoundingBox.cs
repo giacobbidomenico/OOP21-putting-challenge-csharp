@@ -1,4 +1,4 @@
-﻿using puttingchallenge.Fantilli.common;
+﻿using PuttingChallenge.Fantilli.Common;
 
 namespace PuttingChallenge.Colletta.Collisions
 {

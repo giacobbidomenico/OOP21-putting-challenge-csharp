@@ -1,9 +1,7 @@
 ﻿using Optional;
 using Optional.Unsafe;
-using puttingchallenge.Fantilli.common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli;
 
 namespace PuttingChallenge.Colletta.Collisions
 {
@@ -28,12 +26,12 @@ namespace PuttingChallenge.Colletta.Collisions
             {
                 return new ConcreteCollisionTest(_box);
             }
-            Point2D lastPosition = circleBuilder.Build(timeOfCollision.ValueOrFailure()).getPosition();
+            Point2D lastPosition = circleBuilder.Build(timeOfCollision.ValueOrFailure()).Position;
             Point2D closestPoint = _box.ClosestPointOnBBToPoint(lastPosition);
             if (lastPosition == closestPoint)
             {
                 closestPoint = _box.IntersectionToSegment(
-                        circleBuilder.Build(0).GetPosition(),
+                        circleBuilder.Build(0).Position,
                         lastPosition);
             }
             Vector2D normal = _box.GetNormal(closestPoint);

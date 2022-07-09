@@ -1,4 +1,4 @@
-﻿using puttingchallenge.Fantilli.events;
+﻿using PuttingChallenge.Fantilli.Events;
 
 namespace PuttingChallenge.Colletta.Mediator
 {

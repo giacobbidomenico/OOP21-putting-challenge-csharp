@@ -1,4 +1,4 @@
-﻿using puttingchallenge.Fantilli.common;
+﻿using PuttingChallenge.Fantilli.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;

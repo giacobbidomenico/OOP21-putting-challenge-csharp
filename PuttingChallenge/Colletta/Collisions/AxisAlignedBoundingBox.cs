@@ -1,5 +1,5 @@
 ﻿using System;
-using puttingchallenge.Fantilli.common;
+using PuttingChallenge.Fantilli.Common;
 using Optional;
 using Optional.Unsafe;
 

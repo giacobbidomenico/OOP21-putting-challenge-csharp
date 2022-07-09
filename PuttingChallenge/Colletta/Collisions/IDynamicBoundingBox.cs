@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Optional;
 using Optional.Unsafe;
-using puttingchallenge.Fantilli.common;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli;
 
 namespace PuttingChallenge.Colletta.Collisions
 {
