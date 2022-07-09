@@ -21,22 +21,21 @@ namespace PuttingChallenge.Giacobbi.Test
         private const double NUM4 = 50;
         private const double NUM5 = 100;
         private const double NUM6 = 80;
-        
-        private readonly Point2D mainPosition = new Point2D(NUM1, NUM2);
-        private readonly Point2D anotherPosition = new Point2D(NUM3, NUM4);
-        private Rectangle _container;
-        private BallObjectImpl _ball;
-        private PlayerObject _player;
-        private IGameObject _land;
-        private IGameObject _wall;
-        private IGameObject _tree;
-        private IGameObject _football;
-        private IGameObject _hole;
-        private IList<IGameObject> _staticObstacles;
-        private readonly GameFactory _factory = new GameFactory();
 
-        [SetUp]
-        public void SetUp()
+        public readonly Point2D mainPosition = new Point2D(NUM1, NUM2);
+        public readonly Point2D anotherPosition = new Point2D(NUM3, NUM4);
+        public readonly Rectangle _container;
+        public readonly BallObjectImpl _ball;
+        public readonly PlayerObject _player;
+        public readonly IGameObject _land;
+        public readonly IGameObject _wall;
+        public readonly IGameObject _tree;
+        public readonly IGameObject _football;
+        public readonly IGameObject _hole;
+        public readonly IList<IGameObject> _staticObstacles;
+        public readonly GameFactory  _factory = new GameFactory();
+
+        public TestEnvironment()
         {
             _container = new Rectangle(0, 0, Convert.ToInt32(NUM1), Convert.ToInt32(NUM2));
             _ball = (BallObjectImpl)_factory.CreateBall(anotherPosition, NUM1);
