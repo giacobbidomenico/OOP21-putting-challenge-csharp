@@ -9,8 +9,12 @@ namespace PuttingChallenge.Colletta.Collisions
     /// <summary>
     /// It wraps an ActiveBoundingBox so that its collision can be tested to a PassiveCircleBoundingBox dynamically.
     /// </summary>
-    class ConcreteDynamicBoundingBox : IDynamicBoundingBox
+    public class ConcreteDynamicBoundingBox : IDynamicBoundingBox
     {
+        private readonly IActiveBoundingBox _box;
+
+        public ConcreteDynamicBoundingBox(IActiveBoundingBox box) => _box = box;
+
         /// <inheritdoc cref="IDynamicBoundingBox.CollidesWith"/>
         public IDynamicBoundingBox.ICollisionTest CollidesWith(IPassiveCircleBoundingBox circle, long dt)
         {
