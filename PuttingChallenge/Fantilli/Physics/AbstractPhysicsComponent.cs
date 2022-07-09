@@ -1,6 +1,6 @@
 ﻿namespace PuttingChallenge.Fantilli.Physics
 {
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Environment;
     using PuttingChallenge.Fantilli.Common;
     using PuttingChallenge.Fantilli.GameObjects;
 

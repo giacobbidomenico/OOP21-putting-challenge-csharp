@@ -2,7 +2,7 @@
 {
     using PuttingChallenge.Fantilli.Common;
     using PuttingChallenge.Fantilli.Physics;
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Environment;
 
     /// <summary>
     /// Class that represent an element of the game.

@@ -1,7 +1,9 @@
-﻿using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.physics;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Lucioli;
+﻿using PuttingChallenge.Fantilli;
+using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Physics;
+using PuttingChallenge.Lucioli;
+using PuttingChallenge.Giacobbi.Events;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -188,11 +190,11 @@ namespace PuttingChallenge.Giacobbi.Environment
         /// <inheritdoc/>
         public Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
-            IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
+            PassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
             IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
                     new Point2D(ballPosition.X + ballHitbox.Radius,ballPosition.Y + ballHitbox.Radius),ballHitbox.Radius);
 
-            builder.Hitbox = box;
+            builder.HitBox = box;
             builder.Physic = ballPhysics;
             builder.Position = box.Position;
 
