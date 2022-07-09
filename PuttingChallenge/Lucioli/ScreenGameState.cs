@@ -1,8 +1,6 @@
-﻿using puttingchallenge.Fantilli.gameobjects;
-using PuttingChallenge.Giacobbi;
+﻿using PuttingChallenge.Fantilli.GameObjects;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PuttingChallenge.Lucioli
 {

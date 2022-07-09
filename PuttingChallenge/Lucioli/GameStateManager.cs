@@ -1,10 +1,10 @@
 ﻿using Optional.Unsafe;
-using puttingchallenge.Fantilli.events;
-using puttingchallenge.Fantilli.gameobjects;
+using PuttingChallenge.Fantilli.Events;
+using PuttingChallenge.Fantilli.GameObjects;
 using PuttingChallenge.Colletta.Mediator;
-using PuttingChallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
+using PuttingChallenge.Giacobbi.Environment;
 
 namespace PuttingChallenge.Lucioli
 {
