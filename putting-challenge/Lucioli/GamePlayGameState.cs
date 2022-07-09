@@ -2,11 +2,11 @@ using Optional.Unsafe;
 using System;
 using System.Collections.Generic;
 using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Giacobbi;
 using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.physics;
 using puttingchallenge.Fantilli.events;
 using PuttingChallenge.Colletta.Mediator;
+using PuttingChallenge.Giacobbi;
 
 namespace puttingchallenge.Lucioli
 {
@@ -53,7 +53,7 @@ namespace puttingchallenge.Lucioli
         public void InitModelComunication()
         {
             IObservableEvents<ModelEventType> environmentObservable;
-            environmentObservable = Environment.ValueOrFailure().GetObservable();
+            environmentObservable = Environment.ValueOrFailure().Observable;
             _observer = new ObserverEvents<ModelEventType>();
             environmentObservable.AddObserver(_observer);
             _observable = new ObservableEvents<ModelEventType>();
@@ -141,8 +141,8 @@ namespace puttingchallenge.Lucioli
         /// <param name="points"> where the mouse was pressed and released during the aiming phase.</param>
         public void Shoot(Tuple<Point2D, Point2D> points)
         {
-            BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.ValueOrFailure<IEnvironment>().Ball.GetPhysicsComponent();
-            double batStrength = Environment.ValueOrFailure<IEnvironment>().Player.Bat.Type.Strength;
+            BallPhysicsComponent ballPhysicsComponent = (BallPhysicsComponent)Environment.ValueOrFailure<IEnvironment>().Ball.PhysicsComponent;
+            double batStrength = Environment.ValueOrFailure<IEnvironment>().Player.BatInUse.GetBatStrength();
             if (!ballPhysicsComponent.IsMoving)
             {
                 Vector2D shootingVector = Vector2D.GetVectorFrom(points.Item1, points.Item2);
@@ -153,7 +153,7 @@ namespace puttingchallenge.Lucioli
                     double moduleRate = MaxStrength / shootingVector.GetModule();
                     shootingVector = new Vector2D(moduleRate * shootingVector.X, moduleRate * shootingVector.Y);
                 }
-                Environment.ValueOrFailure<IEnvironment>().Ball.SetVelocity(shootingVector);
+                Environment.ValueOrFailure<IEnvironment>().Ball.Velocity = shootingVector;
                 NotifyEvents(ModelEventType.SHOOT);
             }
         }

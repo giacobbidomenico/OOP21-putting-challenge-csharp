@@ -1,6 +1,8 @@
+using PuttingChallenge.Colletta.Mediator;
+
 namespace puttingchallenge.Lucioli
 {
-    public interface IGameStateManager : Colleague
+    public interface IGameStateManager : IColleague
     {
         /// <summary>
         /// Sets the initial state of the game.

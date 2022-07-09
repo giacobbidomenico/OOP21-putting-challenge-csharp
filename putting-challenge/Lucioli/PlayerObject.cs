@@ -2,6 +2,7 @@
 using puttingchallenge.Fantilli.common;
 using puttingchallenge.Fantilli.gameobjects;
 using puttingchallenge.Fantilli.physics;
+using PuttingChallenge.Colletta.Collisions;
 using static puttingchallenge.Fantilli.gameobjects.IGameObject;
 
 namespace puttingchallenge.Lucioli

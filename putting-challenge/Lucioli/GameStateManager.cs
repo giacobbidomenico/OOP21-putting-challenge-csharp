@@ -1,8 +1,8 @@
 ﻿using Optional.Unsafe;
 using puttingchallenge.Fantilli.events;
 using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Giacobbi;
 using PuttingChallenge.Colletta.Mediator;
+using PuttingChallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
 

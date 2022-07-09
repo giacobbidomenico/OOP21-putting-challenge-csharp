@@ -1,5 +1,5 @@
 ﻿using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Giacobbi;
+using PuttingChallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Optional;
 using puttingchallenge.Fantilli.events;
 using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Giacobbi;
 using PuttingChallenge.Colletta.Mediator;
+using PuttingChallenge.Giacobbi;
 
 namespace puttingchallenge.Lucioli
 {
@@ -52,6 +52,7 @@ namespace puttingchallenge.Lucioli
         {
             throw new NotImplementedException();
         }
-        
+
+        public abstract void NotifyEvents(ModelEventType eventType);
     }
 }
