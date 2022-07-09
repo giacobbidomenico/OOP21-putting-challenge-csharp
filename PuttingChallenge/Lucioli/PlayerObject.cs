@@ -1,11 +1,10 @@
-﻿using putting_challenge.Lucioli;
-using puttingchallenge.Fantilli.common;
-using puttingchallenge.Fantilli.gameobjects;
-using puttingchallenge.Fantilli.physics;
+﻿using PuttingChallenge.Fantilli.Common;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Fantilli.Physics;
 using PuttingChallenge.Colletta.Collisions;
-using static puttingchallenge.Fantilli.gameobjects.IGameObject;
+using static PuttingChallenge.Fantilli.GameObjects.IGameObject;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class PlayerObject : AbstractGameObject
     {

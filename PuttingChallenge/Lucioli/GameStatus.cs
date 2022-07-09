@@ -1,4 +1,4 @@
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public enum GameStatus
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace puttingchallenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class ScreenGameState : GameState
     {
