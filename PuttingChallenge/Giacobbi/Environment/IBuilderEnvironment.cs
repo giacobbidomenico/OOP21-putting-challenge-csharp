@@ -46,7 +46,6 @@ namespace PuttingChallenge.Giacobbi.Environment
         /// the game <see cref="IEnvironment"/>
         /// </returns>
         IBuilderEnvironment AddPlayer(Point2D pos,
-                                      String skinPath,
                                       double w,
                                       double h,
                                       bool flip);
