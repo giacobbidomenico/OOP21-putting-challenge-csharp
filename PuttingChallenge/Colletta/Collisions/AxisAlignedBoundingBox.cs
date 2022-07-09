@@ -87,7 +87,7 @@ namespace PuttingChallenge.Colletta.Collisions
         /// <inheritdoc cref="IActiveBoundingBox.IntersectionToSegment"/>
         public Point2D IntersectionToSegment(Point2D pointA, Point2D pointB)
         {
-            if (ClosestPointOnBBToPoint(pointA) == pointA || ClosestPointOnBBToPoint(pointB) != pointB)
+            if (ClosestPointOnBBToPoint(pointA).Equals(pointA) || !ClosestPointOnBBToPoint(pointB).Equals(pointB))
             {
                 throw new ArgumentException();
             }
