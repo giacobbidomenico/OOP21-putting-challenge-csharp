@@ -1,8 +1,8 @@
-using puttingchallenge.Fantilli.gameobjects;
+using PuttingChallenge.Fantilli.GameObjects;
 using PuttingChallenge.Colletta.Mediator;
-using PuttingChallenge.Giacobbi;
 using System;
 using System.Collections.Generic;
+using PuttingChallenge.Giacobbi.Events;
 
 namespace PuttingChallenge.Lucioli
 {

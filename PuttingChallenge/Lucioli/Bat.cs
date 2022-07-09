@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace putting_challenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class Bat
     {

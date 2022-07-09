@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Optional;
-using puttingchallenge.Fantilli.events;
-using puttingchallenge.Fantilli.gameobjects;
 using PuttingChallenge.Colletta.Mediator;
-using PuttingChallenge.Giacobbi;
+using PuttingChallenge.Fantilli.Events;
+using PuttingChallenge.Fantilli.GameObjects;
+using PuttingChallenge.Giacobbi.Environment;
+using PuttingChallenge.Giacobbi.Events;
 
 namespace PuttingChallenge.Lucioli
 {
@@ -54,5 +55,6 @@ namespace PuttingChallenge.Lucioli
         }
 
         public abstract void NotifyEvents(ModelEventType eventType);
+
     }
 }

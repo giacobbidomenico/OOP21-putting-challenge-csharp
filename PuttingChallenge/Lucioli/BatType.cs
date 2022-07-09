@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace putting_challenge.Lucioli
+namespace PuttingChallenge.Lucioli
 {
     public class DescriptorAttributeBatType : Attribute
     {
