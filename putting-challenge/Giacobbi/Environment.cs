@@ -8,6 +8,9 @@ using System.Drawing;
 using System.Linq;
 using Optional;
 using Optional.Unsafe;
+using PuttingChallenge.Colletta.Collisions;
+using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox.ConcreteCollisionTest;
+using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 
 namespace puttingchallenge.Giacobbi
 {
@@ -16,7 +19,6 @@ namespace puttingchallenge.Giacobbi
         private Option<IObservableEvents<ModelEventType>> _observableGameState;
         private readonly IObservableEvents<ModelEventType> _observable;
         private readonly IObserverEvents<ModelEventType> _observer;
-        private readonly IList<IGameObject> _staticObstacles;
         private bool _collisionWithHole;
         private Point2D _precPosBall;
         private Point2D _precPosPlayer;
@@ -70,7 +72,7 @@ namespace puttingchallenge.Giacobbi
             _observer = new ObserverEvents<ModelEventType>();
             _precPosBall = ball.Position;
             _precPosPlayer = player.Position;
-            
+
             Container = container;
             Ball = ball;
             Player = player;
@@ -185,41 +187,39 @@ namespace puttingchallenge.Giacobbi
         }
 
         /// <inheritdoc/>
-        public Option<CollisionTest> CheckCollisions(PassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
+        public Option<ConcreteCollisionTest> CheckCollisions(IPassiveCircleBoundingBox ballHitbox, BallPhysicsComponent ballPhysics, Point2D ballPosition, long dt)
         {
             IPassiveCircleBBTrajectoryBuilder builder = new PassiveCircleBBTrajectoryBuilder();
             IPassiveCircleBoundingBox box = new ConcretePassiveCircleBoundingBox(
-                    new Point2D(ballPosition.X + ballHitbox.Radius,
-                            ballPosition.Y + ballHitbox.Radius),
-                    ballHitbox.getRadius());
+                    new Point2D(ballPosition.X + ballHitbox.Radius,ballPosition.Y + ballHitbox.Radius),ballHitbox.Radius);
 
-            builder.SetHitbox(box);
-            builder.SetPhysic(ballPhysics);
-            builder.SetPosition(box.getPosition());
+            builder.Hitbox = box;
+            builder.Physic = ballPhysics;
+            builder.Position = box.Position;
 
-            CollisionTest result = ((GameObjectImpl)_hole).getHitBox().collidesWith(builder, dt);
-            if (result.isCollisionOccurred())
+            ConcreteCollisionTest? result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, dt);
+            if (result.IsColliding())
             {
                 _collisionWithHole = true;
             }
 
-            result = null;
-            for (final GameObject gameObject : staticObstacles)
+            foreach (IGameObject gameObject in StaticObstacle.ToList())
             {
-                final CollisionTest currentResult = ((GameObjectImpl)gameObject).getHitBox().collidesWith(builder, dt);
-                if (currentResult.isCollisionOccurred())
+                ConcreteCollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, dt);
+                if (currentResult.IsColliding())
                 {
                     result = currentResult;
                 }
             }
-            return Option.None<CollisionTest>();
+
+            return Option.None<ConcreteCollisionTest>();
         }
 
         /// <inheritdoc/>
         public void ConfigureObservable(IObservableEvents<ModelEventType> observableGameState)
         {
             _observableGameState = Option.Some<IObservableEvents<ModelEventType>>(observableGameState);
-            _observableGameState.ValueOrDefault().AddObserver(_observer);
+            _observableGameState.ValueOrFailure().AddObserver(_observer);
         }
 
         /// <inheritdoc/>
@@ -274,7 +274,7 @@ namespace puttingchallenge.Giacobbi
                 Player,
                 Ball
             };
-            allGameObjects.ToList().AddRange(_staticObstacles);
+            allGameObjects.ToList().AddRange(StaticObstacle);
             allGameObjects.Add(Hole);
             return allGameObjects;
         }
@@ -293,7 +293,7 @@ namespace puttingchallenge.Giacobbi
             if (obj is IEnvironment env)
             {
                 return Ball.Equals(env.Ball)
-                        && _staticObstacles.Select(e => StaticObstacle.Contains(e)).Count() != 0
+                        && StaticObstacle.Select(e => StaticObstacle.Contains(e)).Count() != 0
                         && Container.Equals(env.Container)
                         && Hole.Equals(env.Hole);
             }
@@ -302,7 +302,7 @@ namespace puttingchallenge.Giacobbi
 
         /// <inheritdoc/>
         public override int GetHashCode() =>
-            HashCode.Combine(Ball, Container, Hole, Player, _staticObstacles);
+            HashCode.Combine(Ball, Container, Hole, Player, StaticObstacle);
 
         /// <inheritdoc/>
         public void AddStaticObstacle(IGameObject obstacle) => StaticObstacle.Add(obstacle);
