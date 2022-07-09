@@ -3,7 +3,7 @@
     using System;
     using PuttingChallenge.Fantilli.Common;
     using PuttingChallenge.Fantilli.Physics;
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Environment;
 
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.

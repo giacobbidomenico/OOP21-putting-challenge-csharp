@@ -2,7 +2,7 @@
 {
     using PuttingChallenge.Fantilli.Common;
     using PuttingChallenge.Fantilli.GameObjects;
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Environment;
 
     /// <summary>
     /// Describes the physical behavior of a <see cref="IGameObject"/>.

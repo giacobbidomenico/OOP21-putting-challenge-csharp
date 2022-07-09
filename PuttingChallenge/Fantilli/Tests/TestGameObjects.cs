@@ -3,7 +3,7 @@
     using NUnit.Framework;
     using PuttingChallenge.Fantilli.GameObjects;
     using PuttingChallenge.Fantilli.Common;
-    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Giacobbi.Physics;
     using PuttingChallenge.Colletta.Collisions;
 
     [TestFixture]
