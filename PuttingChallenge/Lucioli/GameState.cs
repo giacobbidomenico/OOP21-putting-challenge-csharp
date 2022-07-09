@@ -28,7 +28,7 @@ namespace PuttingChallenge.Lucioli
             get;
             set;
         }
-        public IMediator Mediator { set => throw new NotImplementedException(); }
+        public IMediator Mediator { set; private get; }
 
         public GameState(GameStateManager manager, GameStatus status)
         {
