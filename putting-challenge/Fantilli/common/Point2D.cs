@@ -1,4 +1,4 @@
-﻿namespace puttingchallenge.Fantilli.common
+﻿namespace PuttingChallenge.Fantilli.Common
 {
     using System;
 

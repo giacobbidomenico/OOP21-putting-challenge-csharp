@@ -1,9 +1,9 @@
-﻿namespace puttingchallenge.Fantilli.tests
+﻿namespace PuttingChallenge.Fantilli.Tests
 {
-    using NUnit.Framework;
-    using puttingchallenge.Fantilli.physics;
-    using puttingchallenge.Fantilli.common;
     using System;
+    using NUnit.Framework;
+    using PuttingChallenge.Fantilli.Physics;
+    using PuttingChallenge.Fantilli.Common;
 
     [TestFixture]
     public class TestBallPhysic

@@ -1,9 +1,9 @@
-﻿namespace puttingchallenge.Fantilli.gameobjects
+﻿namespace PuttingChallenge.Fantilli.GameObjects
 {
     using System;
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.physics;
-    using puttingchallenge.Giacobbi;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.Physics;
+    using PuttingChallenge.Giacobbi;
 
     /// <summary>
     /// Abstract class that define a generic <see cref="IGameObject"/>.

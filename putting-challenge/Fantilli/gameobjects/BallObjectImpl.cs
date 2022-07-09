@@ -1,7 +1,7 @@
-﻿namespace puttingchallenge.Fantilli.gameobjects
+﻿namespace PuttingChallenge.Fantilli.GameObjects
 {
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.physics;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.Physics;
     using PuttingChallenge.Colletta.Collisions;
 
     /// <summary>

@@ -1,11 +1,11 @@
-﻿namespace puttingchallenge.Fantilli
+﻿namespace PuttingChallenge.Fantilli
 {
     using System;
     using Optional;
     using Optional.Unsafe;
     using PuttingChallenge.Colletta.Collisions;
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.physics;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.Physics;
 
     /// <summary>
     /// Class that build a <see cref="IPassiveCircleBoundingBox"/> positioned on a 

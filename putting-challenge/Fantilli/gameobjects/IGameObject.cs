@@ -1,8 +1,8 @@
-﻿namespace puttingchallenge.Fantilli.gameobjects
+﻿namespace PuttingChallenge.Fantilli.GameObjects
 {
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.physics;
-    using puttingchallenge.Giacobbi;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.Physics;
+    using PuttingChallenge.Giacobbi;
 
     /// <summary>
     /// Class that represent an element of the game.

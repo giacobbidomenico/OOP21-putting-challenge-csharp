@@ -1,9 +1,9 @@
-﻿namespace puttingchallenge.Fantilli.tests
+﻿namespace puttingchallenge.Fantilli.Tests
 {
     using NUnit.Framework;
-    using puttingchallenge.Fantilli.gameobjects;
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Giacobbi;
+    using PuttingChallenge.Fantilli.GameObjects;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Giacobbi;
     using PuttingChallenge.Colletta.Collisions;
 
     [TestFixture]

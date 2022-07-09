@@ -1,11 +1,11 @@
-﻿namespace puttingchallenge.Fantilli.physics
+﻿namespace PuttingChallenge.Fantilli.Physics
 {
     using System;
     using Optional;
     using Optional.Unsafe;
-    using puttingchallenge.Giacobbi;
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.gameobjects;
+    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.GameObjects;
     using PuttingChallenge.Colletta.Collisions;
 
     /// <summary>

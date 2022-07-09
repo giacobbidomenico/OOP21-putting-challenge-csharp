@@ -1,7 +1,7 @@
-﻿namespace puttingchallenge.Fantilli.physics
+﻿namespace PuttingChallenge.Fantilli.Physics
 {
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.gameobjects;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.GameObjects;
     using PuttingChallenge.Giacobbi;
 
     /// <summary>

@@ -1,8 +1,8 @@
-﻿namespace puttingchallenge.Fantilli.physics
+﻿namespace PuttingChallenge.Fantilli.Physics
 {
-    using puttingchallenge.Giacobbi;
-    using puttingchallenge.Fantilli.common;
-    using puttingchallenge.Fantilli.gameobjects;
+    using PuttingChallenge.Giacobbi;
+    using PuttingChallenge.Fantilli.Common;
+    using PuttingChallenge.Fantilli.GameObjects;
 
     /// <summary>
     /// Abstract class that describes the physics of moving <see cref="IGameObject"/>.
