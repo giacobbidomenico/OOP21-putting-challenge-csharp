@@ -60,7 +60,7 @@ namespace PuttingChallenge.Colletta.Collisions
                     pointA.Y - _centerPosition.Y);
 
             Vector2D segmentVector = new Vector2D(pointB.X - pointA.X,
-                    pointB.Y - pointA.Y;
+                    pointB.Y - pointA.Y);
 
             Vector2D normalizedSegmentVector = new Vector2D(segmentVector.X / segmentVector.GetModule(),
                     segmentVector.Y / segmentVector.GetModule());
@@ -76,7 +76,7 @@ namespace PuttingChallenge.Colletta.Collisions
         /// <inheritdoc cref="IActiveBoundingBox.IsColliding"/>
         public bool IsColliding(IPassiveCircleBoundingBox circle)
         {
-            return _radius + circle.Radius >= Point2D.GetDistance(_centerPosition, circle.Position));
+            return _radius + circle.Radius >= Point2D.GetDistance(_centerPosition, circle.Position);
         }
     }
 }
