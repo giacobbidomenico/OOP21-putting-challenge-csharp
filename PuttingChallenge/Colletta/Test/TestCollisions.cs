@@ -11,14 +11,16 @@ namespace PuttingChallenge.Colletta.Test
         private const double Radius = 10.0;
         private Point2D _pointA;
         private Point2D _pointB;
-        private IPassiveCircleBoundingBox _passiveCircle;
+        private IPassiveCircleBoundingBox _collidingCircle;
+        private IPassiveCircleBoundingBox _nonCollidingCircle;
 
         [SetUp]
         public void SetUp()
         {
             _pointA = new Point2D(0, 0);
             _pointB = new Point2D(15, 0);
-            _passiveCircle = new ConcretePassiveCircleBoundingBox(_pointA, Radius);
+            _collidingCircle = new ConcretePassiveCircleBoundingBox(_pointA, Radius);
+            _nonCollidingCircle= new ConcretePassiveCircleBoundingBox(_pointB, Radius / Radius);
         }
 
         [Test]
@@ -29,7 +31,8 @@ namespace PuttingChallenge.Colletta.Test
             Assert.AreEqual(circle.ClosestPointOnBBToPoint(_pointA), _pointA);
             Assert.AreEqual(circle.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
             Assert.AreEqual(circle.GetNormal(circle.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
-            Assert.AreEqual(circle.IsColliding(_passiveCircle), true);
+            Assert.AreEqual(circle.IsColliding(_collidingCircle), true);
+            Assert.AreEqual(circle.IsColliding(_nonCollidingCircle), false);
         }
 
         [Test]
@@ -41,7 +44,8 @@ namespace PuttingChallenge.Colletta.Test
             Assert.AreEqual(aABB.ClosestPointOnBBToPoint(_pointB), new Point2D(10, 0));
             Assert.AreEqual(aABB.IntersectionToSegment(_pointB, _pointA), new Point2D(10, 0));
             Assert.AreEqual(aABB.GetNormal(aABB.ClosestPointOnBBToPoint(_pointB)), new Vector2D(+1, 0));
-            Assert.AreEqual(aABB.IsColliding(_passiveCircle), true);
+            Assert.AreEqual(aABB.IsColliding(_collidingCircle), true);
+            Assert.AreEqual(aABB.IsColliding(_nonCollidingCircle), false);
         }
 
     }
