@@ -77,7 +77,24 @@ namespace PuttingChallenge.Lucioli
 
         public void NotifyEvent(IGameEvent eventOccurred)
         {
-            throw new NotImplementedException();
+            switch (eventOccurred.EventType)
+            {
+                case GameEventType.START:
+                    SwitchState(GameStatus.Play);
+                    break;
+                case GameEventType.SHOW_LEADERBOARD:
+                    SwitchState(GameStatus.Leaderboard);
+                    IGameEvent leaderboardEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE, 
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.Leaderboard, new List<IGameObject>()));
+                    break;
+                case GameEventType.SHOW_MAIN_MENU:
+                    SwitchState(GameStatus.MainMenu);
+                    IGameEvent menuEvent = new GameEventWithDetailsImpl<Tuple<SceneType, IList<IGameObject>>>(GameEventType.SET_SCENE,
+                        new Tuple<SceneType, IList<IGameObject>>(SceneType.MainMenu, new List<IGameObject>()));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
