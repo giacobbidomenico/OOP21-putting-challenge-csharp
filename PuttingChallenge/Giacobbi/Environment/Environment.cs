@@ -200,22 +200,23 @@ namespace PuttingChallenge.Giacobbi.Environment
             builder.Physic = ballPhysics;
             builder.Position = box.Position;
 
-            IDynamicBoundingBox.ICollisionTest result = ((GameObjectImpl)Hole).HitBox.CollidesWith(builder, box, dt);
-            if (result.IsColliding())
+            Option<IDynamicBoundingBox.ICollisionTest> result = Option.Some<IDynamicBoundingBox.ICollisionTest>(((GameObjectImpl)Hole).HitBox.CollidesWith(builder, box, dt));
+            if (result.ValueOrFailure().IsColliding())
             {
                 _collisionWithHole = true;
             }
 
+            result = Option.None<IDynamicBoundingBox.ICollisionTest>();
             foreach (IGameObject gameObject in StaticObstacle.ToList())
             {
                 IDynamicBoundingBox.ICollisionTest currentResult = ((GameObjectImpl)gameObject).HitBox.CollidesWith(builder, box, dt);
                 if (currentResult.IsColliding())
                 {
-                    result = currentResult;
+                    result = Option.Some<IDynamicBoundingBox.ICollisionTest>(currentResult);
                 }
             }
 
-            return Option.None<IDynamicBoundingBox.ICollisionTest>();
+            return result;
         }
 
         /// <inheritdoc/>
@@ -296,7 +297,7 @@ namespace PuttingChallenge.Giacobbi.Environment
             if (obj is IEnvironment env)
             {
                 return Ball.Equals(env.Ball)
-                        && StaticObstacle.Select(e => StaticObstacle.Contains(e)).Count() != 0
+                        && StaticObstacle.Select(e => env.StaticObstacle.Contains(e)).Count() != 0
                         && Container.Equals(env.Container)
                         && Hole.Equals(env.Hole);
             }

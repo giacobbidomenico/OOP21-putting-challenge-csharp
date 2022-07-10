@@ -75,7 +75,7 @@ namespace PuttingChallenge.Giacobbi.Environment
         {
             switch (gameObjectType)
             {
-                case IGameObject.GameObjectType.BALL:
+                case IGameObject.GameObjectType.LAND:
                     _gameObjects.Add(_factory.CreateLand(pos, w, h));
                     break;
                 case IGameObject.GameObjectType.WALL:
