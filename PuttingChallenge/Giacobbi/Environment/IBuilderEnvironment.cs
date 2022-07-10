@@ -1,10 +1,12 @@
 ﻿using PuttingChallenge.Fantilli.Common;
 using PuttingChallenge.Fantilli.GameObjects;
-using System;
 using System.Drawing;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
+    /// <summary>
+    /// Interface that defines the builder of the game environment.
+    /// </summary>
     public interface IBuilderEnvironment
     {
         /// <summary>

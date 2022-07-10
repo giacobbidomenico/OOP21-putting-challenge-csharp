@@ -7,6 +7,9 @@ using PuttingChallenge.Giacobbi.Physics;
 
 namespace PuttingChallenge.Giacobbi.Gameobjects
 {
+    /// <summary>
+    /// Factory class for all the game objects.
+    /// </summary>
     public class GameFactory
     {
         /// <summary>
@@ -30,7 +33,6 @@ namespace PuttingChallenge.Giacobbi.Gameobjects
         /// Build the player.
         /// </summary>
         /// <param name="pos">initial position of the player</param>
-        /// <param name="skinPath">path of the player's skin</param>
         /// <param name="w">the width of the player</param>
         /// <param name="h">the height of the player</param>
         /// <param name="flip"></param>  

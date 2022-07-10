@@ -10,6 +10,9 @@ using Optional.Unsafe;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
+    /// <summary>
+    /// Interface that defines the builder of the game environment.
+    /// </summary>
     public class BuilderEnvironment : IBuilderEnvironment
     {
         private readonly GameFactory _factory;
@@ -38,7 +41,7 @@ namespace PuttingChallenge.Giacobbi.Environment
         /// <typeparam name="T"></typeparam>
         /// <param name="element1">element to check</param>
         /// <param name="element2">element to add if element1 is empty</param>
-        /// <returns></returns>
+        /// <returns>the correct element</returns>
         private Option<T> AddElement<T>(Option<T> element1, T element2) =>
             !element1.HasValue ? Option.Some<T>(element2) : element1;
 
@@ -67,7 +70,9 @@ namespace PuttingChallenge.Giacobbi.Environment
         }
 
         /// <inheritdoc/>
-        /// <exception cref="ArgumentException">Argument Exception</exception>
+        /// <exception cref="ArgumentException">
+        /// GameObjectType doesn't exist
+        /// </exception>
         public IBuilderEnvironment AddStaticObstacle(IGameObject.GameObjectType gameObjectType,
                                                      Point2D pos,
                                                      double w,

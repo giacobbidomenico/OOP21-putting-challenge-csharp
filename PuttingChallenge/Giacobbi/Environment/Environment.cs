@@ -14,6 +14,9 @@ using PuttingChallenge.Colletta.Collisions;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
+    /// <summary>
+    /// Interface that defines the game Environment
+    /// </summary>
     public class Environment : IEnvironment
     {
         private Option<IObservableEvents<ModelEventType>> _observableGameState;
@@ -89,7 +92,10 @@ namespace PuttingChallenge.Giacobbi.Environment
             this.NotifyEvents();
         }
 
-
+        /// <summary>
+        /// method that moves the player when the ball comes to rest 
+        /// without hitting the hole
+        /// </summary>
         private void MovePlayer()
         {
             BallPhysicsComponent bf = (BallPhysicsComponent) Ball.PhysicsComponent;

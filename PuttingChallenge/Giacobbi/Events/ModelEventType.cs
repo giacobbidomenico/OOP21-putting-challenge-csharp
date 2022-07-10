@@ -1,5 +1,9 @@
 ﻿namespace PuttingChallenge.Giacobbi.Events
 {
+    /// <summary>
+    /// Enumeration for the different event types notified 
+    /// from the GameState to the Environment and vice-versa.
+    /// </summary>
     public enum ModelEventType
     {
         /// <summary>

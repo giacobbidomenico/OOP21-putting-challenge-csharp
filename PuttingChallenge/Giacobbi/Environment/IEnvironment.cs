@@ -6,11 +6,13 @@ using PuttingChallenge.Giacobbi.Events;
 using System.Drawing;
 using Optional;
 using System.Collections.Generic;
-using static PuttingChallenge.Colletta.Collisions.ConcreteDynamicBoundingBox;
 using PuttingChallenge.Colletta.Collisions;
 
 namespace PuttingChallenge.Giacobbi.Environment
 {
+    /// <summary>
+    /// Interface that defines the game Environment.
+    /// </summary>
     public interface IEnvironment
     {
         /// <summary>
