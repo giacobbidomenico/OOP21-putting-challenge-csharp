@@ -17,6 +17,6 @@ namespace PuttingChallenge.Giacobbi.Events
         /// <returns>
         /// return a <see cref="IList{T}"/> of the events which must be notified.
         /// </returns>
-        IList<A> GetEvents();
+        IList<A> Events { get; }
     }
 }
