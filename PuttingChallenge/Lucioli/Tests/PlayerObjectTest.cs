@@ -4,8 +4,9 @@ using System.Text;
 using NUnit.Framework;
 using PuttingChallenge.Fantilli.Common;
 using PuttingChallenge.Giacobbi.Gameobjects;
+using PuttingChallenge.Lucioli;
 
-namespace PuttingChallenge.Lucioli
+namespace Lucioli.Tests
 {
     [TestFixture]
     public class PlayerObjectTest

@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PuttingChallenge.Lucioli
+namespace Lucioli.Tests
 {
     [TestFixture]
     public class GamePlayGameStateTests
