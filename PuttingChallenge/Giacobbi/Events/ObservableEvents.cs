@@ -34,7 +34,7 @@ namespace PuttingChallenge.Giacobbi.Events
         /// <inheritdoc/>
         public IList<A> EventsReceived()
         {
-            return observers.SelectMany(e => e.GetEvents()).ToList();
+            return observers.SelectMany(e => e.Events).ToList();
         }
     }
 }
