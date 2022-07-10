@@ -13,6 +13,9 @@ using System;
 
 namespace PuttingChallenge.Giacobbi.Test
 {
+    /// <summary>
+    /// Class that contains the Environment tests.
+    /// </summary>
     [TestFixture]
     public class TestEnvironment
     {
@@ -35,7 +38,10 @@ namespace PuttingChallenge.Giacobbi.Test
         public readonly IGameObject _hole;
         public readonly IList<IGameObject> _staticObstacles;
         public readonly GameFactory  _factory = new GameFactory();
-
+        
+        /// <summary>
+        /// Build a new <see cref="TestEnvironment"/>.
+        /// </summary>
         public TestEnvironment()
         {
             _container = new Rectangle(0, 0, Convert.ToInt32(800), Convert.ToInt32(800));
@@ -52,7 +58,11 @@ namespace PuttingChallenge.Giacobbi.Test
                                                        _football};
         }
 
-        public IEnvironment InitEnvironment()
+        /// <summary>
+        /// Initializes the Environment used by the tests.
+        /// </summary>
+        /// <returns></returns>
+        private IEnvironment InitEnvironment()
         {
             return new Environment.Environment(_container,
                                                (BallObjectImpl)_ball,
