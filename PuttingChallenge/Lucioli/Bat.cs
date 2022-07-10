@@ -20,8 +20,8 @@ namespace PuttingChallenge.Lucioli
             string name = Enum.GetName(type, _batType);
             FieldInfo field = type.GetField(name);
 
-            DescriptionAttribute attr = (DescriptionAttribute) field.GetCustomAttribute<Attribute>();
-            return double.Parse(attr.Description);
+            DescriptorAttributeBatType attr = (DescriptorAttributeBatType) field.GetCustomAttribute<Attribute>();
+            return attr.Strength;
         }
     }
 }
