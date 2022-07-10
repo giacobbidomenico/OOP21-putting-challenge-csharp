@@ -52,10 +52,8 @@ namespace PuttingChallenge.Giacobbi.Test
                                                        _football};
         }
 
-        
-        private IEnvironment InitEnvironment()
+        public IEnvironment InitEnvironment()
         {
-            this.CheckNullException();
             return new Environment.Environment(_container,
                                                (BallObjectImpl)_ball,
                                                _player,
@@ -63,14 +61,10 @@ namespace PuttingChallenge.Giacobbi.Test
                                                _hole);
         }
 
-        private void CheckNullException()
-        {
-        }
-
         /// <summary>
         /// Check if the environment is set up correctly. 
         /// </summary>
-        [SetUp]
+        [Test, Order(1)]
         public void TestCorrectEnvironment()
         {
             IEnvironment env = InitEnvironment();
@@ -101,7 +95,7 @@ namespace PuttingChallenge.Giacobbi.Test
         /// <summary>
         /// Check if the environment builder works correctly.
         /// </summary>
-        [Test]
+        [Test, Order(2)]
         public void TestBuilderEnvironment()
         {
             IEnvironment env1 = this.InitEnvironment();
@@ -121,7 +115,7 @@ namespace PuttingChallenge.Giacobbi.Test
         /// <summary>
         /// Checks if the the collisions are detected correctly.
         /// </summary>
-        [Test]
+        [Test, Order(3)]
         public void CheckCollisions()
         {
             var env = this.InitEnvironment();
@@ -139,7 +133,10 @@ namespace PuttingChallenge.Giacobbi.Test
                                                Convert.ToInt64(NUM1)).HasValue);
         }
 
-        [Test]
+        /// <summary>
+        /// Checks if there is a collision with the hole.
+        /// </summary>
+        [Test, Order(4)]
         public void CheckCollisionWithHole()
         {
             var env = this.InitEnvironment();
@@ -157,7 +154,11 @@ namespace PuttingChallenge.Giacobbi.Test
                                                Convert.ToInt64(NUM1)).HasValue);
         }
 
-        [Test]
+        /// <summary>
+        /// Check if the <see cref="GameState"/> communicates correctly 
+        /// with the <see cref="IEnvironment"/>
+        /// </summary>
+        [Test, Order(5)]
         public void TestComunicationFromGameState()
         {
             IEnvironment env = this.InitEnvironment();
@@ -172,7 +173,11 @@ namespace PuttingChallenge.Giacobbi.Test
             Assert.AreNotEqual(eventsReceived, new List<ModelEventType>() { ModelEventType.BALL_IN_HOLE });
         }
 
-        [Test]
+        /// <summary>
+        /// Check if the <see cref="IEnvironment"/> communicates correctly 
+        /// with the <see cref="GameState"/>
+        /// </summary>
+        [Test, Order(6)]
         public void TestComunicationToGameState()
         {
             IEnvironment env = this.InitEnvironment();
