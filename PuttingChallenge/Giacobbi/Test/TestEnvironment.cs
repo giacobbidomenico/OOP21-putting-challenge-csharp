@@ -142,14 +142,14 @@ namespace PuttingChallenge.Giacobbi.Test
         {
             var env = this.InitEnvironment();
 
-            Assert.IsTrue(env.CheckCollisions(_ball.HitBox,
+            Assert.True(env.CheckCollisions(_ball.HitBox,
                                               (BallPhysicsComponent)_ball.PhysicsComponent,
                                               _hole.Position,
                                               Convert.ToInt64(NUM1)).HasValue);
             IGameObject holeCopy = _factory.CreateHole(new Point2D(NUM5, NUM6),
                                                        NUM1,
                                                        NUM2);
-            Assert.IsFalse(env.CheckCollisions(_ball.HitBox,
+            Assert.False(env.CheckCollisions(_ball.HitBox,
                                                (BallPhysicsComponent)_ball.PhysicsComponent,
                                                holeCopy.Position,
                                                Convert.ToInt64(NUM1)).HasValue);
