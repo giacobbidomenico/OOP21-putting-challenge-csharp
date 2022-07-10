@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Optional;
+using Optional.Unsafe;
 using PuttingChallenge.Colletta.Mediator;
 using PuttingChallenge.Fantilli.Common;
 using PuttingChallenge.Giacobbi.Environment;
@@ -52,7 +52,8 @@ namespace PuttingChallenge.Lucioli
             GamePlayGameState gamePlayState = (GamePlayGameState)manager.CurrentGameState;
             for (int i = MaxLives; i > 0; i--)
             {
-                gamePlayState.Shoot(new Tuple<Point2D, Point2D>(new Point2D(0, 0), new Point2D(1, 1)));
+                gamePlayState.Shoot(new Tuple<Point2D, Point2D>(new Point2D(0, 0), new Point2D(-100, -100)));
+                gamePlayState.Environment.ValueOrFailure().Update(1000000);
                 Assert.AreEqual(gamePlayState.Score, None);
                 Assert.AreEqual(gamePlayState.Lives, i - 1);
             }
