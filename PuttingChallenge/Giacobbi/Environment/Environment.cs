@@ -297,7 +297,7 @@ namespace PuttingChallenge.Giacobbi.Environment
             if (obj is IEnvironment env)
             {
                 return Ball.Equals(env.Ball)
-                        && StaticObstacle.Select(e => env.StaticObstacle.Contains(e)).Count() != 0
+                        && StaticObstacle.Select(e => env.StaticObstacle.Contains(e)).Count() == StaticObstacle.ToList().Count()
                         && Container.Equals(env.Container)
                         && Hole.Equals(env.Hole);
             }

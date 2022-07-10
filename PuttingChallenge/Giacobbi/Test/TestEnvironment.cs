@@ -3,6 +3,7 @@ using PuttingChallenge.Fantilli.GameObjects;
 using PuttingChallenge.Fantilli.Physics;
 using PuttingChallenge.Giacobbi.Environment;
 using PuttingChallenge.Giacobbi.Gameobjects;
+using PuttingChallenge.Giacobbi.Events;
 using PuttingChallenge.Lucioli;
 using NUnit.Framework;
 using System.Drawing;
@@ -37,7 +38,7 @@ namespace PuttingChallenge.Giacobbi.Test
 
         public TestEnvironment()
         {
-            _container = new Rectangle(0, 0, Convert.ToInt32(NUM1), Convert.ToInt32(NUM2));
+            _container = new Rectangle(0, 0, Convert.ToInt32(800), Convert.ToInt32(800));
             _ball = (BallObjectImpl)_factory.CreateBall(anotherPosition, NUM1);
             _player = _factory.CreatePlayer(mainPosition, NUM1, NUM2, false);
             _land = _factory.CreateLand(mainPosition, NUM1, NUM2);
@@ -69,7 +70,7 @@ namespace PuttingChallenge.Giacobbi.Test
         /// <summary>
         /// Check if the environment is set up correctly. 
         /// </summary>
-        [Test]
+        [SetUp]
         public void TestCorrectEnvironment()
         {
             IEnvironment env = InitEnvironment();
@@ -103,17 +104,18 @@ namespace PuttingChallenge.Giacobbi.Test
         [Test]
         public void TestBuilderEnvironment()
         {
+            IEnvironment env1 = this.InitEnvironment();
             IBuilderEnvironment buildEnv = new BuilderEnvironment();
-            IEnvironment env = buildEnv.AddBall(anotherPosition, NUM1)
-                                       .AddContainer(_container)
-                                       .AddPlayer(mainPosition, NUM1, NUM2, false)
-                                       .AddStaticObstacle(IGameObject.GameObjectType.LAND, mainPosition, NUM1, NUM2)
-                                       .AddStaticObstacle(IGameObject.GameObjectType.WALL, mainPosition, NUM1, NUM2)
-                                       .AddStaticObstacle(IGameObject.GameObjectType.TREE, mainPosition, NUM1, NUM2)
-                                       .AddStaticObstacle(IGameObject.GameObjectType.FOOTBALL, mainPosition, NUM1, NUM2)
-                                       .AddHole(mainPosition, NUM1, NUM2)
-                                       .Build();
-            Assert.AreEqual(this.InitEnvironment(), env);
+            IEnvironment env2 = buildEnv.AddBall(env1.Ball.Position, NUM1)
+                                        .AddContainer(_container)
+                                        .AddPlayer(mainPosition, NUM1, NUM2, false)
+                                        .AddStaticObstacle(IGameObject.GameObjectType.LAND, mainPosition, NUM1, NUM2)
+                                        .AddStaticObstacle(IGameObject.GameObjectType.WALL, mainPosition, NUM1, NUM2)
+                                        .AddStaticObstacle(IGameObject.GameObjectType.TREE, mainPosition, NUM1, NUM2)
+                                        .AddStaticObstacle(IGameObject.GameObjectType.FOOTBALL, mainPosition, NUM1, NUM2)
+                                        .AddHole(mainPosition, NUM1, NUM2)
+                                        .Build();
+            Assert.True(env1.Equals(env2));
         }
 
         /// <summary>
@@ -153,6 +155,41 @@ namespace PuttingChallenge.Giacobbi.Test
                                                (BallPhysicsComponent)_ball.PhysicsComponent,
                                                holeCopy.Position,
                                                Convert.ToInt64(NUM1)).HasValue);
+        }
+
+        [Test]
+        public void TestComunicationFromGameState()
+        {
+            IEnvironment env = this.InitEnvironment();
+            IObservableEvents<ModelEventType> observable = new ObservableEvents<ModelEventType>();
+            IObserverEvents<ModelEventType> observer = new ObserverEvents<ModelEventType>();
+            env.ConfigureObservable(observable);
+            env.Observable.AddObserver(observer);
+            Assert.AreNotEqual(env.Observable.EventsReceived(), new List<ModelEventType>() { ModelEventType.MOVE_PLAYER, ModelEventType.SHOOT });
+            observer.SendModelEvents(new List<ModelEventType>() { ModelEventType.MOVE_PLAYER, ModelEventType.SHOOT});
+            var eventsReceived = env.Observable.EventsReceived();
+            Assert.AreEqual(eventsReceived, new List<ModelEventType>() { ModelEventType.MOVE_PLAYER , ModelEventType.SHOOT }) ;
+            Assert.AreNotEqual(eventsReceived, new List<ModelEventType>() { ModelEventType.BALL_IN_HOLE });
+        }
+
+        [Test]
+        public void TestComunicationToGameState()
+        {
+            IEnvironment env = this.InitEnvironment();
+            IObservableEvents<ModelEventType> observable = new ObservableEvents<ModelEventType>();
+            IObserverEvents<ModelEventType> observer = new ObserverEvents<ModelEventType>();
+            env.ConfigureObservable(observable);
+            env.Observable.AddObserver(observer);
+            env.Ball.Velocity = new Vector2D(40, 4);
+            observer.SendModelEvents(new List<ModelEventType>() { ModelEventType.SHOOT});
+            env.Update(100);
+            Assert.AreNotEqual(env.Ball.Velocity, new Vector2D(0, 0));
+            env.Ball.Velocity = new Vector2D(0, 0);
+            env.Update(100);
+            Assert.AreEqual(observable.EventsReceived(), new List<ModelEventType>() { ModelEventType.BALL_STOPPED});
+            env.Ball.Position = new Point2D(50, -400);
+            env.Update(100);
+            Assert.AreEqual(observable.EventsReceived(), new List<ModelEventType>() { ModelEventType.BALL_OUT_OF_BOUND});
         }
     }
 }
