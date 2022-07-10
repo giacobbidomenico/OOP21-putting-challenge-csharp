@@ -54,6 +54,8 @@ namespace PuttingChallenge.Lucioli
             {
                 gamePlayState.Shoot(new Tuple<Point2D, Point2D>(new Point2D(0, 0), new Point2D(-100, -100)));
                 gamePlayState.Environment.ValueOrFailure().Update(1000000);
+                gamePlayState.ReceiveEvents();
+                gamePlayState.Environment.ValueOrFailure().ReceiveEvents();
                 Assert.AreEqual(gamePlayState.Score, None);
                 Assert.AreEqual(gamePlayState.Lives, i - 1);
             }

@@ -108,7 +108,7 @@ namespace PuttingChallenge.Lucioli
             }
             else
             {
-                // missing
+                NotifyEvents(ModelEventType.MOVE_PLAYER);
             }
         }
 
