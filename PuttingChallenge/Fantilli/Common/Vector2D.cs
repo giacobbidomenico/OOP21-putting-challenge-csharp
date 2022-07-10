@@ -58,31 +58,22 @@
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
-        public override bool Equals(object obj)
+        public override bool Equals(Object? obj)
         {
-            if (obj == null) return false;
-            if (obj.GetType() != GetType()) return false;
-            return Equals(obj as Vector2D);
-        }
-
-        /// <summary>
-        /// Compares this instance with given <paramref name="vector"/>.
-        /// The result is true if and only if the argument is not null and is 
-        /// an instance of <see cref="Vector2D"/> and contains the same components.
-        /// </summary>
-        /// <param name="vector">the vector to compare</param>
-        /// <returns>true if the given object is equal to this vector, false otherwise</returns>
-        public bool Equals(Vector2D vector)
-        {
-            if (this == vector)
+            if (this == obj)
             {
                 return true;
             }
-            else
+            if (obj == null)
+            {
+                return false;
+            }
+            if (obj is Vector2D vector)
             {
                 return X.CompareTo(vector.X) == 0
                        && Y.CompareTo(vector.Y) == 0;
             }
+            return false;
         }
 
         /// <summary>

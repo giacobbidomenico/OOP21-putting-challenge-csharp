@@ -55,31 +55,22 @@
         public override int GetHashCode() => HashCode.Combine(X, Y);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null) return false;
-            if (obj.GetType() != GetType()) return false;
-            return Equals(obj as Point2D);
-        }
-
-        /// <summary>
-        /// Compares this instance with given <paramref name="point"/>.
-        /// The result is true if and only if the argument is not null and is 
-        /// an instance of <see cref="Point2D"/> and contains the same coordinates.
-        /// </summary>
-        /// <param name="point">the point to compare</param>
-        /// <returns>true if the given object is equal to this point, false otherwise</returns>
-        public bool Equals(Point2D point)
-        {
-            if (this == point)
+            if (obj == null)
+            {
+                return false;
+            }
+            if (this == obj)
             {
                 return true;
             }
-            else
+            if (obj is Point2D point)
             {
                 return X.CompareTo(point.X) == 0
                        && Y.CompareTo(point.Y) == 0;
             }
+            return false;
         }
 
         /// <summary>

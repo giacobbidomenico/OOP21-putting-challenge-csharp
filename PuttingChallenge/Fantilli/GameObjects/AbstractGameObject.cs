@@ -53,32 +53,26 @@
         public override int GetHashCode() => HashCode.Combine(_type, Position, Velocity);
 
         /// <inheritdoc cref="object.Equals(object?)"/>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null) return false;
-            if (obj.GetType() != GetType()) return false;
-            return Equals(obj as AbstractGameObject);
-        }
+            if(obj == null)
+            {
+                return false;
+            }
 
-        /// <summary>
-        /// Compares this instance with given <paramref name="obj"/>.
-        /// The result is true if and only if the argument is not null and is 
-        /// an instance of <see cref="AbstractGameObject"/> and contains the same components.
-        /// </summary>
-        /// <param name="obj">the game object to compare</param>
-        /// <returns>true if the given object is equal to this, false otherwise</returns>
-        public bool Equals(AbstractGameObject obj)
-        {
             if (this == obj)
             {
                 return true;
             }
-            else
+
+            if(obj is IGameObject gameObject)
             {
-                return Position.Equals(obj.Position)
-                       && _phys.Equals(obj.PhysicsComponent)
-                       && _type.Equals(obj.Type);
+                return Position.Equals(gameObject.Position)
+                       && _phys.Equals(gameObject.PhysicsComponent)
+                       && _type.Equals(gameObject.Type);
             }
+            
+            return false;
         }
     }
 }
